@@ -1,0 +1,9 @@
+NB. project: Main/regex
+NB.
+NB. defines list of source files.
+NB. path defaults to project directory.
+
+init.ijs
+defs.ijs
+regex.ijs
+zdefs.ijs

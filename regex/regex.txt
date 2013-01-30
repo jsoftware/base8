@@ -1,0 +1,16 @@
+directory:  system/packages/regex
+
+This directory contains scripts to assist with regex
+definitions.
+
+regbuild.ijs
+============
+Regex builder
+
+regjbld.ijs
+===========
+Build J code regex definitions
+
+regj.ijs
+========
+J code regex definitions (built from regjbld.ijs)
