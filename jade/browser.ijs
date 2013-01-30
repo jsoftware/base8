@@ -12,10 +12,6 @@ NB. load url/filename in browser
 browse=: 3 : 0
 cmd=. dlb@dtb y
 isURL=. 1 e. '://'&E.
-if. IFBROADWAY do.
-  sminfo 'browse error: not yet implemented'
-  EMPTY return.
-end.
 if. IFJHS do.
   cmd=. '/' (I. cmd='\') } cmd
   if. -. isURL cmd do.
@@ -64,7 +60,7 @@ case. do.
     catch.
       msg=. 'Could not run the browser with the command:',LF2
       msg=. msg, cmd,LF2
-      if. IFGTK+.IFQT do.
+      if. IFQT do.
         msg=. msg, 'You can change the browser definition in Edit|Configure|Base',LF2
       end.
       sminfo 'Run Browser';msg

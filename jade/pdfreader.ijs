@@ -7,10 +7,6 @@ NB. open filename in PDFReader
 viewpdf=: 3 : 0
 cmd=. dlb@dtb y
 isURL=. 1 e. '://'&E.
-if. IFBROADWAY do.
-  sminfo 'viewpdf error: not yet implemented'
-  EMPTY return.
-end.
 if. IFJHS do.
   cmd=. '/' (I. cmd='\') } cmd
   if. -.fexist cmd do. EMPTY return. end.
@@ -50,7 +46,7 @@ case. do.
     catch.
       msg=. 'Could not run the PDFReader with the command:',LF2
       msg=. msg, cmd,LF2
-      if. IFGTK+.IFQT do.
+      if. IFQT do.
         msg=. msg, 'You can change the PDFReader definition in Edit|Configure|Base',LF2
       end.
       sminfo 'Run PDFReader';msg

@@ -10,12 +10,6 @@ NB.   x (default 0) 1: wait
 xedit=: 0&$: : (4 : 0)
 'file row'=. 2{.(boxopen y),<0
 isURL=. 1 e. '://'&E.
-if. IFBROADWAY do.
-  msg=. '|Could not run the editor:',cmd,LF
-  msg=. msg,'|Not yet implemented'
-  smoutput msg
-  EMPTY return.
-end.
 if. IFJHS do.         NB. open on client side
   xmr ::0: file
   EMPTY return.

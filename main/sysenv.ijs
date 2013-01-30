@@ -16,7 +16,6 @@ NB. ---------------------------------------------------------
 NB. nouns:
 NB.*   IF64          if a 64 bit J system
 NB.*   IFIOS         if iOS (iPhone/iPad)
-NB.*   IFJ6          if using J602 base library
 NB.*   IFJHS         if jhs libraries loaded
 NB.*   IFQT          if Qt libraries loaded
 NB.*   IFUNIX        if UNIX
@@ -42,8 +41,6 @@ NB. ---------------------------------------------------------
 IF64=: 16={:$3!:3[2
 'IFUNIX IFWIN IFWINCE'=: 5 6 7 = 9!:12''
 IFJHS=: 0
-IFJ6=: 0     NB. 9!:14 no longer reliable for detecting J6
-IFJ7=: 1
 IFWINE=: IFWIN > 0-:2!:5'_'   NB. not an 100% reliable test
 
 NB. ---------------------------------------------------------

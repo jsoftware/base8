@@ -1,4 +1,4 @@
-\rem 602
+\rem
 
 = socket.ijs
 
