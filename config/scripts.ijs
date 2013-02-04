@@ -18,6 +18,7 @@ dd         ~addons/data/odbc/odbc.ijs
 droidwd    ~addons/gui/droidwd/droidwd.ijs
 gl2        ~addons/graphics/gl2/gl2.ijs
 gl3        ~addons/api/gl3/gl3.ijs
+gles       ~addons/api/gles/gles.ijs
 graph      ~addons/graphics/graph/graph.ijs
 grid       ~addons/graphics/grid/grid.ijs
 guid       ~addons/general/misc/guid.ijs
