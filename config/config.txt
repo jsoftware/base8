@@ -7,5 +7,4 @@ User Configurable
 -----------------
 base.cfg           base configuration
 folders.ijs        folder definitions
-pacman.cfg         package manager
 startup.ijs        startup script

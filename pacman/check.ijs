@@ -88,7 +88,7 @@ NB. called at startup
 NB. sets ONLINE state
 NB. returns ok to continue flag
 checkonline=: 3 : 0
-select. ReadCatalog
+select. ReadCatalog_j_
 case. 0 do.
   if. REV >: 0 do.
     ONLINE=: 0

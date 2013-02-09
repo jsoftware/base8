@@ -1,6 +1,4 @@
 NB. view form
-NB.
-NB. !!! 801 not updated
 
 BASELIB=: 'base library'
 DATAMASK=: 0
@@ -25,44 +23,80 @@ NB. menu prelib "&Switch Library..." "" "" "";
 NB. menusep;
 
 NB. =========================================================
+Dat=: 0 : 0
+0 api/expat 1.0.0 1.0.0 libexpat
+0 api/glx 1.0.2 1.0.2 "OpenGL GLX API"
+1 "base library" 7.1.78 7.1.80 "base library scripts"
+0 "data/jdb" 1.0.24 1.0.25 JDB
+0 "debug/dissect" "" 1.03 "Run a sentence and produce a grid display of results"
+0 "debug/lint" 1.10.0 1.10.0 "Load a script and check its syntax"
+)
+
+Dat=: ; 5#<Dat
+
+NB. =========================================================
+table=: 3 : 0
+wd 'pc table'
+wd 'cc pac table'
+wd 'setp pac coltypes 1 0 0 0 0'
+wd 'setp pac colnames "" Package Installed Latest Caption'
+wd 'set pac *',Dat
+wd 'pmovex 100 10 600 250'
+wd 'pshow'
+)
+
+NB. =========================================================
 PMVIEW=: 0 : 0
-pc pmview;
+pc pmview closeok;
 menupop "&File";
-menu exit "E&xit" "" "" "";
+menu exit "&Quit" "Ctrl+Q";
 menupopz;
 menupop "&Tools";
-menu pupcat "&Update Catalog from Server" "" "" "";
+menu pupcat "&Update Catalog from Server";
 menusep;
-menu prebuild "&Rebuild all Repository Catalogs" "" "" "";
+menu prebuild "&Rebuild all Repository Catalogs";
 menusep;
 menu pprefs "&Preferences..." "" "" "";
 menupopz;
-xywh 4 4 75 149;cc sel listbox ws_vscroll bottommove;
-xywh 6 156 33 11;cc bstatus radiobutton topmove bottommove;cn "Status";
-xywh 40 156 44 11;cc bsection radiobutton topmove bottommove group;cn "Category";
-xywh 4 174 75 73;cc g0 groupbox topmove bottommove;cn "Selections";
-xywh 16 186 52 12;cc bclear button topmove bottommove;cn "Clear All";
-xywh 16 200 52 12;cc bupdate button topmove bottommove;cn "Updates";
-xywh 16 214 52 12;cc bnotins button topmove bottommove;cn "Not Installed";
-xywh 16 228 52 12;cc bselall button topmove bottommove;cn "Select All";
-xywh 16 249 52 12;cc apply button topmove bottommove;cn "Do Install...";
-xywh 83 156 295 91;cc edlog editm ws_vscroll es_readonly topmove rightmove bottommove;
-xywh 83 156 295 91;cc edhis editm ws_vscroll topmove rightmove bottommove;
-xywh 83 156 295 91;cc edman editm ws_vscroll topmove rightmove bottommove;
-xywh 83 156 295 91;cc adesc editm ws_vscroll topmove rightmove bottommove;
-xywh 88 251 44 10;cc bsummary radiobutton topmove bottommove;cn "Summary";
-xywh 136 251 37 10;cc bhistory radiobutton topmove bottommove group;cn "History";
-xywh 177 251 43 10;cc bmanifest radiobutton topmove bottommove group;cn "Manifest";
-xywh 350 251 29 10;cc blog radiobutton leftmove topmove rightmove bottommove group;cn "Log";
-xywh 83 4 296 147;cc agrid isigraph rightmove bottommove;
-xywh 221 250 34 12;cc binfo button topmove bottommove;cn "Info";
-pas 3 4;pcenter;
-rem form end;
+splith 0 1 100 150;
+cc sel listbox;
+bin h;
+cc bstatus radiobutton;cn "Status";
+cc bsection radiobutton group;cn "Category";
+bin z;
+cc g0 groupbox;cn "Selections";
+cc bclear button;cn "Clear All";
+cc bupdate button;cn "Updates";
+cc bnotins button;cn "Not Installed";
+cc bselall button;cn "Select All";
+cc apply button;cn "Install";
+splitsep;
+splitv 1 0 400 150;
+cc pac table;
+setp pac coltypes 1 0 0 0 0;
+setp pac colnames "" Package Installed Latest Caption;
+splitsep;
+cc edlog editm;
+bin h;
+cc bsummary radiobutton;cn "Summary";
+cc bhistory radiobutton group;cn "History";
+cc bmanifest radiobutton group;cn "Manifest";
+cc blog radiobutton leftmove topmove rightmove bottommove group;cn "Log";
+cc agrid isigraph rightmove bottommove;
+cc binfo button;cn "Wiki";
+splitend;
+splitend;
 )
 
 NB. =========================================================
 pmview_run=: 3 : 0
 wd PMVIEW
+wd 'set sel one two three'
+wd 'set pac *',Dat
+wd 'pmovex 100 10 900 700'
+wd 'pshow'
+
+return.
 wd 'pn *',SYSNAME
 wd 'setfont adesc ',TEXTFONT
 HWNDP=: wd 'qhwndp'
@@ -315,7 +349,8 @@ end.
 )
 
 NB. =========================================================
-pmview_cancel=: pmview_close=: destroy
+NB. pmview_cancel=: pmview_close=: destroy
+pmview_cancel=: pmview_close=: wd bind 'pclose'
 pmview_bsection_button=: pmview_refresh
 pmview_bstatus_button=: pmview_refresh
 pmview_pprefs_button=: pmprefs_run

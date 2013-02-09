@@ -36,7 +36,6 @@ init_console=: 3 : 0
   fcase. 'edit';'server' do.
     if. -. checkaccess'' do. 0 return. end.
   case. 'read' do.
-    readconfig''
     if. -. checkaddonsdir'' do. 0 return. end.
     setfiles''
     readlocal''

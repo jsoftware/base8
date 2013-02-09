@@ -14,7 +14,6 @@ t fcopynew cf 'boot.ijs'
 fl=. cutopen 0 : 0
 base.cfg
 folders.cfg
-pacman.cfg
 version.txt
 )
 
