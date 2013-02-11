@@ -12,7 +12,7 @@ select. y
 case. 'qtide' do.
   'install' jpkg 'base library ide/qt'
   getqtbin 0
-  smoutput 'exit and restart J using bin/jqt',IFWIN#'.exe'
+  smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';'jqt.cmd'
 case. 'all' do.
   'install' jpkg 'all'
   getqtbin 0
@@ -21,25 +21,31 @@ end.
 
 NB. =========================================================
 NB. get Qt linux or mac or win binaries
+NB. always downloads the jqt binary
+NB. for the qt library (required for mac and win):
 NB. y is 0 - download if not present
 NB.      1 - always download
 getqtbin=: 3 : 0
 if. IFIOS+.'Android'-:UNAME do. return. end.
 if. (<UNAME) -.@e. 'Linux';'Darwin';'Win' do. return. end.
-if. (0={.y,0) *. 0 < #1!:0 jpath '~bin/jqt',IFWIN#'.exe' do. return. end.
+
 require 'pacman'
-smoutput 'Installing jqt binaries...'
 IFPPC=. 0
+if. 'Darwin'-:UNAME do. IFPPC=. 1. e. 'powerpc' E. 2!:0 'uname -p' end.
+
+NB. ---------------------------------------------------------
+smoutput 'Installing JQt binaries...'
 if. 'Linux'-:UNAME do.
-  z=. 'jqt-','linux-',(IF64 pick 'x86';'x64'),'.tar.gz'
+  z=. 'jqt-linux-',(IF64 pick 'x86';'x64'),'.tar.gz'
   z1=. 'libjqt.so'
-else.
-  if. 'Darwin'-:UNAME do. IFPPC=. 1. e. 'powerpc' E. 2!:0 'uname -p' end.
-  z=. 'jqt-',(IFWIN pick 'mac-';'win-'),(IFPPC{::(IF64 pick 'x86';'x64'),'ppc'),'.zip'
-  z1=. IFWIN pick 'libjqt.dylib';'jqt.dll'
+elseif. IFWIN do.
+  z=. 'jqt-win-',(IF64 pick 'x86';'x64'),'.zip'
+  z1=. 'jqt.dll'
+elseif. do.
+  z=. 'jqt-mac-',(IFPPC pick (IF64 pick 'x86';'x64');'ppc'),'.zip'
+  z1=. 'libjqt.dylib'
 end.
-z=. 'http://www.jsoftware.com/download/jqt/',z
-'rc p'=. httpget_jpacman_ z
+'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/jqt/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
@@ -50,7 +56,7 @@ else.
   if. 'Linux'-:UNAME do.
     hostcmd_jpacman_ 'cd ',(dquote d),' && tar xzf ',(dquote p)
   else.
-    hostcmd_jpacman_ 'unzip ',(dquote p),' -d ',dquote d
+    hostcmd_jpacman_ 'unzip -o ',(dquote p),' -d ',dquote d
   end.
   f=. 4 : 'if. #1!:0 y do. x dirss y end.'
   ('INSTALLPATH';jpath '~install') f jpath '~bin'
@@ -62,30 +68,32 @@ else.
   m=. m,'check that you have write permission for: ',LF,jpath '~bin'
 end.
 smoutput m
+
+NB. ---------------------------------------------------------
+NB. install Qt library:
 if. 'Linux'-:UNAME do. return. end.
-smoutput 'Installing Qt binaries...'
-NB. z=. 'qt48-',(IFWIN pick 'mac-';'win-'),(IF64 pick 'x86';'x64'),IFWIN pick '.dmg';'.zip'
-z=. 'qt48-',(IFWIN pick 'mac-';'win-'),(IFWIN{::(IFPPC{::'intel';'ppc');(IF64 pick 'x86';'x64')),'.zip'
-z=. 'http://www.jsoftware.com/download/qtlib/',z
-'rc p'=. httpget_jpacman_ z
+if. ('Darwin'-:UNAME) *. 1=#1!:0 jpath '/Library/Frameworks/QtCore.framework' do. return. end.
+
+tgt=. jpath '~install/',(IFWIN{'Qq'),'t'
+if. (0={.y,0) *. 1=#1!:0 tgt do. return. end.
+
+smoutput 'Installing Qt library...'
+if. IFWIN do.
+  z=. 'qt48-win-',(IF64 pick 'x86';'x64'),'.zip'
+else.
+  z=. 'qt48-mac-',(IFPPC pick 'intel';'ppc'),'.zip'
+end.
+'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/qtlib/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
-d=. jpath '~install'
-if. IFWIN do.
-  unzip_jpacman_ p;d
-  if. #1!:0 jpath '~install/qt' do.
-    m=. 'Finished install of Qt binaries.'
-  else.
-    m=. 'Unable to install Qt binaries.',LF
-    m=. m,'check that you have write permission for: ',LF,jpath '~install/qt'
-  end.
+unzip_jpacman_ p;jpath '~install'
+if. #1!:0 tgt do.
+  m=. 'Finished install of Qt binaries.'
 else.
-  m=. 'in Finder, open ',p,LF
-  m=. m,' and do a standard install of both packages'
-NB.   hostcmd_jpacman_ 'unzip ',(dquote p),' -d ',dquote d
-NB.   f=. 4 : 'if. #1!:0 y do. x dirss y end.'
-NB.   ('INSTALLPATH';jpath '~install') f jpath '~install/qt'
+  m=. 'Unable to install Qt binaries.',LF
+  m=. m,'check that you have write permission for: ',LF,tgt
 end.
 smoutput m
+
 )
