@@ -4,7 +4,7 @@ cocurrent 'z'
 
 NB. =========================================================
 install=: 3 : 0
-if. 'Android'-:UNAME do. return. end.
+if. IFIOS+.'Android'-:UNAME do. return. end.
 require 'pacman'
 if. -. checkaccess_jpacman_ '' do. return. end.
 'update' jpkg ''
@@ -24,15 +24,18 @@ NB. get Qt linux or mac or win binaries
 NB. y is 0 - download if not present
 NB.      1 - always download
 getqtbin=: 3 : 0
+if. IFIOS+.'Android'-:UNAME do. return. end.
 if. (<UNAME) -.@e. 'Linux';'Darwin';'Win' do. return. end.
 if. (0={.y,0) *. 0 < #1!:0 jpath '~bin/jqt',IFWIN#'.exe' do. return. end.
 require 'pacman'
 smoutput 'Installing jqt binaries...'
+IFPPC=. 0
 if. 'Linux'-:UNAME do.
   z=. 'jqt-','linux-',(IF64 pick 'x86';'x64'),'.tar.gz'
   z1=. 'libjqt.so'
 else.
-  z=. 'jqt-',(IFWIN pick 'mac-';'win-'),(IF64 pick 'x86';'x64'),'.zip'
+  if. 'Darwin'-:UNAME do. IFPPC=. 1. e. 'powerpc' E. 2!:0 'uname -p' end.
+  z=. 'jqt-',(IFWIN pick 'mac-';'win-'),(IFPPC{::(IF64 pick 'x86';'x64'),'ppc'),'.zip'
   z1=. IFWIN pick 'libjqt.dylib';'jqt.dll'
 end.
 z=. 'http://www.jsoftware.com/download/jqt/',z
@@ -61,7 +64,8 @@ end.
 smoutput m
 if. 'Linux'-:UNAME do. return. end.
 smoutput 'Installing Qt binaries...'
-z=. 'qt48-',(IFWIN pick 'mac-';'win-'),(IF64 pick 'x86';'x64'),IFWIN pick '.dmg';'.zip'
+NB. z=. 'qt48-',(IFWIN pick 'mac-';'win-'),(IF64 pick 'x86';'x64'),IFWIN pick '.dmg';'.zip'
+z=. 'qt48-',(IFWIN pick 'mac-';'win-'),(IFWIN{::(IFPPC{::'intel';'ppc');(IF64 pick 'x86';'x64')),'.zip'
 z=. 'http://www.jsoftware.com/download/qtlib/',z
 'rc p'=. httpget_jpacman_ z
 if. rc do.
