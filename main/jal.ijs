@@ -87,7 +87,12 @@ end.
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
-unzip_jpacman_ p;jpath '~install'
+d=. jpath '~install'
+if. IFWIN do.
+  unzip_jpacman_ p;d
+else.
+  hostcmd_jpacman_ 'unzip -o ',(dquote p),' -d ',dquote d
+end.
 if. #1!:0 tgt do.
   m=. 'Finished install of Qt binaries.'
 else.
