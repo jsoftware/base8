@@ -42,7 +42,7 @@ elseif. IFWIN do.
   z=. 'jqt-win-',(IF64 pick 'x86';'x64'),'.zip'
   z1=. 'jqt.dll'
 elseif. do.
-  z=. 'jqt-mac-',(IFPPC pick (IF64 pick 'x86';'x64');'ppc'),'.zip'
+  z=. 'jqt-mac-',(IFPPC pick 'x64';'ppc'),'.zip'
   z1=. 'libjqt.dylib'
 end.
 'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/jqt/',z
