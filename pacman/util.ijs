@@ -408,4 +408,3 @@ NB. add zip extension
 zipext=: 3 : 0
 y, IFUNIX pick '.zip';'.tar.gz'
 )
-

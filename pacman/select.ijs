@@ -25,7 +25,6 @@ if. 0=#dat do. $0 return. end.
 NB. =========================================================
 pkgups=: pkgnew < pkglater
 
-
 NB. =========================================================
 NB. pkgsearch v Searches package names in PKGDATA for matches to terms in y
 NB. result: boolean mask of matching rows of PKGDATA
@@ -68,3 +67,4 @@ end.
 msk=. masklib y
 (msk#y) ; <(-.msk)#y
 )
+

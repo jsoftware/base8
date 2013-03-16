@@ -21,7 +21,6 @@ nms=. 1 {"1 PKGDATA
 nms=. ~. (nms i.&> '/') {.each nms
 SECTION=: 'All';nms
 DATAMASK=: (#PKGDATA) $ 1
-NB. if. ISGUI do. pmview_postinit'' end.
 EMPTY
 )
 
