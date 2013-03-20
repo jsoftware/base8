@@ -309,6 +309,7 @@ H=. '0123456789ABCDEF'
 h=. '0123456789abcdef'
 dfh=: 16 #. 16 | (H,h) i. ]
 hfd=: h {~ 16 #.^:_1 ]
+4!:55 'H';'h'
 
 NB. if character string is valid utf8
 isutf8=: 1:@(7&u:) :: 0:
