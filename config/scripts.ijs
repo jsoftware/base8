@@ -60,4 +60,5 @@ unicode    ~addons/convert/misc/unicode.ijs
 validate   ~addons/general/misc/validate.ijs
 viewmat    ~addons/graphics/viewmat/viewmat.ijs
 wdclass    ~addons/gui/wdclass/wdclass.ijs
+wdooo      ~addons/tables/wdooo/wdooo.ijs
 )

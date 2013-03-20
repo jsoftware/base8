@@ -100,7 +100,7 @@ if. def e.~ <,':' do.
   end.
 end.
 min=. 0>.ln-before [ max=. (<:#def)<.ln+after
-ctx=. '[',"1 (":,.range) ,"1 ('] ') ,"1 >def{~range=. min + i. >:max-min
+ctx=. ((,.ln=range){' >'),"1 '[',"1 (":,.range) ,"1 ('] ') ,"1 >def{~range=. min + i. >:max-min
 > (<'@@ ', name, '[', (dyad#':'), (":ln) ,'] *', (nc{' acv'),' @@ ', src), def0, <"1 ctx
 )
 
@@ -217,8 +217,59 @@ end.
 NB. =========================================================
 NB.*dbview v view stack
 dbview=: 3 : 0
+'not yet implemented' return.
 if. _1 = 4!:0 <'jdbview_jdbview_' do.
   'require'~'~system/util/dbview.ijs'
 end.
 jdbview_jdbview_ }. 13!:13''
+)
+
+NB. =========================================================
+NB.*dbhelp n display help message
+dbhelp=: 0 : 0
+The call stack (dbstk'') is a 9-column boxed matrix:
+  0  name
+  1  error number, or 0 if this call has no error.
+  2  line number
+  3  name class
+  4  definition
+  5  source script
+  6  argument list
+  7  locals
+  8  suspense
+
+f is the name of a verb
+      dbss 'f 0'   monadic line 0
+      dbss 'f :2'  dyadic line 2
+      dbss 'f *:*' all lines
+
+dbr     reset, set suspension mode (0=disable, 1=enable)
+dbs     display stack
+dbsq    stop query
+dbss    stop set
+dbrun   run again (from current stop)
+dbnxt   run next (skip line and run)
+dbret   exit and return argument
+dbjmp   jump to line number
+dbsig   signal error
+dbrr    re-run with specified arguments
+dbrrx   re-run with specified executed arguments
+dberr   last error number
+dberm   last error message
+dbstk   call stack
+dblxq   latent expression query
+dblxs   latent expression set
+dbtrace trace control
+dbq     queries suspension mode (set by dbr)
+dbst    returns stack text
+
+dbctx       display context
+dbg         turn debug window on/off
+dblocals    display local names on stack
+dbstack     display stack
+dbstop      add stop definitions
+dbstops     set all stop definitions
+dbstopme    stop current definition
+dbstopnext  stop current definition at next line
+dbview      view stack
 )
