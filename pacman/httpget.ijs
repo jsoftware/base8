@@ -16,7 +16,7 @@ ferase p;q
 fail=. 0
 cmd=. HTTPCMD rplc '%O';(dquote p);'%L';(dquote q);'%t';t;'%T';(":TIMEOUT);'%U';f
 try.
-  if. (UNAME-:'Android') > fexist jpath '~tools/ftp/wget' do.
+  if. (UNAME-:'Android') > IFQT +. fexist jpath '~tools/ftp/wget' do.
     rr=. f anddf p
     if. rr >: 0 do.
       r=. 0;p
