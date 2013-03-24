@@ -58,6 +58,7 @@ if. 'Android'-:UNAME do.
   'rwxrwxrwx'1!:7 ::0:<jpath'~tools/ftp/wget'
   if. IFQT do.
     android_exec_host_z_=: android_exec_host_jqtide_
+    qtdemo_z_=: load bind '~addons/ide/qt/demo/qtdemo.ijs'
   else.
     android_exec_host_z_=: 2!:1
   end.

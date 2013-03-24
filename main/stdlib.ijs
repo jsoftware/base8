@@ -17,6 +17,8 @@ NB. verb           3
 NB. monad          3
 NB. dyad           4
 
+NB. alpha27        add alpha channel
+NB. alpha17        remove alpha channel
 NB. assert         assert value is true
 NB. bind           binds argument to a monadic verb
 NB. boxdraw
@@ -213,6 +215,12 @@ sort=: /:~ : /:
 
 NB.*take v name for {.
 take=: {.
+
+NB.*add alpha channel
+alpha27=: (27 b.) & 16bffffff
+
+NB.*remove alpha channel
+alpha17=: (17 b.) & 16bffffff
 
 NB. =========================================================
 NB.*assert v assert value is true
