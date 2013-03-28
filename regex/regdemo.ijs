@@ -25,12 +25,12 @@ menu p8 "Character strings" "" "" "";
 menu p9 "J numeric items" "" "" "";
 menu p10 "J names" "" "" "";
 menupopz;
-xywh 182 20 32 11;cc close button leftmove rightmove;cn "Close";
-xywh 4 9 21 9;cc label static;cn "Pattern:";
-xywh 27 7 150 11;cc pat edit ws_border es_autohscroll rightmove;
-xywh 0 34 217 93;cc out richeditm ws_hscroll ws_vscroll es_autohscroll es_autovscroll es_readonly es_sunken rightmove bottommove;
-xywh 182 6 32 11;cc match button leftmove rightmove;cn "&Match";
-xywh 27 20 150 9;cc msg static rightmove;cn "";
+cc close button;cn "Close";
+cc label static;cn "Pattern:";
+cc pat edit;
+wh 434 186;cc out editm readonly;
+cc match button leftmove rightmove;cn "&Match";
+cc msg static;cn "";
 pas 0 0;pcenter;
 rem form end;
 )
@@ -60,10 +60,10 @@ wd 'pshow;'
 
 NB. =========================================================
 regdemo_run1=: 3 : 0
-xywh=. wd 'psel ',HWNDP,';qformx'
+xywh=. wd 'psel ',HWNDP,';qform'
 wd REGDEMO
 new=. wd 'qhwndp'
-wd 'pmovex ',xywh
+wd 'pmove ',xywh
 wd 'setfont out ',FIXFONT
 newtext TEXT
 wd 'setwindowfocus pat'
