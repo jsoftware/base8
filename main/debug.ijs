@@ -217,9 +217,8 @@ end.
 NB. =========================================================
 NB.*dbview v view stack
 dbview=: 3 : 0
-'not yet implemented' return.
 if. _1 = 4!:0 <'jdbview_jdbview_' do.
-  'require'~'~system/util/dbview.ijs'
+  'require'~'~addons/ide/qt/dbview.ijs'
 end.
 jdbview_jdbview_ }. 13!:13''
 )
