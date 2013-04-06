@@ -6,6 +6,7 @@ NB. path defaults to project directory.
 init.ijs
 util.ijs
 check.ijs
+config.ijs
 httpget.ijs
 install.ijs
 show.ijs
