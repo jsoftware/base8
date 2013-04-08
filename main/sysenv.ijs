@@ -16,6 +16,7 @@ NB. ---------------------------------------------------------
 NB. nouns:
 NB.*   IF64          if a 64 bit J system
 NB.*   IFIOS         if iOS (iPhone/iPad)
+NB.*   IFJCDROID     if JConsole for Android
 NB.*   IFJHS         if jhs libraries loaded
 NB.*   IFQT          if Qt libraries loaded
 NB.*   IFUNIX        if UNIX
@@ -53,6 +54,13 @@ if. notdef 'IFQT' do.
   IFQT=: 0
   libjqt=: 'libjqt'  NB. avoid name undefined error
 end.
+
+NB. ---------------------------------------------------------
+if. notdef 'IFJCDROID' do.
+  IFJCDROID=: 0
+end.
+
+assert. IFQT *: IFJCDROID
 
 NB. ---------------------------------------------------------
 if. notdef 'UNAME' do.

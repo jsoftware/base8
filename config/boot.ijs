@@ -59,8 +59,10 @@ if. 'Android'-:UNAME do.
   if. IFQT do.
     android_exec_host_z_=: android_exec_host_jqtide_
     qtdemo_z_=: load bind '~addons/ide/qt/demo/qtdemo.ijs'
-  else.
+  end.
+  if. IFJCDROID do.
     android_exec_host_z_=: 2!:1
+    dwdemo_z_=: load bind '~addons/gui/android/demo/dwdemo.ijs'
   end.
   wddemo_z_=: load bind '~addons/demos/wd/demos.ijs'
 end.
