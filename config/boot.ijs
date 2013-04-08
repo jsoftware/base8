@@ -52,16 +52,18 @@ load '~system/main/ctag.ijs'
 load '~system/util/jadetag.ijs'
 load^:IFQT '~addons/ide/qt/qt.ijs'
 NB. android specific
-load^:((UNAME-:'Android') > isatty 0) '~addons/gui/android/android.ijs'
 if. 'Android'-:UNAME do.
   'rwxrwxrwx'1!:7 ::0:<jpath'~tools/zip/7za'
   'rwxrwxrwx'1!:7 ::0:<jpath'~tools/ftp/wget'
   if. IFQT do.
     android_exec_host_z_=: android_exec_host_jqtide_
+    load '~addons/gui/android/android.ijs'
     qtdemo_z_=: load bind '~addons/ide/qt/demo/qtdemo.ijs'
   end.
   if. IFJCDROID do.
     android_exec_host_z_=: 2!:1
+    load '~addons/gui/android/android.ijs'
+    load '~addons/gui/droidwd/droidwd.ijs'
     dwdemo_z_=: load bind '~addons/gui/droidwd/demo/dwdemo.ijs'
   end.
   wddemo_z_=: load bind '~addons/demos/wd/demos.ijs'
@@ -73,7 +75,7 @@ NB. JVERSION_z_ (used in about box)
 r=. 'Engine: ',9!:14''
 r=. r,LF,'Library: ',LF -.~ 1!:1<jpath '~system/config/version.txt'
 if. IFQT do.
-r=. r,LF,'Qt IDE: ',wd'version'
+  r=. r,LF,'Qt IDE: ',wd'version'
 end.
 r=. r,LF,'Platform: ',UNAME,' ',IF64 pick '32';'64'
 r=. r,LF,'Installer: ',LF -.~ 1!:1 :: ('unknown'"_) <jpath'~bin/installer.txt'
