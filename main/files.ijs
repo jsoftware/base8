@@ -22,6 +22,7 @@ NB.    to  fcopynew fls   copy files (if changed)
 NB.        fdir           file directory
 NB.        ferase fl      erase file
 NB.        fexist fl      return 1 if file exists
+NB.        fpathname      split file path into path;name
 NB.    opt fread fl       read file
 NB.    opt freadblock fl  read lines of file in blocks
 NB.        freadr fl      read records (flat file)
@@ -151,7 +152,7 @@ for_n. I. p='/' do. 1!:5 :: 0: < n{.p end.
 )
 
 NB. =========================================================
-NB.*path split file fpathname into path;name
+NB.*fpathname split file name into path;name
 fpathname=: +./\.@:=&'/' (# ; -.@[ # ]) ]
 
 NB. =========================================================
