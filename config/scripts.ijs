@@ -55,6 +55,7 @@ socket     ~system/main/socket.ijs
 stats      ~addons/stats/base/base.ijs
 tar        ~system/util/tar.ijs
 task       ~system/main/task.ijs
+trace      ~addons/general/misc/trace.ijs
 trig       ~addons/math/misc/trig.ijs
 unicode    ~addons/convert/misc/unicode.ijs
 validate   ~addons/general/misc/validate.ijs
