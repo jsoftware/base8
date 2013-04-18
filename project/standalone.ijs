@@ -4,7 +4,6 @@ NB. functions for construction of standalone applications
 coclass <'jp'
 
 STANDALONE=: 0 : 0
-IFJCDROID=: IFJCDROID_z_=: 0
 PATHSEP_j_=: '/'
 jhostpath_z_=: PATHSEP_j_ & (I. @ (e.&'/\')@] })
 jpath_z_=: jhostpath
