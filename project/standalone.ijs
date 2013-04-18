@@ -29,7 +29,7 @@ r=. r, 'coclass ''jbaselibtag''' taketo qt
 )
 
 getlibs=: 3 : 0
-libs=. jpath each getscripts_j_ <;._2 y,LF
+libs=. jpath each getscripts_j_ <;._2 y
 r=. ''
 for_i. libs do.
   r=. r,freads i
