@@ -79,11 +79,8 @@ end.
 NB. ---------------------------------------------------------
 if. notdef 'IFRASPI' do.
   if. UNAME -: 'Linux' do.
-      IFRASPI=: 'arm' -: 3{. 2!:0 'uname -m'
-    else.
-      IFRASPI=: 0
-    end.
-  elseif. do.
+    IFRASPI=: 'arm' -: 3{. 2!:0 'uname -m'
+  else.
     IFRASPI=: 0
   end.
 end.
