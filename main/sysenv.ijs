@@ -19,6 +19,7 @@ NB.*   IFIOS         if iOS (iPhone/iPad)
 NB.*   IFJCDROID     if JConsole for Android
 NB.*   IFJHS         if jhs libraries loaded
 NB.*   IFQT          if Qt libraries loaded
+NB.*   IFRASPI       if Raspberry Pi
 NB.*   IFUNIX        if UNIX
 NB.*   IFWIN         if Windows (2000 and up)
 NB.*   IFWINCE       if Windows CE
@@ -72,6 +73,18 @@ if. notdef 'UNAME' do.
     end.
   elseif. do.
     UNAME=: 'Win'
+  end.
+end.
+
+NB. ---------------------------------------------------------
+if. notdef 'IFRASPI' do.
+  if. UNAME -: 'Linux' do.
+      IFRASPI=: 'arm' -: 3{. 2!:0 'uname -m'
+    else.
+      IFRASPI=: 0
+    end.
+  elseif. do.
+    IFRASPI=: 0
   end.
 end.
 
