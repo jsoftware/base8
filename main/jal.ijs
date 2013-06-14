@@ -36,7 +36,11 @@ if. 'Darwin'-:UNAME do. IFPPC=. 1. e. 'powerpc' E. 2!:0 'uname -p' end.
 NB. ---------------------------------------------------------
 smoutput 'Installing JQt binaries...'
 if. 'Linux'-:UNAME do.
-  z=. 'jqt-linux-',(IF64 pick 'x86';'x64'),'.tar.gz'
+  if. IFRASPI do.
+    z=. 'jqt-raspi.tar.gz'
+  else.
+    z=. 'jqt-linux-',(IF64 pick 'x86';'x64'),'.tar.gz'
+  end.
   z1=. 'libjqt.so'
 elseif. IFWIN do.
   z=. 'jqt-win-',(IF64 pick 'x86';'x64'),'.zip'
