@@ -39,6 +39,7 @@ jzopengl   ~addons/graphics/opengl/jzopengl.ijs
 jzopenglutil ~addons/graphics/opengl/jzopenglutil.ijs
 jzplot     ~addons/graphics/plot/jzplot.ijs
 numeric    ~addons/general/misc/numeric.ijs
+odbc       ~addons/data/odbc/odbc.ijs
 opengl     ~addons/graphics/opengl/opengl.ijs
 pack       ~addons/general/misc/pack.ijs
 pacman     ~system/util/pacman.ijs
