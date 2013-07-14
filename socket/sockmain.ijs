@@ -61,6 +61,7 @@ NB.*sdsend v send data
 NB. y- socket; indicator specifying the way in which the call is made (0)
 NB. x- data
 sdsend=: 4 : 0"1
+if. '' -: $x do. x =. ,x end.
 r=. >{.sendJ (>0{y);x;(#x);>1{y
 if. _1=r do. 0;~sdsockerror'' else. 0;r end.
 )
@@ -275,7 +276,7 @@ NB. =========================================================
 NB. returns the value of a socket option
 sdgetsockopt=: 3 : 0
 's lev name'=. y
-r=. getsockoptJ s;lev;name;(,0);,4
+r=. getsockoptJ s;lev;name;(,_1);,4
 if. 0~:res r do. 0;~sdsockerror'' return. end.
 d=. ''$>4{r
 if. name-:SO_LINGER do. 0;65536 65536#:d else. 0;d end.

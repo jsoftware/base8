@@ -45,7 +45,7 @@ getprotobynumberJ=: 'getprotobynumber i i' scdm
 getservbynameJ=: 'getservbyname i i i' scdm
 getservbyportJ=: 'getservbyport i i i' scdm
 getsocknameJ=: 'getsockname i i * *i' scdm
-getsockoptJ=: 'getsockopt i i i i * *i' scdm
+getsockoptJ=: 'getsockopt i i i i *i *i' scdm
 htonlJ=: 'htonl i i' scdm
 htonsJ=: 'htons s s' scdm
 listenJ=: 'listen i i i' scdm
@@ -56,7 +56,7 @@ recvfromJ=: 'recvfrom i i *c i i * *i' scdm
 selectJ=: 'select i i * * * *' ccdm
 sendJ=: 'send i i *c i i' scdm
 sendtoJ=: 'sendto i i *c i i * i' scdm
-setsockoptJ=: 'setsockopt i i i i * i' scdm
+setsockoptJ=: 'setsockopt i i i i *i i' scdm
 shutdownJ=: 'shutdown i i i' scdm
 socketJ=: 'socket i i i i' scdm
 
