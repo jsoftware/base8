@@ -151,6 +151,7 @@ NB. y = day numbers
 NB. x = optional:
 NB.   0 - result in form <yyyy mm dd> (default)
 NB.   1 - result in form <yyyymmdd>
+NB.   2 - result in form <yyyy mm dd hh MM ss>
 NB.
 NB. examples:
 NB.    todate 72460
@@ -166,12 +167,19 @@ todate=: 3 : 0
 0 todate y
 :
 s=. $y
-a=. 657377.75 +, y
+a=. 657377.75 +, y=. <. p=. y
 d=. <. a - 36524.25 * c=. <. a % 36524.25
 d=. <.1.75 + d - 365.25 * y=. <. (d+0.75) % 365.25
 r=. (1+12|m+2) ,: <. 0.41+d-30.6* m=. <. (d-0.59) % 30.6
-r=. s $ |: ((c*100)+y+m >: 10) ,r
-if. x do. r=. 100 #. r end.
+if. 1<x do.
+  h=. <. t=. 24*(1&|) ,p
+  mm=. <. t=. 60*t-h
+  ss=. 60*t-mm
+  r=. s $ |: ((c*100)+y+m >: 10) ,r , |: h ,. mm,. ss
+else.
+  r=. s $ |: ((c*100)+y+m >: 10) ,r
+end.
+if. 1=x do. r=. 100 #. r end.
 r
 )
 
@@ -184,6 +192,7 @@ NB.
 NB. x = optional:
 NB.   0 - dates in form <yyyy mm dd> (default)
 NB.   1 - dates in form <yyyymmdd>
+NB.   2 - dates in form <yyyy mm dd hh MM ss>
 NB. 0 = todayno 1800 1 1, or earlier
 NB.
 NB. example:
@@ -194,12 +203,19 @@ todayno=: 3 : 0
 0 todayno y
 :
 a=. y
-if. x do. a=. 0 100 100 #: a end.
+if. 1=x do. a=. 0 100 100 #: a end.
 a=. ((*/r=. }: $a) , {:$a) $,a
-'y m d'=. <"_1 |: a
+if. 1<x do.
+  'y m d h mm s'=. <"_1 |: a
+else.
+  'y m d'=. <"_1 |: a
+end.
 y=. 0 100 #: y - m <: 2
 n=. +/ |: <. 36524.25 365.25 *"1 y
 n=. n + <. 0.41 + 0 30.6 #. (12 | m-3),"0 d
+if. 1<x do.
+  n=. n + (24 60 60#.h,.mm,.s)%24*3600
+end.
 0 >. r $ n - 657378
 )
 
