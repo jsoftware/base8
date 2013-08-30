@@ -85,7 +85,7 @@ smoutput 'Installing Qt library...'
 if. IFWIN do.
   z=. 'qt48-win-',(IF64 pick 'x86';'x64'),'.zip'
 else.
-  z=. 'qt48-mac-',(IFPPC pick 'intel';'ppc'),'.zip'
+  z=. 'qt48-mac-',(IFPPC pick (IF64 pick 'x86';'x64');'ppc'),'.zip'
 end.
 'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/qtlib/',z
 if. rc do.
