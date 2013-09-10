@@ -79,14 +79,14 @@ end.
 NB. ---------------------------------------------------------
 if. notdef 'IFRASPI' do.
   if. UNAME -: 'Linux' do.
-    IFRASPI=: 'arm' -: 3{. 2!:0 'uname -m'
+    IFRASPI=: 1 e. 'BCM2708' E. 2!:0 'cat /proc/cpuinfo'
   else.
     IFRASPI=: 0
   end.
 end.
 
 NB. ---------------------------------------------------------
-if. IF64 +. IFIOS +. UNAME-:'Android' do.
+if. IF64 +. IFIOS +. IFRASPI +. UNAME-:'Android' do.
   IFWOW64=: 0
 else.
   if. IFUNIX do.
