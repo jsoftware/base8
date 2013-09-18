@@ -30,6 +30,7 @@ SystemFolders_j_=: ids,.jpathsep@".&.>ids
 
 md=. 3 : 0 NB. recursive makedir
 a=. jpathsep y,'/'
+if. ('//'-:2{.a)+.('/root/'-:6{.a) do. return. end.
 if. -.#1!:0 }:a do.
   for_n. I. a='/' do. 1!:5 :: [ <n{.a end.
 end.
