@@ -22,6 +22,7 @@ temp=. user,'/temp'
 ids=. ;:'addons bin break config home install snap system tools temp user'
 
 0!:0 :: ] <jpathsep bin,'/profilex.ijs' NB. override
+0!:0 :: ] <home,>(systype-5){'/.jprofile';'/_jprofile' NB. override per user
 
 SystemFolders_j_=: ids,.jpathsep@".&.>ids
 
