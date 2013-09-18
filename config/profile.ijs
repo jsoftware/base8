@@ -13,7 +13,6 @@ addons=. install,'/addons'
 system=. install,'/system'
 tools=. install,'/tools'
 home=. >(systype-5){(2!:5'HOME');2!:5'USERPROFILE'
-home=. >(home-:,'/'){home;install
 userx=. '\j',('64-'#~16={:$3!:3[2),'801-user'
 user=. home,userx
 user=. >(home-:,'/'){user;install,'/user'
