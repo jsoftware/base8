@@ -59,17 +59,12 @@ if. 'Android'-:UNAME do.
     android_exec_host_z_=: android_exec_host_jqtide_
     load '~addons/gui/android/android.ijs'
     dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
-  end.
-  if. IFJCDROID do.
+  elseif. IFJCDROID do.
     android_exec_host_z_=: 2!:1
     load '~addons/gui/android/android.ijs'
     load '~addons/gui/droidwd/droidwd.ijs'
-    dwdemo_z_=: load bind '~addons/gui/droidwd/demo/dwdemo.ijs'
     dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/docs/android-version.txt'''
-    wddemo_z_=: load bind '~addons/demos/wd/demos.ijs'
   end.
-NB. temp facility for debug
-  t_z_=: 3 : 'load ',(2!:5 'EXTERNAL_STORAGE'),'''/t'',(":y),''.ijs'''
 end.
 startupide''
 
