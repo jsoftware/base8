@@ -14,7 +14,7 @@ system=. install,'/system'
 tools=. install,'/tools'
 home=. >(systype-5){(2!:5'HOME');2!:5'USERPROFILE'
 home=. >(0-:home){home;,'/'
-userx=. '\j',('64-'#~16={:$3!:3[2),'801-user'
+userx=. '/j',('64-'#~16={:$3!:3[2),'801-user'
 user=. home,userx
 user=. >((<home) e. '/root';,'/'){user;install,'/user'
 home=. >((<home) e. '/root';,'/'){home;install
