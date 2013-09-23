@@ -16,8 +16,8 @@ home=. >(systype-5){(2!:5'HOME');2!:5'USERPROFILE'
 home=. >(0-:home){home;,'/'
 userx=. '/j',('64-'#~16={:$3!:3[2),'801-user'
 user=. home,userx
-user=. >((<home) e. '/root';,'/'){user;install,'/user'
-home=. >((<home) e. '/root';,'/'){home;install
+user=. >((<home) e. '/root';'';,'/'){user;install,'/user'
+home=. >((<home) e. '/root';'';,'/'){home;install
 break=. user,'/break'
 config=. user,'/config'
 snap=. user,'/snap'
@@ -25,7 +25,7 @@ temp=. user,'/temp'
 ids=. ;:'addons bin break config home install snap system tools temp user'
 
 0!:0 :: ] <jpathsep bin,'/profilex.ijs' NB. override
-0!:0 :: ] <home,>(systype-5){'/.jprofile';'/_jprofile' NB. override per user
+0!:0 :: ] <home,>(systype-5){'/.jprofile.ijs';'/_jprofile.ijs' NB. override per user
 
 SystemFolders_j_=: ids,.jpathsep@".&.>ids
 
