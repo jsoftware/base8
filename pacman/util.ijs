@@ -350,11 +350,10 @@ NB. 0 if not
 NB. works for vista virtual store
 NB. jreg.bat is deleted/rewritten if there is access
 testaccess=: 3 : 0
-f=. <jpath'~bin/installer.txt'
-d=. 1!:1 f
+f=. <jpath'~install/testaccess.txt'
 try.
+  '' 1!:2 f
   1!:55 f
-  d 1!:2 f
   1
 catch.
   0
@@ -390,7 +389,7 @@ if. IFUNIX do.
       if. (i.0 0) -: tar 'x';file;dir do. e=. '' end.
     end.
   elseif. IFIOS do.
-    require 'tar'
+    require '~system/util/tar.ijs'
     'file dir'=. y
     if. (i.0 0) -: tar 'x';file;dir do. e=. '' end.
   elseif. do.

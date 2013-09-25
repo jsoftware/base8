@@ -54,7 +54,11 @@ JRELEASE=: ({.~i.&'/') 9!:14''
 NB. !!! 801
 JRELEASE=: 'j801'
 LIBTREE=: readtree''
-WWW=: 'http://www.jsoftware.com/jal/',JRELEASE,'/'
+if. IFIOS do.
+  WWW=: '/jal/',JRELEASE,'/'
+else.
+  WWW=: 'http://www.jsoftware.com/jal/',JRELEASE,'/'
+end.
 LIBVER=: jpath '~system/config/version.txt'
 )
 

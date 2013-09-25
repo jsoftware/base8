@@ -16,7 +16,33 @@ ferase p;q
 fail=. 0
 cmd=. HTTPCMD rplc '%O';(dquote p);'%L';(dquote q);'%t';t;'%T';(":TIMEOUT);'%U';f
 try.
-  if. (UNAME-:'Android') > IFQT +. fexist jpath '~tools/ftp/wget' do.
+  if. IFIOS do.
+    require 'socket'
+    1!:55 ::0: <p
+    rc=. 0 [ e=. pp=. ''
+    whilst. 0 do.
+      'rc sk'=. sdsocket_jsocket_''
+      if. 0~:rc do. break. end.
+      rc=. sdconnect_jsocket_ sk;PF_INET_jsocket_;'23.21.67.48';80
+      if. 0~:rc do. break. end.
+      'rc sent'=. ('GET ',f,' HTTP/1.0',LF2) sdsend_jsocket_ sk;0
+      if. 0~:rc do. break. end.
+      while. ((0=rc)*.(*#m)) [[ 'rc m'=. sdrecv_jsocket_ sk,1024 do.
+        pp=. pp,m
+      end.
+    end.
+    if. 0~:rc do. fail=. 1
+    elseif. 1 -.@e. '200 OK' E. (20{.pp) do. fail=. 1 [ e=. ({.~ i.&LF) pp
+    elseif. #p1=. I. (CRLF,CRLF) E. 500{.pp do. p2=. 4
+    elseif. #p1=. I. LF2 E. 500{.pp do. p2=. 2
+    elseif. do. fail=. 1
+    end.
+    if. 0=fail do.
+      ((p2+{.p1)}.pp) 1!:2 <p
+    else.
+      if. 0~:rc do. e=. sderror_jsocket_ rc end.
+    end.
+  elseif. (UNAME-:'Android') > IFQT +. fexist jpath '~tools/ftp/wget' do.
     rr=. f anddf p
     if. rr >: 0 do.
       r=. 0;p
@@ -29,7 +55,7 @@ try.
     ferase q
     r
     return.
-  else.
+  elseif. do.
     e=. shellcmd cmd
   end.
 catch. fail=. 1 end.
