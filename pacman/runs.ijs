@@ -48,6 +48,7 @@ init_console=: 3 : 0
 
 NB. =========================================================
 jpkg=: 4 : 0
+  if. IFIOS do. 'pacman not available' 13!:8]3 end.
   select. x
   case. 'history';'manifest' do.
     x showfiles_console y
