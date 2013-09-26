@@ -46,6 +46,7 @@ NB. getargs        getopts in the sh/bash shells
 NB. getenv         get environment variable
 NB. hfd            hex from decimal
 NB. inv, inverse   inverse (^:_1)
+NB. iospath        iOS file system path
 NB. isatty         test whether a file descriptor refers to a terminal
 NB. items          items ("_1)
 NB. leaf           leaf (L:0)
@@ -165,6 +166,12 @@ getenv=: 2!:5
 NB.*inv a inverse (^:_1)
 NB.*inverse a inverse (^:_1)
 inv=: inverse=: ^:_1
+
+NB.*iospath v iOS file system path
+iospath=: 3 : 0
+if. IFIOS *. ('/j'-:2{.y) do. y=. y,~ '/Documents',~ 2!:5 'HOME' end.
+y
+)
 
 NB.*isatty v test whether a file descriptor refers to a terminal
 3 : 0''

@@ -160,7 +160,7 @@ NB. =========================================================
 gzopen=: 3 : 0
 'f m'=. y
 f=. jpath jpathsep^:IFWIN f
-if. IFIOS > '/private'-:8{.f do. f=. f,~ '/Documents',~ LF-.~2!:5 'HOME' end.
+f=. iospath^:IFIOS f
 assert. 0~:h=. (libz,' gzopen >',cv,' x *c *c') cd f;,m
 if. -.no_gzbuffer do.
   try. 0=(libz,' gzbuffer >',cv,' i x i') cd h;128*1024 catch. no_gzbuffer=: 1 end.  NB. not available in older version
