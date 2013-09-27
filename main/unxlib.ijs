@@ -12,10 +12,12 @@ NB. unxlib        return the name of a shared library.
 
 NB. =========================================================
 NB. *UNXLIB      n table of common shared libraries
+NB. pre-built libxml2.so not available in android
 UNXLIB=: ([: <;._1 ' ',]);._2 (0 : 0)
 libc.so.6 libc.so libc.dylib libc.dylib
 libz.so.1 libz.so libz.dylib libz.dylib
 libsqlite3.so.0 libsqlite.so libsqlite3.dylib libsqlite3.dylib
+libxml2.so.2 libxml2.so libxml2.dylib libxml2.dylib
 )
 
 NB. =========================================================
