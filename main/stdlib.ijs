@@ -41,6 +41,7 @@ NB. evtloop        dummy event loop (empty)
 NB. exit           exit (2!:55)
 NB. expand         boolean expand data
 NB. fetch          fetch ({::)
+NB. fixdotdot      fix up a/b/c/d/../../e/../f to a/b/f
 NB. fliprgb        flip between argb and abgr byte order
 NB. getargs        getopts in the sh/bash shells
 NB. getenv         get environment variable
@@ -141,6 +142,14 @@ every=: &>
 
 NB.*evtloop
 evtloop=: EMPTY"_
+
+NB. *fixdotdot v fix up a/b/c/d/../../e/../f to a/b/f
+fixdotdot=: 3 : 0
+while. 1 e. r=. '../' E. y do.
+  y=. ((2+p)}.y),~ ({.~ i:&'/') }: (p=. {.I.r){.y
+end.
+y
+)
 
 NB. *fliprgb v flip between argb and abgr byte order
 fliprgb=: 3 : 0

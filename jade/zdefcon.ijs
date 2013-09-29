@@ -74,7 +74,7 @@ NB. *wcsize v return columns and rows of console
 NB. syntax:
 NB.   wcsize ''   (argument is ignored)
 wcsize=: 3 : 0
-if. (-.IFQT+.IFJHS) *. UNAME-:'Linux' do.
+if. (-.IFQT+.IFJHS+.IFIOS) *. UNAME-:'Linux' do.
   |.@".@(-.&LF)@(2!:0) :: (Cwh_j_"_) '/bin/stty size 2>/dev/null'
 else.
   Cwh_j_

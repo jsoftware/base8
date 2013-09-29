@@ -7,6 +7,8 @@ intersect=: e. # [
 matchhead=: [ -: #@[ {. ]
 towords=: ;:^:(_1 * 1 = L.)
 
+termLF=: , (0 < #) # LF -. {:
+
 NB. =========================================================
 NB. decomment
 NB. argument and result are text vectors
