@@ -12,6 +12,9 @@ if. IFJHS do.
   if. -.fexist cmd do. EMPTY return. end.
   redirecturl_jijxm_=: (' ';'%20') stringreplace cmd
   EMPTY return.
+elseif. IFIOS do.
+  jh '<a href="file://',(iospath y),'" >',cmd,'</a>'
+  EMPTY return.
 end.
 PDFReader=. PDFReader_j_
 select. UNAME

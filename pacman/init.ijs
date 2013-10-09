@@ -18,6 +18,8 @@ SYSNAME=: 'Package Manager'
 TIMEOUT=: 60
 WWWREV=: REV=: _1
 Ignore=: 0$<''
+Ignore=: Ignore, IFIOS#<;._1 ' demos/gldemo demos/glsimple demos/grid demos/isigraph demos/plot demos/wd demos/wdplot'
+Ignore=: Ignore, (-.IFIOS)#<;._1 ' ide/ios'
 
 NB. =========================================================
 3 : 0''

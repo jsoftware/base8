@@ -41,7 +41,7 @@ NB.    dat fwrites fl     write string
 
 cocurrent 'z'
 
-fboxname=: <@jpath_j_@(8 u: >) ::]
+fboxname=: <@(fixdotdot^:IFIOS)@jpath_j_@(8 u: >) ::]
 fexists=: #~ fexist
 f2utf8=: ]
 
