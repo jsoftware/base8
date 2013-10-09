@@ -1,9 +1,9 @@
 NB. build
 
-writesource_jp_ '~Main/ctag';'~system/main/ctag.ijs'
+writesource_jp_ '~Main/ctag';'~.Main/release/install/system/main/ctag.ijs'
 
 cf=. (jpath '~Main/ctag/') , ]
-cu=. (jpath '~system/util/') , ]
+cu=. (jpath '~.Main/release/install/system/util/') , ]
 
 mkdir_j_ cu''
 

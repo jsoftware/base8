@@ -1,14 +1,14 @@
 NB. config build
 
 cf=. (jpath '~Main/config/') , ]
-ct=. (jpath '~system/config/') , ]
-cu=. (jpath '~system/util/') , ]
+ct=. (jpath '~.Main/release/install/system/config/') , ]
+cu=. (jpath '~.Main/release/install/system/util/') , ]
 cc=. (jpath '~.system/user/config/') , ]
 
 mkdir_j_ ct''
 mkdir_j_ cu''
 
-t=. jpath '~system/util/boot.ijs'
+t=. jpath '~.Main/release/install/system/util/boot.ijs'
 t fcopynew cf 'boot.ijs'
 
 fl=. cutopen 0 : 0

@@ -1,5 +1,5 @@
 
-mkdir_j_ jpath '~system/defs'
+mkdir_j_ jpath '~.Main/release/install/system/defs'
 
 F=. cutopen 0 : 0
 hostdefs_aix
@@ -24,7 +24,7 @@ netdefs_win
 
 cp=. 3 : 0
 fm=. jpath '~Main/defs/',y,'.ijs'
-to=. jpath '~system/defs/',y,'.ijs'
+to=. jpath '~.Main/release/install/system/defs/',y,'.ijs'
 to fcopynew fm
 )
 

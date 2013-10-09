@@ -2,7 +2,7 @@ NB. main save
 
 cocurrent 'jpsave'
 mkdir_j_ jpath '~.Main/release/'
-mkdir_j_ jpath '~system/main'
+mkdir_j_ jpath '~.Main/release/install/system/main'
 
 f=. 3 : 0
 load '~Main/',y,'/build.ijs'
@@ -36,6 +36,12 @@ compare
 dat=. ; freads each (<jpath '~.Main/release/') ,each F , each <'.ijs'
 dat=. dat, 'cocurrent <''base'''
 
-dat fwritenew jpath '~system/main/stdlib.ijs'
+dat fwritenew jpath '~.Main/release/install/system/main/stdlib.ijs'
 
-(jpath '~.system/breaker.ijs') fcopynew jpath '~Main/main/breaker.ijs'
+(jpath '~.Main/release/install/breaker.ijs') fcopynew jpath '~Main/main/breaker.ijs'
+
+NB. copy may fail if ~install is not writable by the current user
+(2!:0 ::0:) 'cp -r "',(jpath '~.Main/release/install/system'),'" "',(jpath '~install'),'/."'
+(2!:0 ::0:) 'cp "',(jpath '~.Main/release/install/breaker.ijs'),'" "',(jpath '~install'),'/."'
+
+

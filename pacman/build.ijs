@@ -1,3 +1,3 @@
 NB. build
 
-writesourcex_jp_ '~Main/pacman';'~system/util/pacman.ijs'
+writesourcex_jp_ '~Main/pacman';'~.Main/release/install/system/util/pacman.ijs'

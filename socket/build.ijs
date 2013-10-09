@@ -1,3 +1,3 @@
 NB. build
 
-writesourcex_jp_ '~Main/socket';'~system/main/socket.ijs'
+writesourcex_jp_ '~Main/socket';'~.Main/release/install/system/main/socket.ijs'
