@@ -83,7 +83,8 @@ if. 0=L.y do.
 end.
 y=. y -. Ignore, IFIOS#<;._1 ' jview qtide ide/qt'
 y=. y -. (-.IFIOS)#<;._1 ' ide/ios'
-y=. y -. (IFIOS+.IFJHS)#<;._1 ' wdclass gui/wdclass viewmat gl2 graphics/gl2'
+y=. y -. (-.IFQT)#<;._1 ' qtide ide/qt'
+y=. y -. (((UNAME-:'Android')>IFQT+.IFJCDROID)+.IFIOS+.IFJHS)#<;._1 ' wdclass gui/wdclass viewmat gl2 graphics/gl2'
 y=. y -. (UNAME-:'Android')#<;._1 ' jview'
 y=. y -. (UNAME-.@-:'Android')#<;._1 ' droidwd gui/droidwd android gui/android'
 y=. y -. IFQT#<;._1 ' droidwd gui/droidwd'
