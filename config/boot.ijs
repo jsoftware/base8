@@ -59,11 +59,13 @@ if. 'Android'-:UNAME do.
     android_exec_host_z_=: android_exec_host_jqtide_
     load '~addons/gui/android/android.ijs'
     dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
-  elseif. IFJCDROID do.
+  else.
     android_exec_host_z_=: 2!:1
-    load '~addons/gui/android/android.ijs'
-    load '~addons/gui/droidwd/droidwd.ijs'
-    dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/docs/android-version.txt'''
+    if. IFJCDROID do.
+      load '~addons/gui/android/android.ijs'
+      load '~addons/gui/droidwd/droidwd.ijs'
+      dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/docs/android-version.txt'''
+    end.
   end.
 end.
 startupide''
