@@ -81,13 +81,12 @@ if. 0=L.y do.
     y=. cutnames y
   end.
 end.
-y=. y -. Ignore, IFIOS#<;._1 ' jview qtide ide/qt'
+y=. y -. Ignore, IFIOS#<;._1 ' jview qtide ide/qt viewmat'
 y=. y -. (-.IFIOS)#<;._1 ' ide/ios'
 y=. y -. (-.IFQT)#<;._1 ' qtide ide/qt'
-y=. y -. (((UNAME-:'Android')>IFQT+.IFJCDROID)+.IFIOS+.IFJHS)#<;._1 ' wdclass gui/wdclass viewmat gl2 graphics/gl2'
+y=. y -. (((UNAME-:'Android')>IFQT+.IFJCDROID)+.IFIOS+.IFJHS)#<;._1 ' wdclass gui/wdclass gl2 graphics/gl2'
 y=. y -. (UNAME-:'Android')#<;._1 ' jview'
-y=. y -. (UNAME-.@-:'Android')#<;._1 ' droidwd gui/droidwd android gui/android'
-y=. y -. IFQT#<;._1 ' droidwd gui/droidwd'
+y=. y -. (-.IFJCDROID)#<;._1 ' droidwd gui/droidwd android gui/android'
 if. 0=#y do. '' return. end.
 ndx=. ({."1 Public) i. y
 ind=. I. ndx < # Public
