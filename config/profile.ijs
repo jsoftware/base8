@@ -9,6 +9,8 @@ BINPATH_z_=: jpathsep BINPATH_z_
 NB. create SystemFolders
 bin=. BINPATH
 install=. (bin i: '/'){.bin
+fhs=. (FHS"_)^:(0=4!:0<'FHS') (0)
+install=. (0&~:fhs){::install;'/usr/share/j/8.0.1'
 addons=. install,'/addons'
 system=. install,'/system'
 tools=. install,'/tools'
@@ -24,7 +26,7 @@ snap=. user,'/snap'
 temp=. user,'/temp'
 ids=. ;:'addons bin break config home install snap system tools temp user'
 
-0!:0 :: ] <jpathsep bin,'/profilex.ijs' NB. override
+0!:0 :: ] <(({.~ i:&'/') jpathsep >{.4!:3''),'/profilex.ijs' NB. override
 0!:0 :: ] <home,>(systype-5){'/.jprofile.ijs';'/_jprofile.ijs' NB. override per user
 
 SystemFolders_j_=: ids,.jpathsep@".&.>ids

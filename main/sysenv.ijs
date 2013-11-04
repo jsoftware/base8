@@ -26,6 +26,7 @@ NB.*   IFWINCE       if Windows CE
 NB.*   IFWINE        if Wine (Wine Is Not an Emulator)
 NB.*   IFWOW64       if running J32 on a 64 bit o/s
 NB.*   UNAME         name of UNIX o/s
+NB.*   FHS           filesystem hierarchy: 0=not used  1=linux  2=debian multiarch
 
 18!:4 <'z'
 
@@ -62,6 +63,11 @@ if. notdef 'IFJCDROID' do.
 end.
 
 assert. IFQT *: IFJCDROID
+
+NB. ---------------------------------------------------------
+if. notdef 'FHS' do.
+  FHS=: 0
+end.
 
 NB. ---------------------------------------------------------
 if. notdef 'UNAME' do.
