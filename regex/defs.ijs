@@ -14,7 +14,7 @@ if. 0=FHS do.
     f=. jpath '~tools/regex/',t
   end.
 elseif. 1=FHS do. f=. '/usr/lib/', t
-elseif. 2=FHS do. f=. '/usr/lib/',arch t [ arch=. '/',~ IFRASPI{::(IF64{::'i386-linux-gnu';'x86_64-linux-gnu');'arm-linux-gnueabihf'
+elseif. 2=FHS do. f=. '/usr/lib/',arch, t [ arch=. '/',~ IFRASPI{::(IF64{::'i386-linux-gnu';'x86_64-linux-gnu');'arm-linux-gnueabihf'
 end.
 
 NB. fall back one more time for android
