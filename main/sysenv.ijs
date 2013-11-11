@@ -26,7 +26,7 @@ NB.*   IFWINCE       if Windows CE
 NB.*   IFWINE        if Wine (Wine Is Not an Emulator)
 NB.*   IFWOW64       if running J32 on a 64 bit o/s
 NB.*   UNAME         name of UNIX o/s
-NB.*   FHS           filesystem hierarchy: 0=not used  1=linux  2=debian multiarch
+NB.*   FHS           filesystem hierarchy: 0=not used  1=linux
 
 18!:4 <'z'
 
