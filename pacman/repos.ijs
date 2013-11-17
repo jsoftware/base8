@@ -21,7 +21,7 @@ switchlibrary 1 pick new
 
 NB. =========================================================
 switchlibrary=: 3 : 0
-ferase LIBVER
+'' fwrite LIBVER
 writetree LIBTREE=: y
 refreshjal''
 readlocal''
