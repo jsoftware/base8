@@ -8,7 +8,7 @@ case. 'Win' do. t=. 'jpcre.dll'
 case. 'Darwin' do. t=. 'libjpcre.dylib'
 case. do. t=. 'libjpcre.so'
 end.
-if. 0=FHS do.
+if. (0=FHS) > 'Linux'-:UNAME do.
   f=. BINPATH,'/',t
   if. 0 = 1!:4 :: 0: <f do.
     f=. jpath '~tools/regex/',t
@@ -20,20 +20,26 @@ NB. fall back one more time for android
     f=. (f i: '/'){. f
     f=. f,'/lib/', t
   end.
-else.
-  f=. t
-end.
 
-rxdll=: '"',f,'" '
-)
-
-rxcdm=: 1 : '(rxdll,x)&(15!:0)'
+  rxdll=. '"',f,'"'
 
 NB. =========================================================
 NB. J DLL calls corresponding to the four extended regular expression
 NB. functions defined in The Single Unix Specification, Version 2
-jregcomp=: 'regcomp + i *x *c i' rxcdm
-jregexec=: 'regexec + i *x *c x *i i' rxcdm
-jregerror=: 'regerror + x i * *c x' rxcdm
-jregfree=: 'regfree + n *x' rxcdm
+  jregcomp=: (rxdll,' regcomp + i *x *c i')&(15!:0)
+  jregexec=: (rxdll,' regexec + i *x *c x *i i')&(15!:0)
+  jregerror=: (rxdll,' regerror + x i * *c x')&(15!:0)
+  jregfree=: (rxdll,' regfree + n *x')&(15!:0)
 
+else.
+
+  rxdll=. 'libpcreposix.so.3'
+
+  jregcomp=: (rxdll,' pcreposix_regcomp + i *x *c i')&(15!:0)
+  jregexec=: (rxdll,' pcreposix_regexec + i *x *c x *i i')&(15!:0)
+  jregerror=: (rxdll,' pcreposix_regerror + x i * *c x')&(15!:0)
+  jregfree=: (rxdll,' pcreposix_regfree + n *x')&(15!:0)
+
+end.
+''
+)
