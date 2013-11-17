@@ -44,7 +44,7 @@ NB. ---------------------------------------------------------
 IF64=: 16={:$3!:3[2
 'IFUNIX IFWIN IFWINCE'=: 5 6 7 = 9!:12''
 IFJHS=: 0
-IFWINE=: IFWIN > 0-:2!:5'_'   NB. not an 100% reliable test
+IFWINE=: IFWIN > 0-:2!:5'LOGNAME'   NB. not an 100% reliable test
 
 NB. ---------------------------------------------------------
 if. notdef 'IFIOS' do.
