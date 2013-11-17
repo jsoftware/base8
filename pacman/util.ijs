@@ -393,7 +393,14 @@ if. IFUNIX do.
     'file dir'=. y
     if. (i.0 0) -: tar 'x';file;dir do. e=. '' end.
   elseif. do.
+    if. 0~:FHS do.
+      oumask=. LF-.~2!:0'umask'
+      2!:0'umask 0022 || true'
+    end.
     e=. shellcmd 'tar -xzf ',file,' -C ',dir
+    if. 0~:FHS do.
+      2!:0'umask ',oumask,' || true'
+    end.
   end.
 else.
   dir=. (_2&}. , '/' -.~ _2&{.) dir
