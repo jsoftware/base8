@@ -395,11 +395,11 @@ if. IFUNIX do.
   elseif. do.
     if. 0~:FHS do.
       oumask=. LF-.~2!:0'umask'
-      2!:0'umask 0022 || true'
+      2!:0'umask 0022'
     end.
-    e=. shellcmd 'tar -xzf ',file,' -C ',dir
+    e=. shellcmd 'tar --no-same-owner --no-same-permissions -xzf ',file,' -C ',dir
     if. 0~:FHS do.
-      2!:0'umask ',oumask,' || true'
+      2!:0'umask ',oumask
     end.
   end.
 else.
