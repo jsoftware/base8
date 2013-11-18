@@ -397,7 +397,7 @@ if. IFUNIX do.
       oumask=. LF-.~2!:0'umask'
       2!:0'umask 0022'
     end.
-    e=. shellcmd 'tar --no-same-owner --no-same-permissions -xzf ',file,' -C ',dir
+    e=. shellcmd 'tar ',(('Linux'-:UNAME)#'--no-same-owner --no-same-permissions'),' -xzf ',file,' -C ',dir
     if. 0~:FHS do.
       2!:0'umask ',oumask
     end.
