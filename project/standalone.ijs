@@ -5,7 +5,6 @@ coclass <'jp'
 
 STANDALONE=: 0 : 0
 load_z_=: require_z_=: script_z_=: ]
-jsystemdefs_z_=: 3 : '0!:100 toHOST (y,''_'',tolower UNAME,(IF64#''_64''),''_j_'')~'
 )
 
 getstdenv=: 3 : 0

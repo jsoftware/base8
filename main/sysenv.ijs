@@ -109,5 +109,9 @@ jcwdpath=: (1!:43@(0&$),])@jpathsep@((*@# # '/'"_),])
 NB. =========================================================
 jsystemdefs=: 3 : 0
 xuname=. UNAME
-0!:0 <jpath '~system/defs/',y,'_',(tolower xuname),(IF64#'_64'),'.ijs'
+if. 0=4!:0 <f=. y,'_',(tolower xuname),(IF64#'_64'),'_j_' do.
+  0!:100 toHOST f~
+else.
+  0!:0 <jpath '~system/defs/',y,'_',(tolower xuname),(IF64#'_64'),'.ijs'
+end.
 )

@@ -4,6 +4,7 @@ NB. defines list of source files.
 NB. path defaults to project directory.
 
 sysenv.ijs
+configure.ijs
 unxlib.ijs
 android.ijs
 stdlib.ijs

@@ -37,10 +37,10 @@ if. IFUNIX do.
     HTTPCMD=: 'wget ',nc,' -O %O -o %L -t %t %U'
   end.
 else.
-  exe=. '"',(jpath '~tools/ftp/wget.exe'),'"'
+  if. fexist exe=. jpath '~tools/ftp/wget.exe' do. exe=. '"',exe,'"' else. exe=. 'wget.exe' end.
   try. nc=. nc #~ 1 e. nc E. shell exe,' --help' catch. nc=. '' end.
   HTTPCMD=: exe,' ',nc,' -O %O -o %L -t %t -T %T %U'
-  UNZIP=: '"',(jpath '~tools/zip/unzip.exe'),'" -o -C '
+  if. fexist UNZIP=: jpath '~tools/zip/unzip.exe' do. UNZIP=: '"',UNZIP,'" -o -C ' else. UNZIP=: 'unzip.exe -o -C ' end.
 end.
 )
 
