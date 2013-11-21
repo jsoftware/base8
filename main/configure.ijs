@@ -21,19 +21,15 @@ end.
 if. (<'home') -.@e. {."1 SystemFolders do.
   if. 'Win'-:UNAME do. t=. 2!:5'USERPROFILE'
   elseif. 'Android'-:UNAME do. t=. '/sdcard'
-  elseif. 'Darwin'-:UNAME do. t=. 2!:5'HOME'
-  elseif. 'Linux'-:UNAME do. t=. 2!:5'HOME'
+  elseif. 'Darwin'-:UNAME do. t=. (0-:t){::'';~t=. 2!:5'HOME'
+  elseif. 'Linux'-:UNAME do. t=. (0-:t){::'';~t=. 2!:5'HOME'
   elseif. do. t=. ''
   end.
-  if. 0-:t do.
+  if. (''-:t)+.((,'/')-:t)+.('/root'-:t)+.('/usr/'-:5{.t) do.
     t=. '/tmp/',":2!:6''
     1!:5 ::] <t
   end.
   SystemFolders=: SystemFolders, 'home';t
-end.
-
-if. (<'install') -.@e. {."1 SystemFolders do.
-  SystemFolders=: SystemFolders, 'install';BINPATH,'/..'
 end.
 
 if. (<'temp') -.@e. {."1 SystemFolders do.
