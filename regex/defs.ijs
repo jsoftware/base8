@@ -8,7 +8,7 @@ case. 'Win' do. t=. 'jpcre.dll'
 case. 'Darwin' do. t=. 'libjpcre.dylib'
 case. do. t=. 'libjpcre.so'
 end.
-if. (0=FHS) > 'Linux'-:UNAME do.
+if. (0~:FHS) *: 'Linux'-:UNAME do.
   f=. BINPATH,'/',t
   if. 0 = 1!:4 :: 0: <f do.
     f=. jpath '~tools/regex/',t
