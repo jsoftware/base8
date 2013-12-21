@@ -27,6 +27,30 @@ end.
 )
 
 NB. =========================================================
+NB. android specific
+startupandroid=: 3 : 0
+if. IFQT do.
+  android_exec_host_z_=: android_exec_host_jqtide_
+else.
+  android_exec_host_z_=: 2!:1
+  if. IFJCDROID do.
+    load '~addons/gui/android/android.ijs'
+    load '~addons/gui/droidwd/droidwd.ijs'
+    dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/docs/android-version.txt'''
+  end.
+end.
+welcome=. jpath '~install/welcome.ijs'
+if. 1!:4 :: 0: <welcome do.
+  18!:4 <'base'
+  try.
+    load welcome
+  catch.
+    smoutput 'An error occurred when loading welcome script: ',welcome
+  end.
+end.
+)
+
+NB. =========================================================
 3 : 0''
 ndx=. ({."1 SystemFolders_j_) i. <'system'
 sys=. '/' ,~ > 1 { ndx { SystemFolders_j_
@@ -51,23 +75,7 @@ load '~system/util/configure.ijs'
 load '~system/main/ctag.ijs'
 load '~system/util/jadetag.ijs'
 load^:IFQT '~addons/ide/qt/qt.ijs'
-NB. android specific
-if. 'Android'-:UNAME do.
-  'rwxrwxrwx'1!:7 ::0:<jpath'~tools/zip/7za'
-  'rwxrwxrwx'1!:7 ::0:<jpath'~tools/ftp/wget'
-  if. IFQT do.
-    android_exec_host_z_=: android_exec_host_jqtide_
-    load '~addons/gui/android/android.ijs'
-    dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
-  else.
-    android_exec_host_z_=: 2!:1
-    if. IFJCDROID do.
-      load '~addons/gui/android/android.ijs'
-      load '~addons/gui/droidwd/droidwd.ijs'
-      dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/docs/android-version.txt'''
-    end.
-  end.
-end.
+startupandroid^:('Android'-:UNAME)''
 startupide''
 
 NB. ---------------------------------------------------------

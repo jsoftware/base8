@@ -370,24 +370,12 @@ NB. =========================================================
 NB. unzip file into given subdirectory
 unzip=: 3 : 0
 'file dir'=. dquote each y
-e=. 'Unexpected error'
+e=. 'Unexpected unzip error'
 if. IFUNIX do.
   if. UNAME-:'Android' do.
-    if. '.zip"'-:_5{.file do.
-      if. fexist jpath '~tools/zip/7za' do.
-        dir=. (_2&}. , '/' -.~ _2&{.) dir
-        e=. shellcmd UNZIP,' ',file,' -o',dir
-      else.
-        e=. ''
-        'file dir'=. y
-        e1=. dir andunzip file
-        if. -. e1 = 0 do. e=. 'failed to unzip ',file,' to ',dir, ' - ',(":e) ,LF end.
-      end.
-    else.
-      require 'tar'
-      'file dir'=. y
-      if. (i.0 0) -: tar 'x';file;dir do. e=. '' end.
-    end.
+    require 'tar'
+    'file dir'=. y
+    if. (i.0 0) -: tar 'x';file;dir do. e=. '' end.
   elseif. IFIOS do.
     require '~system/util/tar.ijs'
     'file dir'=. y

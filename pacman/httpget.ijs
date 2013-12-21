@@ -16,7 +16,7 @@ ferase p;q
 fail=. 0
 cmd=. HTTPCMD rplc '%O';(dquote p);'%L';(dquote q);'%t';t;'%T';(":TIMEOUT);'%U';f
 try.
-  if. IFIOS do.
+  if. IFIOS +. UNAME-:'Android' do.
     require 'socket'
     1!:55 ::0: <p
     rc=. 0 [ e=. pp=. ''
@@ -42,19 +42,6 @@ try.
     else.
       if. 0~:rc do. e=. sderror_jsocket_ rc end.
     end.
-  elseif. (UNAME-:'Android') > IFQT +. fexist jpath '~tools/ftp/wget' do.
-    rr=. f anddf p
-    if. rr >: 0 do.
-      r=. 0;p
-    else.
-      msg=. 'Download failed: ',f,'. returned ',": rr
-      log msg
-      info 'Connection failed:',LF2,msg
-      r=. 1; msg
-    end.
-    ferase q
-    r
-    return.
   elseif. do.
     e=. shellcmd cmd
   end.

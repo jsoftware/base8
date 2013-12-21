@@ -15,10 +15,8 @@ if. (0~:FHS) *: 'Linux'-:UNAME do.
   end.
 
 NB. fall back one more time for android
-  if. 0 = 1!:4 :: 0: <f do.
-    f=. (BINPATH i: '/'){. BINPATH
-    f=. (f i: '/'){. f
-    f=. f,'/lib/', t
+  if. ('Android'-:UNAME) *. 0 = 1!:4 :: 0: <f do.
+    f=. AndroidLibPath,'/',t
   end.
 
   rxdll=. '"',f,'"'

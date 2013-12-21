@@ -69,7 +69,7 @@ info CHECKADDONSDIR rplc 'XX';d
 NB. =========================================================
 NB. defines and returns online state from query
 getonline=: 3 : 0
-ONLINE=: mbnoyes y
+ONLINE=: 2=3 2 wdquery y
 )
 
 NB. =========================================================

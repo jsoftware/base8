@@ -25,12 +25,7 @@ NB. =========================================================
 3 : 0''
 nc=. '--no-cache'
 if. IFUNIX do.
-  if. UNAME-:'Android' do.
-    exe=. '"',(jpath '~tools/ftp/wget'),'"'
-    try. nc=. nc #~ 1 e. nc E. shell exe,' --help' catch. nc=. '' end.
-    HTTPCMD=: exe,' ',nc,' -O %O -o %L -t %t %U'
-    UNZIP=: '"',(jpath '~tools/zip/7za'),'" x -y '
-  elseif. UNAME-:'Darwin' do.
+  if. UNAME-:'Darwin' do.
     HTTPCMD=: 'curl -o %O --stderr %L -f -s -S %U'
   elseif. do.
     try. nc=. nc #~ 1 e. nc E. shell 'wget --help' catch. nc=. '' end.

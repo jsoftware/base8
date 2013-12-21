@@ -101,6 +101,15 @@ else.
     IFWOW64=: 'AMD64'-:2!:5'PROCESSOR_ARCHITEW6432'
   end.
 end.
+
+NB. ---------------------------------------------------------
+if. UNAME-:'Android' do.
+  if. IFQT do.
+    AndroidLibPath=: ({.~i:&'/') libjqt
+  else.
+    AndroidLibPath=: '/lib',~ ({.~i:&'/')^:2 BINPATH
+  end.
+end.
 )
 
 NB. =========================================================
