@@ -29,16 +29,6 @@ end.
 NB. =========================================================
 NB. android specific
 startupandroid=: 3 : 0
-if. IFQT do.
-  android_exec_host_z_=: android_exec_host_jqtide_
-else.
-  android_exec_host_z_=: 2!:1
-  if. IFJCDROID do.
-    load '~addons/gui/android/android.ijs'
-    load '~addons/gui/droidwd/droidwd.ijs'
-    dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/docs/android-version.txt'''
-  end.
-end.
 welcome=. jpath '~install/welcome.ijs'
 if. 1!:4 :: 0: <welcome do.
   18!:4 <'base'
@@ -74,7 +64,7 @@ load 'task'
 load '~system/util/configure.ijs'
 load '~system/main/ctag.ijs'
 load '~system/util/jadetag.ijs'
-load^:IFQT '~addons/ide/qt/qt.ijs'
+load^:IFQT^:(fexist@jpath) '~addons/ide/qt/qt.ijs'
 startupandroid^:('Android'-:UNAME)''
 startupide''
 
@@ -92,7 +82,9 @@ JVERSION=: toJ r
 
 NB. ---------------------------------------------------------
 NB. set break
-setbreak 'default'
+if. -. IFIOS +. 'Android'-:UNAME do.
+  setbreak 'default'
+end.
 
 NB. ---------------------------------------------------------
 ndx=. <./ ARGV i. '-jp';'-jprofile'

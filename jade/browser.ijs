@@ -44,7 +44,7 @@ case. do.
     if. -. isURL cmd do.
       cmd=. 'file://',cmd
     end.
-    android_exec_host 'android.intent.action.VIEW';(utf8 cmd);''
+    android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'text/html'
   else.
     if. 0 = #browser do.
       browser=. dfltbrowser''

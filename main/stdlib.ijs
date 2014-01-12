@@ -41,6 +41,7 @@ NB. evtloop        dummy event loop (empty)
 NB. exit           exit (2!:55)
 NB. expand         boolean expand data
 NB. fetch          fetch ({::)
+NB. file2url       convert to file:// format
 NB. fixdotdot      fix up a/b/c/d/../../e/../f to a/b/f
 NB. fliprgb        flip between argb and abgr byte order
 NB. getargs        getopts in the sh/bash shells
@@ -325,6 +326,19 @@ NB. =========================================================
 NB.*expand v boolean expand
 NB. form: boolean expand data
 expand=: # inverse
+
+NB. =========================================================
+NB. *file2url v convert to file:// format
+file2url=: 3 : 0
+y=. (' ';'%20';'\';'/') stringreplace y -. '"'
+if. IFWIN do.
+  if. ':'~:{:2{.y do. ((' ';'%20';'\';'/') stringreplace 1!:43''),'/',y end.
+  'file:///', y
+else.
+  if. '/'~:{.y do. ((' ';'%20') stringreplace 1!:43''),'/',y end.
+  'file://', y
+end.
+)
 
 NB. =========================================================
 NB.*dfh v decimal from hex

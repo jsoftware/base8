@@ -372,7 +372,12 @@ unzip=: 3 : 0
 'file dir'=. dquote each y
 e=. 'Unexpected unzip error'
 if. IFUNIX do.
+  notarcmd=. IFIOS
   if. UNAME-:'Android' do.
+NB. busybox tar is faster than jtar
+    notarcmd=. _1-: 2!:0 ::_1: 'which tar'
+  end.
+  if. notarcmd *. UNAME-:'Android' do.
     require 'tar'
     'file dir'=. y
     if. (i.0 0) -: tar 'x';file;dir do. e=. '' end.
@@ -381,13 +386,10 @@ if. IFUNIX do.
     'file dir'=. y
     if. (i.0 0) -: tar 'x';file;dir do. e=. '' end.
   elseif. do.
-    if. 0~:FHS do.
-      oumask=. LF-.~2!:0'umask'
-      2!:0'umask 0022'
-    end.
     e=. shellcmd 'tar ',(('Linux'-:UNAME)#'--no-same-owner --no-same-permissions'),' -xzf ',file,' -C ',dir
-    if. 0~:FHS do.
-      2!:0'umask ',oumask
+    if. (0~:FHS) *. (<2!:5'HOME') e. 0;'/root';'';,'/' do.
+      shellcmd 'find ',dir,' -type d -exec chmod a+rx {} \+'
+      shellcmd 'find ',dir,' -type f -exec chmod a+r {} \+'
     end.
   end.
 else.

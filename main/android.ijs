@@ -35,3 +35,10 @@ andunzip =: 3 : 0
 :
  'libj.so java_unzip_file > i *c *c' 15!:0 y;x
 )
+
+NB. start new activity using intent
+android_exec_host=: 3 : 0
+'intent uri mimetype'=. 3{.y
+2!:0 ::0: utf8 'am start -a ', intent, ' -d ', (dquote uri), (*#mimetype)#' -t ', mimetype
+EMPTY
+)
