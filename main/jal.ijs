@@ -12,7 +12,7 @@ select. y
 case. 'qtide' do.
   'install' jpkg 'base library ide/qt'
   getqtbin 0
-  smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';'jqt.cmd'
+  smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';(fexist jpath '~install/jqt.cmd'){::'bin/jqt.exe';'jqt.cmd'
 case. 'all' do.
   'install' jpkg 'all'
   getqtbin 0
@@ -94,6 +94,16 @@ end.
 d=. jpath '~install'
 if. IFWIN do.
   unzip_jpacman_ p;d
+  if. -.fexist jpath '~install/jqt.cmd' do.
+    smoutput 'move Qt library to bin'
+    spawn_jtask_ 'cmd /k rmdir /s /q "',('/\' charsub jpath '~install/plugins'),'" > nul'
+    (jpath '~install/plugins') frename (jpath '~install/qt/plugins')
+    for_fn. {."(1) 1!:0 jpath '~install/qt/*' do.
+      1!:55 ::0: <jpath '~bin/',>fn
+      (jpath '~bin/',>fn) frename (jpath '~install/qt/',>fn)
+    end.
+    'Do not delete this folder' 1!:2 <jpath '~install/qt/dummy.txt'
+  end.
 else.
   hostcmd_jpacman_ 'unzip -o ',(dquote p),' -d ',dquote d
 end.
