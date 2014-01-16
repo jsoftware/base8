@@ -1,23 +1,12 @@
 NB. class/object library
-
-NB. defines:
-NB.
-NB. coclass        set co class
-NB. cocreate       create object
-NB. cocurrent      set current locale
-NB. codestroy      destroy current object
-NB. coerase        erase object
-NB. cofullname     return name with locale qualifier
-NB. coinsert       insert into path (before z)
-NB. coname         return current co name
-NB. conames        formatted co name list
-NB. conew          create object
-NB. conl           return co name list
-NB. copath         set/get co path
-NB. coreset        destroy all object locales
+NB.%colib.ijs - class/object library
+NB.-This script defines the class/object library and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
 
 18!:4 <'z'
 
+NB. =========================================================
+NB.*coclass v set class/object class
 coclass=: 18!:4 @ boxxopen
 
 NB. =========================================================
@@ -34,7 +23,8 @@ codestroy=: coerase @ coname
 
 NB. =========================================================
 NB.*coerase v erase object
-NB. example: coerase <'jzplot'
+NB.-example:
+NB.+coerase <'jzplot'
 coerase=: 18!:55
 
 NB. =========================================================
@@ -50,13 +40,14 @@ end.
 
 NB. =========================================================
 NB.*coinsert v insert into path (before z)
-NB.
-NB. adds argument and copath of argument to current path.
-NB.
-NB. paths are in order of argument, except that z is at the end.
-NB.   coinsert 'cdir'
-NB.   coinsert 'cdir pobj'
-NB.   coinsert 'cdir';'pobj'
+NB.-
+NB.- adds argument and copath of argument to current path.
+NB.-
+NB.-paths are in order of argument, except that z is at the end.
+NB.-example:
+NB.+coinsert 'cdir'
+NB.+coinsert 'cdir pobj'
+NB.+coinsert 'cdir';'pobj'
 coinsert=: 3 : 0
 n=. ;: :: ] y
 p=. ; (, 18!:2) @ < each n
@@ -65,11 +56,11 @@ p=. ~. (18!:2 coname''), p
 )
 
 NB. =========================================================
-NB.*coname v return current co name
+NB.*coname v return current class/object name
 coname=: 18!:5
 
 NB. =========================================================
-NB.*conames v formatted co name list
+NB.*conames v formatted class/object name list
 conames=: list_z_ @ conl
 
 NB. =========================================================
@@ -87,15 +78,16 @@ w
 )
 
 NB. =========================================================
-NB.*conl v return co name list
-NB. form: conl n
+NB.*conl v return class/object name list
+NB.-syntax:
+NB.+conl n
 NB.   0 e. n  = return named locales
 NB.   1 e. n  = return numbered locales
 NB.   conl '' = return both, same as conl 0 1
 conl=: 18!:1 @ (, 0 1"_ #~ # = 0:)
 
 NB. =========================================================
-NB.*copath v set/get co path
+NB.*copath v set/get class/object path
 copath=: 18!:2 & boxxopen
 
 NB. =========================================================

@@ -1,8 +1,15 @@
 NB. jal definitions
+NB.%jal.ijs - jal utilities
+NB.-This script defines jal utilities and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
 
 cocurrent 'z'
 
 NB. =========================================================
+NB.*install v install from jal
+NB.-Install from jal.
+NB.-
+NB.-y is either 'qtide' to install the Qt IDE, or 'all' to install all jal packages.
 install=: 3 : 0
 if. IFIOS+.'Android'-:UNAME do. return. end.
 require 'pacman'
@@ -20,11 +27,14 @@ end.
 )
 
 NB. =========================================================
-NB. get Qt linux or mac or win binaries
-NB. always downloads the jqt binary
-NB. for the qt library (required for mac and win):
-NB. y is 0 - download if not present
-NB.      1 - always download
+NB.*getqtbin v get Qt binaries
+NB.-Get Qt binaries.
+NB.-
+NB.-Always downloads the jqt binary.
+NB.-
+NB.-For the qt library (required for mac and win):
+NB.- y is 0 - download if not present
+NB.-      1 - always download
 getqtbin=: 3 : 0
 if. IFIOS+.'Android'-:UNAME do. return. end.
 if. (<UNAME) -.@e. 'Linux';'Darwin';'Win' do. return. end.

@@ -1,18 +1,30 @@
 NB. break
-NB. setbreak 'default' is done by profile
-NB. setbreak creates file ~break/Pid.Class
-NB.  and writes 0 to the first byte
-NB.  Pid is the process id and Class is normally default
-NB. setbreak does 9!:47 with this file
-NB. 9!:47 maps first byte of file
-NB. JE tests this byte for break requests
-NB. another task writes 1 or 2 to the file for attention/break
-NB. 9!:46 returns filename
-NB. break y sets break for JEs with class y
-NB. JEs with the same class all get the break
-NB. non-default class protects JE from default break
-NB. new setbreak replaces old
+NB.%break.ijs - break utilities
+NB.-This script defines break utilities and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
+NB.-
+NB.-`setbreak 'default'` is done by the profile.
+NB.-
+NB.-setbreak creates file `~break/Pid.Class` and writes 0 to the first byte.
+NB.-
+NB.-Pid is the process id and Class is normally 'default'.
+NB.-
+NB.-setbreak calls 9!:47 with this file.
+NB.-
+NB.-9!:47 maps the first byte of file, and JE tests this byte for break requests.
+NB.-
+NB.-Another task writes 1 or 2 to the file for attention/break.
+NB.-
+NB.-9!:46 returns the filename.
+NB.-
+NB.-`break` y sets break for JEs with class y.
+NB.-
+NB.-JEs with the same class all get the break. A non-default class protects JE from the default break.
+NB.-
+NB.- A new setbreak replaces the old.
 
+NB. =========================================================
+NB.*break v break J execution
 NB. y is class to signal - '' treated as 'default'
 break=: 3 : 0
 class=. >(0=#y){y;'default'
@@ -27,8 +39,11 @@ end.
 i.0 0
 )
 
+NB. =========================================================
+NB.*setbreak v set break
+NB.-Set break
 NB. y is class
-NB. create unique file ~break/Pid.Class
+NB.Creates unique file ~break/Pid.Class
 setbreak=: 3 : 0
 try.
   p=. jpath '~break/'

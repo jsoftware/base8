@@ -1,17 +1,12 @@
 NB. unxlib
-NB.
-NB. common shared library (for UNIX)
-
-NB. nouns:
-NB. UNXLIB        table of common shared libraries
-NB.
-NB. verbs:
-NB. unxlib        return the name of a shared library.
+NB.%unxlib.ijs - common shared library for UNIX
+NB.-This script defines the common shared library for UNIX and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
 
 18!:4 <'z'
 
 NB. =========================================================
-NB. *UNXLIB      n table of common shared libraries
+NB.*UNXLIB n table of common shared libraries
 NB. pre-built libxml2.so not available in android
 UNXLIB=: ([: <;._1 ' ',]);._2 (0 : 0)
 libc.so.6 libc.so libc.dylib libc.dylib
@@ -21,8 +16,9 @@ libxml2.so.2 libxml2.so libxml2.dylib libxml2.dylib
 )
 
 NB. =========================================================
-NB. *unxlib      v return the name of a shared library.
-NB. e.g.   unxlib 'c'
+NB.*unxlib v return the name of a shared library.
+NB.-example:
+NB.+unxlib 'c'
 unxlib=: 3 : 0
 r=. (;: 'c z sqlite3') i. <,y
 c=. IFIOS + (;: 'Linux Android Darwin') i. <UNAME_z_

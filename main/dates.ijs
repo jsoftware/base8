@@ -1,4 +1,7 @@
 NB. date and time utilities
+NB.%dates.ijs - date and time utilities
+NB.-This script defines date and time utilities and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
 
 NB.   calendar        calendar for year [months]
 NB.   isotimestamp    ISO-formatted time stamp
@@ -19,31 +22,31 @@ cocurrent 'z'
 
 NB. =========================================================
 NB.*calendar v formatted calendar for year [months]
-NB.
-NB. returns calendar for year, as a list of months
-NB.
-NB. form: [opt] calendar year [months]
-NB.
-NB. right argument is one or more numbers: year, months
-NB. If no months are given, it defaults to all months.
-NB.
-NB. optional left argument is startday of week,
-NB.  0=sunday (default)
-NB.  1=monday
-NB.
-NB. example:
-NB.    calendar 2007 11 12
-NB. ┌─────────────────────┬─────────────────────┐
-NB. │         Nov         │         Dec         │
-NB. │ Su Mo Tu We Th Fr Sa│ Su Mo Tu We Th Fr Sa│
-NB. │              1  2  3│                    1│
-NB. │  4  5  6  7  8  9 10│  2  3  4  5  6  7  8│
-NB. │ 11 12 13 14 15 16 17│  9 10 11 12 13 14 15│
-NB. │ 18 19 20 21 22 23 24│ 16 17 18 19 20 21 22│
-NB. │ 25 26 27 28 29 30   │ 23 24 25 26 27 28 29│
-NB. │                     │ 30 31               │
-NB. └─────────────────────┴─────────────────────┘
-
+NB.-
+NB.-Returns calendar for year, as a list of months
+NB.-
+NB.-sy:
+NB.+[opt] calendar year [months]
+NB.-
+NB.-right argument is one or more numbers: year, months
+NB.-If no months are given, it defaults to all months.
+NB.-
+NB.-optional left argument is startday of week,
+NB.- 0=sunday (default)
+NB.- 1=monday
+NB.-
+NB.-example:
+NB.+   calendar 2014 3 4
+NB.+┌─────────────────────┬─────────────────────┐
+NB.+│         Mar         │         Apr         │
+NB.+│ Su Mo Tu We Th Fr Sa│ Su Mo Tu We Th Fr Sa│
+NB.+│                    1│        1  2  3  4  5│
+NB.+│  2  3  4  5  6  7  8│  6  7  8  9 10 11 12│
+NB.+│  9 10 11 12 13 14 15│ 13 14 15 16 17 18 19│
+NB.+│ 16 17 18 19 20 21 22│ 20 21 22 23 24 25 26│
+NB.+│ 23 24 25 26 27 28 29│ 27 28 29 30         │
+NB.+│ 30 31               │                     │
+NB.+└─────────────────────┴─────────────────────┘
 calendar=: 3 : 0
 0 calendar y
 :
@@ -59,31 +62,33 @@ h=. ((x*3)|.' Su Mo Tu We Th Fr Sa'),:"1~_3(_12&{.)\h
 
 NB. =========================================================
 NB.*getdate v get date from character string
-NB. form: [opt] getdate string
-NB.
-NB. useful for input forms that have a date entry field
-NB.
-NB. date forms permitted:
-NB.     1986 5 23
-NB.     May 23 1986
-NB.     23 May 1986
-NB.
-NB. optional x:
-NB.   0  = days first - default
-NB.     23 5 1986
-NB.   1  = months first
-NB.     5 23 1986
-NB.
-NB. other characters allowed:  ,-/:
-NB.
-NB. if not given, century defaults to current
-NB.
-NB. only first 3 characters of month are tested.
-NB.
-NB. examples:
-NB. 23/5/86
-NB. may 23, 1986
-NB. 1986-5-23
+NB.-Get date from character string.
+NB.-Useful for input forms with date entry fields.
+NB.-sy:
+NB.+[opt] getdate string
+NB.-
+NB.- date forms permitted:
+NB.-    1986 5 23
+NB.-    May 23 1986
+NB.-    23 May 1986
+NB.-
+NB.- optional x:
+NB.-  0  = days first - default (23 5 1986)
+NB.-  1  = months first (5 23 1986)
+NB.-
+NB.-Other characters allowed:  ,-/:
+NB.-
+NB.-If not given, century defaults to current
+NB.-
+NB.-Only first 3 characters of month are tested.
+NB.-
+NB.-example:
+NB.+   getdate '23/5/86'
+NB.+2086 5 23
+NB.+   getdate 'may 23, 1986'
+NB.+1986 5 23
+NB.+   getdate '1986-5-23'
+NB.+1986 5 23
 getdate=: 3 : 0
 0 getdate y
 :
@@ -125,7 +130,9 @@ end.
 
 NB. =========================================================
 NB.*isotimestamp v format time stamps as:  2000-05-23 16:06:39.268
-NB. y is one or more time stamps in 6!:0 format
+NB.-Format time stamps as:  2000-05-23 16:06:39.268
+NB.-
+NB.-y is one or more time stamps in 6!:0 format.
 isotimestamp=: 3 : 0
 r=. }: $y
 t=. _6 [\ , 6 {."1 y
@@ -142,26 +149,26 @@ d=. ' ' (I. d='b')} d
 
 NB. =========================================================
 NB.*todate v converts day numbers to dates
-NB. converts day numbers to dates, converse <todayno>
-NB.
-NB. This conversion is exact and provides a means of
-NB. performing exact date arithmetic.
-NB.
-NB. y = day numbers
-NB. x = optional:
-NB.   0 - result in form <yyyy mm dd> (default)
-NB.   1 - result in form <yyyymmdd>
-NB.   2 - result in form <yyyy mm dd hh MM ss>
-NB.
-NB. examples:
-NB.    todate 72460
-NB. 1998 5 23
-NB.
-NB.    todate 0 1 2 3 + todayno 1992 2 27
-NB. 1992 2 27
-NB. 1992 2 28
-NB. 1992 2 29
-NB. 1992 3  1
+NB.-Converts day numbers to dates, converse [todayno](#todayno)
+NB.-
+NB.-This conversion is exact and provides a means of
+NB.-performing exact date arithmetic.
+NB.-
+NB.- y = day numbers
+NB.- x = optional:
+NB.-   0 - result in form <yyyy mm dd> (default)
+NB.-   1 - result in form <yyyymmdd>
+NB.-   2 - result in form <yyyy mm dd hh MM ss>
+NB.-
+NB.-example:
+NB.+   todate 72460
+NB.+1998 5 23
+NB.+
+NB.+   todate 0 1 2 3 + todayno 1992 2 27
+NB.+1992 2 27
+NB.+1992 2 28
+NB.+1992 2 29
+NB.+1992 3  1
 
 todate=: 3 : 0
 0 todate y
@@ -186,19 +193,20 @@ r
 
 NB. =========================================================
 NB.*todayno v converts dates to day numbers
-NB. converts dates to day numbers, converse <todate>
-NB.
-NB. y = dates
-NB.
-NB. x = optional:
-NB.   0 - dates in form <yyyy mm dd> (default)
-NB.   1 - dates in form <yyyymmdd>
-NB.   2 - dates in form <yyyy mm dd hh MM ss>
-NB. 0 = todayno 1800 1 1, or earlier
-NB.
-NB. example:
-NB.    todayno 1998 5 23
-NB. 72460
+NB.-Converts dates to day numbers, converse [todate](#todate)
+NB.-
+NB.- y = dates
+NB.-
+NB.- x = optional:
+NB.-   0 - dates in form <yyyy mm dd> (default)
+NB.-   1 - dates in form <yyyymmdd>
+NB.-   2 - dates in form <yyyy mm dd hh MM ss>
+NB.-
+NB.-0 = todayno 1800 1 1, or earlier
+NB.-
+NB.-example:
+NB.+   todayno 1998 5 23
+NB.+72460
 
 todayno=: 3 : 0
 0 todayno y
@@ -222,20 +230,21 @@ end.
 
 NB. =========================================================
 NB.*tsdiff v differences between pairs of dates.
-NB.
-NB. form:
-NB. end tsdiff begin
-NB.   end, begin are vectors or matrices in form YYYY MM DD
-NB.   end dates should be later than begin dates
-NB.
-NB. method is to subtract dates on a calendar basis to determine
-NB. integral number of months plus the exact number of days remaining.
-NB. This is converted to payment periods, where # days remaining are
-NB. calculated as: (# days)%365
-NB.
-NB. example:
-NB.    1994 10 1 tsdiff 1986 5 23
-NB. 8.35799
+NB.-Return differences between pairs of dates.
+NB.-sy:
+NB.+end tsdiff begin
+NB.-
+NB.-  end, begin are vectors or matrices in form YYYY MM DD
+NB.-  end dates should be later than begin dates
+NB.-
+NB.-method is to subtract dates on a calendar basis to determine
+NB.-integral number of months plus the exact number of days remaining.
+NB.-This is converted to payment periods, where # days remaining are
+NB.-calculated as: (# days)%365
+NB.-
+NB.-example:
+NB.+   1994 10 1 tsdiff 1986 5 23
+NB.+8.35799
 
 tsdiff=: 4 : 0
 r=. -/"2 d=. _6 (_3&([\)) \ ,x,"1 y
@@ -250,19 +259,19 @@ r +/ . % 1 12 365
 
 NB. =========================================================
 NB.*tsrep v timestamp representation as a single number
-NB.
-NB. form:
-NB. [opt] timerep times
-NB.   opt=0  convert timestamps to numbers (default)
-NB.       1  convert numbers to timestamps
-NB.
-NB. timestamps are in 6!:0 format, or matrix of same.
-NB.
-NB. examples:
-NB.    tsrep 1800 1 1 0 0 0
-NB. 0
-NB.    ":!.13 tsrep 1995 5 23 10 24 57.24
-NB. 6165887097240
+NB.-
+NB.-sy:
+NB.-[opt] timerep times
+NB.-  opt=0  convert timestamps to numbers (default)
+NB.-      1  convert numbers to timestamps
+NB.-
+NB.-timestamps are in 6!:0 format, or matrix of same.
+NB.-
+NB.-example:
+NB.+   tsrep 1800 1 1 0 0 0
+NB.+0
+NB.+   x: tsrep 1995 5 23 10 24 57.24
+NB.+6165887097240
 tsrep=: 3 : 0
 0 tsrep y
 :
@@ -288,7 +297,10 @@ end.
 
 NB. =========================================================
 NB.*timestamp v format time stamps as:  23 May 1998 16:06:39
-NB. y is time stamp, if empty default to current time
+NB. Format time stamps as:  23 May 1998 16:06:39
+NB.-
+NB.-y is one or more time stamps in 6!:0'' format.
+NB.-If empty defaults to current time.
 timestamp=: 3 : 0
 if. 0 = #y do. w=. 6!:0'' else. w=. y end.
 r=. }: $ w
@@ -301,15 +313,20 @@ d=. ' ' (I. d='+') } d
 (r,20) $ d
 )
 
+NB. =========================================================
+NB.*tstamp v format time stamps as:  23 May 1998 16:06:39
+NB.-Same as [timestamp])#timestamp)
 tstamp=: timestamp
 
 NB. =========================================================
 NB.*valdate v validate dates
-NB. form: valdate dates
-NB. dates is 3-element vector
-NB.       or 3-column matrix
-NB.       in form YYYY MM DD
-NB. returns 1 if valid
+NB.-sy:
+NB.-valdate dates
+NB.- dates is 3-element vector
+NB.-       or 3-column matrix
+NB.-       in form YYYY MM DD
+NB.-
+NB.-returns 1 if valid
 valdate=: 3 : 0
 s=. }:$y
 'w m d'=. t=. |:((*/s),3)$,y
@@ -321,30 +338,33 @@ s$b*d<:day
 
 NB. =========================================================
 NB.*weekday v returns weekday from date, 0=Sunday ... 6=Saturday
-NB. arguments as for <todayno>
-NB.
-NB. examples:
-NB.    weekday 1997 5 23
-NB. 5
-NB.    1 weekday 19970523
-NB. 5
+NB.-Returns weekday from date, 0=Sunday ... 6=Saturday.
+NB.-Arguments as for [todayno](#todayno)
+NB.-
+NB.-example:
+NB.+   weekday 1997 5 23
+NB.+5
+NB.+   1 weekday 19970523
+NB.+5
 
 weekday=: 7 | 3 + todayno
 
 NB. =========================================================
 NB.*weeknumber v gives the year and weeknumber of date
-NB.
-NB. A week belongs to a year iff 4 days of the week belong to that year.
-NB. see http://www.phys.uu.nl/~vgent/calendar/isocalendar.htm
-NB.
-NB. y = dates
-NB. In the ISO 8601 calendar a week starts on monday.
-NB.
-NB. examples:
-NB.    weeknumber 2005 1 2
-NB. 2004 53
-NB.    weeknumber 2005 1 3
-NB. 2005 1
+NB.-
+NB.-Gives the year and weeknumber of date.
+NB.-
+NB.-A week belongs to a year iff 4 days of the week belong to that year.
+NB.-see http://www.phys.uu.nl/~vgent/calendar/isocalendar.htm
+NB.-
+NB.-y = dates
+NB.-In the ISO 8601 calendar a week starts on monday.
+NB.-
+NB.-example:
+NB.+   weeknumber 2005 1 2
+NB.+2004 53
+NB.+   weeknumber 2005 1 3
+NB.+2005 1
 
 weeknumber=: 3 : 0
 yr=. {.y
@@ -361,12 +381,14 @@ end.
 
 NB. =========================================================
 NB.*weeksinyear v gives number of weeks in year
-NB.
-NB. y = years
-NB. In the ISO 8601 calendar a week starts on monday.
-NB.
-NB. example:
-NB.   weeksinyear 2000 +i.10
-NB. 52 52 52 52 53 52 52 52 52 53
+NB.-Gives number of weeks in year
+NB.-
+NB.-y = years
+NB.-
+NB.-In the ISO 8601 calendar a week starts on monday.
+NB.-
+NB.-example:
+NB.+  weeksinyear 2000 +i.10
+NB.+52 52 52 52 53 52 52 52 52 53
 
 weeksinyear=: 3 : '52+ +./"1 [ 4=weekday(1 1,:12 31),"0 1/~ y'

@@ -1,50 +1,52 @@
-NB. directory utilities
-
+NB.-directory utilities
+NB.%dir.ijs - directory utilities
+NB.-This script defines directory utilities and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
+NB.
 NB. main verbs:
-NB.   dir            directory
-NB.   dircompare     compare directories
-NB.   dircompares    compare directories (called by dircompare)
-NB.   dirpath        directory paths
-NB.   dirfind        find name in directory
-NB.   dirs           directory browse
-NB.   dirss          directory string search
-NB.   dirssrplc      search and replace in directory
-NB.   dirtree        files in directory tree
-NB.   dirused        file count, space in directory tree
+NB.  dir            directory
+NB.  dircompare     compare directories
+NB.  dircompares    compare directories (called by dircompare)
+NB.  dirpath        directory paths
+NB.  dirfind        find name in directory
+NB.  dirs           directory browse
+NB.  dirss          directory string search
+NB.  dirssrplc      search and replace in directory
+NB.  dirtree        files in directory tree
+NB.  dirused        file count, space in directory tree
 NB.
 NB. note: dirtree excludes hidden directories, and other
 NB. directories specified in the session configuration.
-NB.
-NB. This is also used by:
-NB.   dircompare, dirfind, dirss, dirssrplc
 
 cocurrent 'z'
 
 NB. =========================================================
 NB.*dir v directory listings
-NB.
-NB. y = dos file specification:
-NB.      if empty, defaults to *
-NB.
-NB. x is optional:
-NB.    - if not given, defaults to 'n'
-NB.    - if character, returns a formatted directory,
-NB.        where x is the sort option:
-NB.          d=by date
-NB.          n=by name
-NB.          s=by size
-NB.    - if numeric, there are 1 or 2 elements:
-NB.          0{  0= list short names
-NB.              1= boxed list of full pathnames
-NB.              2= full directory list
-NB.          1{  0= filenames only (default)
-NB.              1= include subdirectories
-NB.
-NB. subdirectories are shown first
-NB. filenames are returned in lower case
-NB.
-NB. e.g.  dir ''
-NB.       1 dir jpath '~system/main/d*.ijs'
+NB.-
+NB.- y = file specification
+NB.-     if empty, defaults to *
+NB.-
+NB.- x is optional:
+NB.-   - if not given, defaults to 'n'
+NB.-   - if character, returns a formatted directory,
+NB.-       where x is the sort option:
+NB.-         d=by date
+NB.-         n=by name
+NB.-         s=by size
+NB.-   - if numeric, there are 1 or 2 elements:
+NB.-         0{  0= list short names
+NB.-             1= boxed list of full pathnames
+NB.-             2= full directory list
+NB.-         1{  0= filenames only (default)
+NB.-             1= include subdirectories
+NB.-
+NB.- subdirectories are shown first
+NB.- filenames are returned in lower case
+NB.-
+NB.-example:
+NB.+dir ''
+NB.+1 dir jpath '~system/main/d*.ijs'
+
 dir=: 3 : 0
 'n' dir y
 :
@@ -95,20 +97,22 @@ end.
 NB. =========================================================
 NB.*dircompare v compare files in directories
 NB.
-NB. form: [opt] dircompare dirs
+NB.-syntax:
+NB.+[opt] dircompare dirs
+NB.-
+NB.- dirs = directory names
+NB.- opt is optional, with up to three elements:
+NB.-   0{  =0 short file comparison (default)
+NB.-       =1 long file comparison
+NB.-   1{  =0 given directory only (default)
+NB.-       =1 recurse through subdirectories
+NB.-   2{  =0 file contents only (default)
+NB.-       =1 also compare timestamps
 NB.
-NB.   dirs = directory names
-NB.   opt is optional, with up to three elements:
-NB.     0{  =0 short file comparison (default)
-NB.         =1 long file comparison
-NB.     1{  =0 given directory only (default)
-NB.         =1 recurse through subdirectories
-NB.     2{  =0 file contents only (default)
-NB.         =1 also compare timestamps
+NB.-example:
+NB.+dircompare 'main /jbak/main'
 NB.
-NB. e.g.  dircompare 'main /jbak/main'
-NB.
-NB. returns text result or error message
+NB.-returns text result or error message
 dircompare=: 3 : 0
 0 dircompare y
 :
@@ -144,7 +148,7 @@ if. +/ # &> c do.
   if. {.opt do.
     r=. r,LF,;(,&(LF2)) &.> cd
   end.
-  
+
 end.
 
 if. 0=#;res do. r=. r,'no difference',LF end.
@@ -153,22 +157,24 @@ if. 0=#;res do. r=. r,'no difference',LF end.
 )
 
 NB. =========================================================
-NB. dircompares v compare files in directories
+NB.*dircompares v compare files in directories
 NB.
-NB. form: [opt] dircompares dirs
+NB.-syntax:
+NB.+[opt] dircompares dirs
 NB.
-NB.   dirs = directory names
-NB.   opt is optional, with up to three elements:
-NB.     0{  =0 short file comparison (default)
-NB.         =1 long file comparison
-NB.     1{  =0 given directory only (default)
-NB.         =1 recurse through subdirectories
-NB.     2{  =0 file contents only (default)
-NB.         =1 also compare timestamps
+NB.- dirs = directory names
+NB.- opt is optional, with up to three elements:
+NB.-   0{  =0 short file comparison (default)
+NB.-       =1 long file comparison
+NB.-   1{  =0 given directory only (default)
+NB.-       =1 recurse through subdirectories
+NB.-   2{  =0 file contents only (default)
+NB.-       =1 also compare timestamps
 NB.
-NB. e.g.  dircompares 'main /jbak/main'
+NB.-example:
+NB.+dircompares 'main /jbak/main'
 NB.
-NB. returns error message or 3-element boxed list
+NB.-returns error message or 3-element boxed list
 dircompares=: 3 : 0
 0 dircompares y
 :
@@ -210,14 +216,14 @@ dy=. (fy e. fx)#dy
 if. #j=. dx -. dy do.
   j=. {."1 j
   cmp=. <@fcompare"1 (sx&,&.>j),.sy&,&.>j
-  
+
   if. 0=2{opt do.
     f=. 'no difference'&-: @ (_13&{.)
     msk=. -. f &> cmp
     j=. msk#j
     cmp=. msk#cmp
   end.
-  
+
   r=. r,< j;<cmp
 else.
   r=. r,a:
@@ -228,13 +234,15 @@ r
 
 NB. =========================================================
 NB.*dirfind v find name in directory
-NB. find name in directory
+NB.-Find name in directory
+NB.-
+NB.-syntax:
+NB.+string dirfind directory
 NB.
-NB. form: string dirfind directory
-NB.
-NB. returns filenames in directory tree containing string
-NB.
-NB. e.g. 'jfile' dirfind 'packages'
+NB.-returns filenames in directory tree containing string
+NB.-
+NB.-example:
+NB.+'jfile' dirfind 'packages'
 dirfind=: 4 : 0
 f=. [: 1&e. x&E.
 g=. #~ [: -. [: +./\. =&'/'
@@ -245,10 +253,12 @@ if. 1 e. m do. ; (m # d) ,each LF else. 0 0$'' end.
 
 NB. =========================================================
 NB.*dirpath v directory paths
-NB. return directory paths starting from y
-NB. optional x=0  all paths (default)
-NB.             1  non-empty paths (i.e. having files)
-NB. e.g. dirpath 'examples'
+NB.-Return directory paths starting from y
+NB.-
+NB.- Optional x=0  all paths (default)
+NB.-            1  non-empty paths (i.e. having files)
+NB.-example:
+NB.+dirpath 'examples'
 dirpath=: 3 : 0
 0 dirpath y
 :
@@ -287,14 +297,16 @@ end.
 NB. =========================================================
 NB.*dirss v directory string search
 NB.
-NB. form: string dirss directory
+NB.-syntax:
+NB.+string dirss directory
 NB.
-NB. searches for files in directory tree containing string,
-NB. returning formatted display where found.
+NB.- searches for files in directory tree containing string,
+NB.- returning formatted display where found.
 NB.
-NB. e.g. 'create' dirss 'main'
+NB.-example:
+NB.+'create' dirss 'main'
 NB.
-NB. If x is a 2-element boxed list, calls dirssrplc
+NB.-If x is a 2-element boxed list, calls dirssrplc
 dirss=: 4 : 0
 if. (2=#x) *. 1=L. x do.
   x dirssrplc y return.
@@ -319,9 +331,12 @@ if. #fnd do. 2}.fnd else. 'not found: ',x end.
 
 NB. =========================================================
 NB.*dirssrplc v directory string search and replace
-NB. form: (old;new) dirssrplc files
-NB. example:
-NB.    ('old';'new') dirssrplc jpath '~system/main/*.ijs'
+NB.-
+NB.-syntax:
+NB.+(old;new) dirssrplc files
+NB.-
+NB.-example:
+NB.+('old';'new') dirssrplc jpath '~system/main/*.ijs'
 dirssrplc=: 4 : 0
 fls=. {."1 dirtree y
 if. 0 e. #fls do.
@@ -335,23 +350,27 @@ j=. >b # fls , each ': '&, each r
 
 NB. =========================================================
 NB.*dirtree v get filenames in directory tree
-NB. return filenames in directory tree as boxed matrix
-NB. optional x is a timestamp to exclude earlier files
-NB. each row contains:  filename;timestamp;size
-NB.
-NB. directory search is recursive through subdirectories
-NB. filenames are returned in lower case
-NB.
-NB. ignores hidden directories
-NB.
-NB. global DirTreeX_j_ (set in session configuration)
-NB. is a list of directories to exclude from the search,
-NB. e.g. DirTreeX_j_=: <'cvs' to exclude cvs directories.
-NB.
-NB. e.g.  dirtree ''
-NB.       dirtree 'main'
-NB.       dirtree jpath '~system/packages/*.ijs'
-NB. 2004 5 23 dirtree ''   - files dated on or after date.
+NB.-Return filenames in directory tree as boxed matrix
+NB.-
+NB.-Optional x is a timestamp to exclude earlier files.
+NB.-
+NB.-Each row contains:  filename;timestamp;size
+NB.-
+NB.-Directory search is recursive through subdirectories
+NB.-
+NB.-Filenames are returned in lower case in OSX or Windows
+NB.-
+NB.-Ignores hidden directories
+NB.-
+NB.-Global `DirTreeX_j_` (set in session configuration)
+NB.-is a list of directories to exclude from the search.
+NB.-e.g. DirTreeX_j_=: <'cvs' to exclude cvs directories.
+NB.-
+NB.-example:
+NB.+dirtree ''
+NB.+dirtree 'main'
+NB.+dirtree jpath '~system/packages/*.ijs'
+NB.+2014 5 23 dirtree ''   - files dated on or after date.
 dirtree=: 3 : 0
 0 dirtree y
 :
@@ -367,8 +386,8 @@ y=. y #~ (+./\ *. +./\.) y~:' '
 y=. y,(0=#y)#'*'
 if. ps={:y do. y=. y,'*' end.
 
-NB. ---------------------------------------------------------
-NB. if no wildcard, check if directory:
+NB.----------------------------------------------------------
+NB.-if no wildcard, check if directory:
 if. -. '*' e. y do.
   if. 1 = #j=. 1!:0 y do.
     select. 'hd' = 1 4 { >4{,j
@@ -378,10 +397,10 @@ if. -. '*' e. y do.
   end.
 end.
 
-NB. ---------------------------------------------------------
+NB.----------------------------------------------------------
 ts=. 100"_ #. 6: {. 0: >. <. - # {. 1980"_
 'path ext'=. (b#y);(-.b=. +./\.y=ps)#y
-NB. read files in current directory:
+NB.-read files in current directory:
 if. #dl=. 1!:0 y do.
   att=. > 4{"1 dl
   fl=. (('h' ~: 1{"1 att) *. 'd' ~: 4{"1 att)#dl
@@ -389,7 +408,7 @@ if. #dl=. 1!:0 y do.
     r=. r,(path&,&.>{."1 fl),.1 2{"1 fl
   end.
 end.
-NB. read any subdirectories:
+NB.-read any subdirectories:
 if. #dl=. 1!:0 path,'*' do.
   att=. > 4{"1 dl
   dr=. {."1 (('h' ~: 1{"1 att) *. 'd' = 4{"1 att) # dl

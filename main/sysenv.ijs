@@ -1,7 +1,7 @@
 NB. sysenv - System Environment
-NB.
-NB. ---------------------------------------------------------
-NB. Main definitions are in z:
+NB.%sysenv.ijs - system environment utilities
+NB.-This script defines text system environment and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
 
 NB. ---------------------------------------------------------
 NB. verbs:
@@ -14,19 +14,19 @@ NB.*IFDEF v        if DEFxxx exists
 
 NB. ---------------------------------------------------------
 NB. nouns:
-NB.*   IF64          if a 64 bit J system
-NB.*   IFIOS         if iOS (iPhone/iPad)
-NB.*   IFJCDROID     if JConsole for Android
-NB.*   IFJHS         if jhs libraries loaded
-NB.*   IFQT          if Qt libraries loaded
-NB.*   IFRASPI       if Raspberry Pi
-NB.*   IFUNIX        if UNIX
-NB.*   IFWIN         if Windows (2000 and up)
-NB.*   IFWINCE       if Windows CE
-NB.*   IFWINE        if Wine (Wine Is Not an Emulator)
-NB.*   IFWOW64       if running J32 on a 64 bit o/s
-NB.*   UNAME         name of UNIX o/s
-NB.*   FHS           filesystem hierarchy: 0=not used  1=linux
+NB.*IF64          n if a 64 bit J system
+NB.*IFIOS         n if iOS (iPhone/iPad)
+NB.*IFJCDROID     n if JConsole for Android
+NB.*IFJHS         n if jhs libraries loaded
+NB.*IFQT          n if Qt libraries loaded
+NB.*IFRASPI       n if Raspberry Pi
+NB.*IFUNIX        n if UNIX
+NB.*IFWIN         n if Windows (2000 and up)
+NB.*IFWINCE       n if Windows CE
+NB.*IFWINE        n if Wine (Wine Is Not an Emulator)
+NB.*IFWOW64       n if running J32 on a 64 bit o/s
+NB.*UNAME         n name of UNIX o/s
+NB.*FHS           n filesystem hierarchy: 0=not used  1=linux
 
 18!:4 <'z'
 

@@ -1,78 +1,94 @@
-NB. files
+NB.-files
+NB.%file.ijs - file utilities
+NB.-This script defines file utilities and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
+NB.-
+NB.-read verbs take a right argument of a filename, optionally
+NB.-linked with one or two numbers (as for 1!:11):
+NB.-  0 = start of read (may be negative)
+NB.-  1 = length of read (default rest of file)
+NB.-
+NB.-write verbs return number of characters written.
+NB.-
+NB.-filenames may be open or boxed character or unicode strings
+NB.-
+NB.-string verbs write out text delimited with the host OS delimiter,
+NB.-and read in text delimited by LF.
+NB.-
+NB.-on error, the result is _1,
+NB.-e.g. for file not found/file read error/file write error
 NB.
-NB. read verbs take a right argument of a filename, optionally
-NB. linked with one or two numbers (as for 1!:11):
-NB.   0 = start of read (may be negative)
-NB.   1 = length of read (default rest of file)
-NB.
-NB. write verbs return number of characters written.
-NB.
-NB. filenames may be open or boxed character or unicode strings
-NB.
-NB. string verbs write out text delimited with the host OS delimiter,
-NB. and read in text delimited by LF.
-NB.
-NB. on error, the result is _1,
-NB. e.g. for file not found/file read error/file write error
-NB.
-NB.    dat fappend fl     append
-NB.    dat fappends fl    append string
-NB.   verb fapplylines fl apply verb to lines of file
-NB.    to  fcopynew fls   copy files (if changed)
-NB.        fdir           file directory
-NB.        ferase fl      erase file
-NB.        fexist fl      return 1 if file exists
-NB.        fpathname      split file path into path;name
-NB.    opt fread fl       read file
-NB.    opt freadblock fl  read lines of file in blocks
-NB.        freadr fl      read records (flat file)
-NB.        freads fl      read string
-NB.     to frename fl     rename file
-NB.    dat freplace fl    replace in file
-NB.    opt fselect txt    select file
-NB.        fsize fl       size of file
-NB.    str fss fl         string search file
-NB. oldnew fssrplc fl     search and replace in file
-NB.        fstamp fl      file timestamp
-NB.        fgets txt      convert text read from file to J string
-NB.        fview fl       view file (requires textview)
-NB.    dat fwrite fl      write file
-NB.    dat fwrites fl     write string
+NB.-   dat fappend fl     append
+NB.-   dat fappends fl    append string
+NB.-  verb fapplylines fl apply verb to lines of file
+NB.-   to  fcopynew fls   copy files (if changed)
+NB.-       fdir           file directory
+NB.-       ferase fl      erase file
+NB.-       fexist fl      return 1 if file exists
+NB.-       fpathname      split file path into path;name
+NB.-   opt fread fl       read file
+NB.-   opt freadblock fl  read lines of file in blocks
+NB.-       freadr fl      read records (flat file)
+NB.-       freads fl      read string
+NB.-    to frename fl     rename file
+NB.-   dat freplace fl    replace in file
+NB.-   opt fselect txt    select file
+NB.-       fsize fl       size of file
+NB.-   str fss fl         string search file
+NB.-oldnew fssrplc fl     search and replace in file
+NB.-       fstamp fl      file timestamp
+NB.-       fgets txt      convert text read from file to J string
+NB.-       fview fl       view file (requires textview)
+NB.-   dat fwrite fl      write file
+NB.-   dat fwrites fl     write string
 
 cocurrent 'z'
 
-fboxname=: <@(fixdotdot^:IFIOS)@jpath_j_@(8 u: >) ::]
 fexists=: #~ fexist
 f2utf8=: ]
 
 NB. =========================================================
+NB.*fboxname v fix and box filename
+fboxname=: <@(fixdotdot^:IFIOS)@jpath_j_@(8 u: >) ::]
+
+NB. =========================================================
 NB.*fappend v append text to file
-NB.	The text is first ravelled. The file is created if necessary.
-NB. Returns number of characters written, or an error message.
-NB. form: text fappend filename
-NB. example:
-NB.   'chatham' fappend 'newfile.txt'
-NB. 7
+NB.-Append text to file.
+NB.-
+NB.-The text is first ravelled. The file is created if necessary.
+NB.-
+NB.-Returns number of characters written, or an error message.
+NB.-
+NB.-syntax:
+NB.+text fappend filename
+NB.-
+NB.-example:
+NB.+   'chatham' fappend 'newfile.txt'
+NB.+7
 fappend=: 4 : 0
 (,x) (#@[ [ 1!:3) :: _1: fboxname y
 )
 
 NB. =========================================================
 NB.*fappends v append string to file
-NB. The text is first ravelled into a vector with each row
-NB. terminated by the host delimiter.
-NB. The file is created if necessary. Returns number of characters
-NB. written, or an error message.
+NB.-Append string to file.
+NB.-
+NB.-The text is first ravelled into a vector with each row
+NB.-terminated by the host delimiter.
+NB.-
+NB.-The file is created if necessary. Returns number of characters
+NB.-written, or an error message.
 fappends=: 4 : 0
 (fputs x) (#@[ [ 1!:3) :: _1: fboxname y
 )
 
 NB. =========================================================
 NB.*fapplylines a apply verb to lines in file delimited by LF
+NB.-Apply verb to lines in file delimited by LF.
 NB.
-NB. form:
-NB.     lineproc fapplylines file  NB. line terminators removed
-NB.   1 lineproc fapplylines file  NB. line terminators preserved
+NB.-syntax:
+NB.-    lineproc fapplylines file  NB. line terminators removed
+NB.-  1 lineproc fapplylines file  NB. line terminators preserved
 fapplylines=: 1 : 0
 0 u fapplylines y
 :
@@ -101,10 +117,13 @@ end.
 
 NB. =========================================================
 NB.*fcopynew v copies files if changed
-NB. form: tofile fcopynew fromfiles
-NB. returns: 0, size    not changed
-NB.          1, size    changed
-NB.          _1         failure
+NB.-Copies files if changed.
+NB.-syntax:
+NB.+tofile fcopynew fromfiles
+NB.-
+NB.- returns: 0, size    not changed
+NB.-          1, size    changed
+NB.-         _1         failure
 fcopynew=: 4 : 0
 dat=. fread each boxopen y
 if. (<_1) e. dat do. _1 return. end.
@@ -116,22 +135,24 @@ end.
 
 NB. =========================================================
 NB.*fdir v file directory
-NB. example:
-NB.   fdir jpath '~system/main/s*.ijs'
+NB.-example:
+NB.+fdir jpath '~system/main/s*.ijs'
 fdir=: 1!:0@fboxname
 
 NB. =========================================================
 NB.*ferase v erases a file
-NB. Returns 1 if successful, otherwise _1
+NB.-Erases a file.
+NB.-
+NB.-Returns 1 if successful, otherwise _1
 ferase=: (1!:55 :: _1:) @ (fboxname &>) @ boxopen
 
 NB. =========================================================
 NB.*fexist v test if a file exists
-NB. Returns 1 if the file exists, otherwise 0.
+NB.-Returns 1 if the file exists, otherwise 0.
 fexist=: (1:@(1!:4) :: 0:) @ (fboxname &>) @ boxopen
 
 NB. =========================================================
-NB. convert text read from file to J string
+NB.*fgets v convert text read from file to J string
 fgets=: 3 : 0
 y=. (-(26{a.)={:y) }. y
 if. 0=#y do. '' return. end.
@@ -139,11 +160,11 @@ y,LF -. {:y=. toJ y
 )
 
 NB. =========================================================
-NB.*fmakex make file executable
+NB.*fmakex v make file executable
 fmakex=: (] 1!:7~ 'x' 2 5 8} 1!:7) @ fboxname
 
 NB. =========================================================
-NB.*fpathcreate create a folder path, returning success
+NB.*fpathcreate v create a folder path, returning success
 fpathcreate=: 3 : 0
 if. 0=#y do. 1 return. end.
 p=. (,'/'-.{:) jpathsep y
@@ -152,13 +173,15 @@ for_n. I. p='/' do. 1!:5 :: 0: < n{.p end.
 )
 
 NB. =========================================================
-NB.*fpathname split file name into path;name
+NB.*fpathname v split file name into path;name
 fpathname=: +./\.@:=&'/' (# ; -.@[ # ]) ]
 
 NB. =========================================================
 NB.*fread v read file
-NB. y is filename {;start size}
-NB. optional x calls freads
+NB.-Read file.
+NB.-
+NB.- y is filename {;start size}
+NB.- optional x calls freads
 fread=: 3 : 0
 if. 1 = #y=. boxopen y do.
   1!:1 :: _1: fboxname y
@@ -171,10 +194,15 @@ x freads y
 
 NB. =========================================================
 NB.*freadblock v read block of lines from file
-NB. lines are terminated by LF
-NB. blocksize is ~1e6
-NB. y is filename;start position
-NB. returns: block;new start position
+NB.-Read block of lines from file.
+NB.-
+NB.-Lines are terminated by LF.
+NB.-
+NB.-Blocksize is ~1e6
+NB.-
+NB.-y is filename;start position
+NB.-
+NB.-returns: block;new start position
 freadblock=: 3 : 0
 'f p'=. y
 f=. > fboxname f
@@ -199,10 +227,14 @@ end.
 
 NB. =========================================================
 NB.*freadr v read records from flat file
-NB. y is filename {;record start, # of records}
-NB. records are assumed of fixed length delimited by
-NB. one (only) of CR, LF, or CRLF.
-NB. the result is a matrix of records.
+NB.-Read records from flat file.
+NB.-
+NB.-y is filename {;record start, # of records}
+NB.-
+NB.-Records are assumed of fixed length delimited by
+NB.-one (only) of CR, LF, or CRLF.
+NB.-
+NB.-the result is a matrix of records.
 freadr=: 3 : 0
 'f s'=. 2{.boxopen y
 f=. fboxname f
@@ -230,11 +262,12 @@ dat=. (-wid)[\dat
 
 NB. =========================================================
 NB.*freads v read file as string
-NB. y is filename {;start size}
-NB. x is optional (b and m same as fread):
-NB.    = b    read as boxed vector
-NB.    = m    read as matrix
-NB. freads
+NB.-Read file as string.
+NB.-
+NB.- y is filename {;start size}
+NB.- x is optional (b and m same as fread):
+NB.-    = b    read as boxed vector
+NB.-    = m    read as matrix
 freads=: 3 : 0
 '' freads y
 :
@@ -247,7 +280,11 @@ end.
 )
 
 NB. =========================================================
-NB. *frename v newname frename oldname - return 1 if rename ok
+NB.-*frename v renames file
+NB.-syntax:
+NB.+newname frename oldname
+NB.-
+NB.-Returns 1 if rename successful.
 frename=: 4 : 0
 x=. > fboxname x
 y=. > fboxname y
@@ -261,7 +298,9 @@ end.
 
 NB. =========================================================
 NB.*freplace v replace text in file
-NB. form: dat freplace file;pos
+NB.-
+NB.-syntax:
+NB.+dat freplace file;pos
 freplace=: 4 : 0
 y=. boxopen y
 dat=. ,x
@@ -271,13 +310,16 @@ dat f :: _1: (fboxname {.y),{:y
 
 NB. =========================================================
 NB.*fsize v return file size
-NB. returns file size or _1 if error
+NB.-
+NB.-Returns file size or _1 if error
 fsize=: (1!:4 :: _1:) @ (fboxname &>) @ boxopen
 
 NB. =========================================================
 NB.*fss v file string search
-NB. form: str fss file
-NB. search file for string, returning indices
+NB.-Search file for string, returning indices.
+NB.-
+NB.-syntax:
+NB.+str fss file
 fss=: 4 : 0
 y=. fboxname y
 size=. 1!:4 :: _1: y
@@ -294,7 +336,9 @@ r
 
 NB. =========================================================
 NB.*fssrplc v file string search and replace
-NB. form: (old;new) fssrplc file
+NB.-
+NB.-syntax:
+NB.+(old;new) fssrplc file
 fssrplc=: fstringreplace
 
 NB. =========================================================
@@ -302,7 +346,7 @@ NB.*fstamp v returns file timestamp
 fstamp=: (1: >@{ , @ (1!:0) @ fboxname) :: _1:
 
 NB. =========================================================
-NB. convert text for write as string
+NB.fputs v convert text for file write as string
 fputs=: 3 : 0
 dat=. ":y
 if. 0 e. $dat do.
@@ -317,11 +361,12 @@ end.
 )
 
 NB. =========================================================
-NB.*ftype v file type
-NB.
-NB. return 0 = not exist
-NB.        1 = file
-NB.        2 = directory (optionally ending in path separator)
+NB.*ftype v get file type
+NB.-Get file type, as:
+NB.-
+NB.- 0 = not exist
+NB.- 1 = file
+NB.- 2 = directory
 ftype=: 3 : 0
 d=. (}: ^: ('/'={:)) ucp y
 d=. 1!:0 fboxname d
@@ -333,7 +378,7 @@ end.
 )
 
 NB. =========================================================
-NB. *fview v view file (requires textview)
+NB.-*fview v view file (requires textview)
 fview=: 3 : 0
 if. 3 ~: nc <'textview_z_' do.
   sminfo 'textview not available.' return.
@@ -352,6 +397,7 @@ fwrite=: 4 : 0
 )
 
 NB. =========================================================
+NB.*fwrite v write text to file if changed
 fwritenew=: 4 : 0
 dat=. ,x
 if. dat -: fread y do. 0 return. end.
@@ -363,7 +409,3 @@ NB.*fwrites v write string to file
 fwrites=: 4 : 0
 (fputs x) (#@[ [ 1!:2) :: _1: fboxname y
 )
-
-NB. !!! for development, remove later
-ftostring=: fputs
-fstring=: fgets

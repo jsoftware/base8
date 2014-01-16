@@ -1,14 +1,7 @@
 NB. class/object utilities
-
-NB. cofind         find objects containing name in object
-NB. cofindv        find objects and values of name in object
-NB. coinfo         return info on co classes
-NB. conouns        nouns referencing object
-NB. conounsx       object references with locales
-NB. copathnl       path name list
-NB. copathnlx      formatted path name list with defining classes
-NB. coselect       select current locale
-NB. costate        state of class objects
+NB.%coutil.ijs - class/object utilities
+NB.-This script defines the class/object utilities and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
 
 cocurrent 'z'
 
@@ -29,8 +22,10 @@ end.
 )
 
 NB. =========================================================
-NB.*coinfo v return info on co classes
-NB. returns noun refs;object;creator;path
+NB.*coinfo v get info on co classes
+NB.-Get info on co classes
+NB.-
+NB.-Returns: noun refs;object;creator;path
 coinfo=: 3 : 0
 ref=. boxxopen y
 if. 0 e. $ref do. i.0 4 return. end.
@@ -49,7 +44,8 @@ t=. n#~ (<y)-:&> ".each n
 
 NB. =========================================================
 NB.*conounsx v object references with locales
-NB. returns: object;references;locales
+NB.-Object references with locales
+NB.-returns: object;references;locales
 conounsx=: 3 : 0
 r=. ''
 if. #y do.
@@ -63,7 +59,6 @@ end.
 
 NB. =========================================================
 NB.*copathnl v path name list
-NB. path name list
 copathnl=: 3 : 0
 '' copathnl y
 :
@@ -91,7 +86,6 @@ n,.|:( n&e. &> r) #each t
 
 NB. =========================================================
 NB.*coselect v select current locale
-NB.
 coselect_result=: 3 : 0
 'r x s'=. y
 if. r do.

@@ -1,5 +1,8 @@
-NB. debug definitions and utilities
-
+NB. debug utilities
+NB.%debug.ijs - debug utilities
+NB.-This script defines debug utilities and is included in the J standard library.
+NB.-Definitions are loaded into the z locale.
+NB.
 NB. e.g.  dbss 'f 0'   monadic line 0
 NB.       dbss 'f :2'  dyadic line 2
 NB.       dbss 'f *:*' all lines
@@ -70,10 +73,10 @@ NB. dbstopnext  stop current definition at next line
 NB. dbview      view stack
 
 NB. =========================================================
-NB. *dbctx v display context as character matrix
-NB.
-NB. y is ignored
-NB. x is the number of lines before and after the current stop
+NB.*dbctx v display context as character matrix
+NB.-Display context as character matrix
+NB.- y is ignored
+NB.-x is the number of lines before and after the current stop
 NB.      default to 3 3
 dbctx=: 3 3&$: : (4 : 0)
 if. -.13!:17'' do. 0 0$'' return. end.
@@ -121,15 +124,17 @@ NB.   13!:0 [ 0
 NB. end.
 NB. )
 
+NB.*dbg v reset, set suspension mode (0=disable, 1=enable)
 dbg=: 13!:0
 
 NB. =========================================================
 NB.*dblocals v display names and locals on stack
-NB. form: [namelist] dblocals stack indices (default all)
-NB. example:
-NB.          dblocals ''     display all local names in stack
-NB.  'abc Z' dblocals i.5    display names abc and Z where found
-NB.                          in first 5 definitions on stack
+NB.-syntax:
+NB.+[namelist] dblocals stack_indices
+NB.-If indices is empty, defaults to all
+NB.-example:
+NB.+ dblocals ''            NB. display all local names in stack
+NB.+'abc Z' dblocals i.5    NB. display names abc and Z where found in first 5 definitions on stack
 dblocals=: _1&$: : (4 : 0)
 stk=. }. 13!:13''
 if. 0=#y do. y=. a: else. y=. (y e. i.#stk) # y end.
@@ -143,10 +148,13 @@ end.
 
 NB. =========================================================
 NB.*dbstack v displays call stack with header
-NB. ignores definition and source script (default)
-NB. y is the number of lines to display, all if empty
-NB. or a name on the stack
-NB. limits display to screenwidth
+NB.+Displays call stack with header
+NB.-Ignores definition and source script (default)
+NB.-
+NB.-y is the number of lines to display, all if empty
+NB.-or a name on the stack
+NB.-
+NB.-limits display to screenwidth
 dbstack=: 3 : 0
 hdr=. ;:'name en ln nc args locals susp'
 stk=. }. 13!:13''
@@ -167,8 +175,9 @@ tc@": each stk
 
 NB. =========================================================
 NB.*dbstop v set stops on all lines in namelist
-NB.
-NB. Adds to current set of stops
+NB.-Set stops on all lines in namelist
+NB.-
+NB.-Adds to current set of stops.
 dbstop=: 3 : 0
 if. 0 e. #y -. ' ' do. 13!:3'' return. end.
 t=. 13!:2''
@@ -179,15 +188,18 @@ t=. ~. t, (;: ^: (L.=0:) y) ,&.> <' *:*'
 
 NB. =========================================================
 NB.*dbstops v set stops on all lines in namelist
-NB.
-NB. Replaces current set of stops
+NB.-Set stops on all lines in namelist
+NB.-
+NB.-Replaces current set of stops
 dbstops=: 3 : 0
 13!:3 ; (;: ^: (L.=0:) y) ,&.> <' *:*;'
 )
 
 NB. =========================================================
 NB.*dbstopme v set stops on current definition if y
-NB. does nothing if suspension is off
+NB.-Set stops on current definition if y.
+NB.-
+NB.-Does nothing if suspension is off.
 dbstopme=: 3 : 0
 if. y do.
   if. 0 e. $c=. }. 13!:13'' do. return. end.
@@ -201,7 +213,9 @@ end.
 
 NB. =========================================================
 NB.*dbstopnext v set stop on next line of current definition if y
-NB. does nothing if suspension is off
+NB.-Set stop on next line of current definition if y.
+NB.-
+NB.-Does nothing if suspension is off.
 dbstopnext=: 3 : 0
 if. y do.
   if. 0 e. $c=. }. 13!:13'' do. return. end.
