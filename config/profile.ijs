@@ -17,7 +17,7 @@ system=. install,'/system'
 tools=. install,'/tools'
 home=. >(systype-5){(2!:5'HOME');2!:5'USERPROFILE'
 home=. >(0-:home){home;,'/'
-isroot=. (<home) e. '/root';'';,'/'
+isroot=. (<home) e. '/var/root';'/root';'';,'/'
 userx=. '/j',('64-'#~16={:$3!:3[2),'801-user'
 user=. home,userx
 user=. >isroot{user;install,'/user'
@@ -36,7 +36,7 @@ SystemFolders_j_=: ids,.jpathsep@".&.>ids
 
 md=. 3 : 0 NB. recursive makedir
 a=. jpathsep y,'/'
-if. ('//'-:2{.a)+.('/root/'-:6{.a)+.('/usr/'-:5{.a)+.('/tmp'-:a) do. return. end. NB. installed under / /root /usr
+if. ('//'-:2{.a)+.('/root/'-:6{.a)+.('/var/root/'-:10{.a)+.('/usr/'-:5{.a)+.('/tmp'-:a) do. return. end. NB. installed under / /root /usr
 if. -.#1!:0 }:a do.
   for_n. I. a='/' do. 1!:5 :: [ <n{.a end.
 end.
