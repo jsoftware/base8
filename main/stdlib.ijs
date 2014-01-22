@@ -181,7 +181,7 @@ exit=: 2!:55
 NB. =========================================================
 NB.*expand v boolean expand
 NB.-form: boolean expand data
-expand=: # inverse
+expand=: #^:_1
 
 NB. =========================================================
 NB.*file2url v convert to file:// format
