@@ -17,9 +17,6 @@ Tags
 UserDict
 Editor
 Editor_nox
-GL2Backend
-GL2ExtGlcmds
-GTKVER
 RGBSEQ
 )
 
