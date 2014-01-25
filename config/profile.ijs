@@ -49,7 +49,5 @@ md config
 md snap
 md temp
 
-4!:55 (;:'systype fhs isroot userx ids md'), ids
-
 NB. boot up J and load startup.ijs if it exists
-0!:0 <jpathsep system,'/util/boot.ijs'
+0!:0 <jpathsep (4!:55 (;:'systype fhs isroot userx ids md'), ids)]system,'/util/boot.ijs'
