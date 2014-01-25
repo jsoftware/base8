@@ -384,7 +384,7 @@ NB. busybox tar is faster than jtar
   else.
     e=. shellcmd 'tar ',(('Darwin'-:UNAME){::'--no-same-owner --no-same-permissions';'-o -p'),' -xzf ',file,' -C ',dir
   end.
-  if. (0~:FHS) *. (<2!:5'HOME') e. 0;'/var/root';'/root';'';,'/' do.
+  if. (0~:FHS) *. ('root'-:2!:5'USER) +. (<2!:5'HOME') e. 0;'/var/root';'/root';'';,'/' do.
     shellcmd ::0: 'find ',dir,' -type d -exec chmod a+rx {} \+'
     shellcmd ::0: 'find ',dir,' -type f -exec chmod a+r {} \+'
   end.
