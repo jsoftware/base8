@@ -1,5 +1,5 @@
 NB.-files
-NB.%file.ijs - file utilities
+NB.%files.ijs - file utilities
 NB.-This script defines file utilities and is included in the J standard library.
 NB.-Definitions are loaded into the z locale.
 NB.-

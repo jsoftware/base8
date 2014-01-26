@@ -43,3 +43,5 @@ dat fwritenew jpath '~.Main/release/install/system/main/stdlib.ijs'
 NB. copy may fail if ~install is not writable by the current user
 (2!:0 ::0:) 'cp -r "',(jpath '~.Main/release/install/system'),'" "',(jpath '~install'),'/."'
 (2!:0 ::0:) 'cp "',(jpath '~.Main/release/install/breaker.ijs'),'" "',(jpath '~install'),'/."'
+
+hostcmd_j_ 'rm -rf ',jpath '~.Main/release'

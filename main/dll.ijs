@@ -28,8 +28,8 @@ cder=: 15!:10
 cderx=: 15!:11
 
 NB. =========================================================
-NB.*gh v allocate header
-NB.*fh v free header
+NB.gh v allocate header
+NB.fh v free header
 NB.*symget v get address of locale entry for name
 NB.*symget v set array as address
 NB.*symdat v get address of data for name

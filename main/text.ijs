@@ -5,9 +5,9 @@ NB.-Definitions are loaded into the z locale.
 
 NB. =========================================================
 NB.*cutpara v cut text into boxed list of paragraphs
-NB.-sy:
+NB.-syntax:
 NB.+cutpara text
-NB.-ex:
+NB.-example:
 NB.+   cutpara 'one',LF,'two',LF2,'three'
 NB.+┌────────┬─────┐
 NB.+│one two │three│
@@ -21,9 +21,9 @@ b <;._2 txt
 
 NB. =========================================================
 NB.*foldtext v fold text to given width
-NB.-sy:
+NB.-syntax:
 NB.+width foldtext text
-NB.-ex:
+NB.-example:
 NB.+   A=: 'In the very middle of the court was a table, with a large dish of tarts upon it.'
 NB.+
 NB.+   30 foldtext A
@@ -66,7 +66,7 @@ NB.-syntax:
 NB.+topara text
 NB.-Replaces single LFs not followed by blanks by spaces,
 NB.-except for LF's at the beginning
-NB.-ex:
+NB.-example:
 NB.+   topara 'one',LF,'two',LF2,'three'
 NB.+one two
 NB.+

@@ -85,16 +85,6 @@ n,.|:( n&e. &> r) #each t
 )
 
 NB. =========================================================
-NB.*coselect v select current locale
-coselect_result=: 3 : 0
-'r x s'=. y
-if. r do.
-  runimmx0_jijs_ '18!:4 <''',s,''''
-end.
-empty''
-)
-
-NB. =========================================================
 NB.*costate v state of class objects
 costate=: 3 : 0
 r=. ,: ;:'refs id creator path'

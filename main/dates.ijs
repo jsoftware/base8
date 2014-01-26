@@ -25,7 +25,7 @@ NB.*calendar v formatted calendar for year [months]
 NB.-
 NB.-Returns calendar for year, as a list of months
 NB.-
-NB.-sy:
+NB.-syntax:
 NB.+[opt] calendar year [months]
 NB.-
 NB.-right argument is one or more numbers: year, months
@@ -64,7 +64,7 @@ NB. =========================================================
 NB.*getdate v get date from character string
 NB.-Get date from character string.
 NB.-Useful for input forms with date entry fields.
-NB.-sy:
+NB.-syntax:
 NB.+[opt] getdate string
 NB.-
 NB.- date forms permitted:
@@ -231,7 +231,7 @@ end.
 NB. =========================================================
 NB.*tsdiff v differences between pairs of dates.
 NB.-Return differences between pairs of dates.
-NB.-sy:
+NB.-syntax:
 NB.+end tsdiff begin
 NB.-
 NB.-  end, begin are vectors or matrices in form YYYY MM DD
@@ -260,7 +260,7 @@ r +/ . % 1 12 365
 NB. =========================================================
 NB.*tsrep v timestamp representation as a single number
 NB.-
-NB.-sy:
+NB.-syntax:
 NB.-[opt] timerep times
 NB.-  opt=0  convert timestamps to numbers (default)
 NB.-      1  convert numbers to timestamps
@@ -320,7 +320,7 @@ tstamp=: timestamp
 
 NB. =========================================================
 NB.*valdate v validate dates
-NB.-sy:
+NB.-syntax:
 NB.-valdate dates
 NB.- dates is 3-element vector
 NB.-       or 3-column matrix

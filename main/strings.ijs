@@ -132,7 +132,7 @@ NB.-
 NB.-Consecutive field delimiters indicate empty field.
 NB.-Field delimiters may occur within a field if
 NB.-the field is enclosed by string delimiters.
-NB.-ex:
+NB.-example:
 NB.+   ('|';'<>') chopstring '<hello|world>|4|84.3'
 NB.+┌───────────┬─┬────┐
 NB.+│hello|world│4│84.3│
