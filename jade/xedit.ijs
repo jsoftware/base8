@@ -15,7 +15,7 @@ if. IFJHS do.         NB. open on client side
   xmr ::0: file
   EMPTY return.
 end.
-if. (UNAME-:'Android') > isatty 0 do.
+if. UNAME-:'Android' do.
   file=. '/' (I. file='\') } file
   if. -. isURL file do.
     file=. 'file://',file
@@ -23,7 +23,7 @@ if. (UNAME-:'Android') > isatty 0 do.
   android_exec_host 'android.intent.action.VIEW';(utf8 file);'text/plain'
   EMPTY return.
 end.
-editor=. (Editor_j_;Editor_nox_j_){::~ nox=. IFUNIX *. (0;'') e.~ <2!:5 'DISPLAY'
+editor=. (Editor_j_;Editor_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
 if. 0=#editor do. EMPTY return. end.
 if. 1 e. '%f' E. editor do.
   cmd=. editor stringreplace~ '%f';(dquote >@fboxname file);'%l';(":>:row)

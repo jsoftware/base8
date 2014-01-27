@@ -30,30 +30,28 @@ case. 'Win' do.
     r=. ShellExecute 0;(uucp 'open');(uucp PDFReader);(uucp dquote cmd);NULL;SW_SHOWNORMAL
   end.
   if. r<33 do. sminfo 'view pdf error:',PDFReader,' ',cmd,LF2,1{::cderx'' end.
+case. 'Android' do.
+  cmd=. '/' (I. cmd='\') } cmd
+  if. -. isURL cmd do.
+    cmd=. 'file://',cmd
+  end.
+  android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'application/pdf'
 case. do.
-  if. (UNAME-:'Android') > isatty 0 do.
-    cmd=. '/' (I. cmd='\') } cmd
-    if. -. isURL cmd do.
-      cmd=. 'file://',cmd
+  if. 0 = #PDFReader do.
+    PDFReader=. dfltpdfreader''
+  end.
+  PDFReader=. dquote PDFReader
+  cmd=. '/' (I. cmd='\') } cmd
+  cmd=. PDFReader,' ',dquote cmd
+  try.
+    2!:1 cmd
+  catch.
+    msg=. 'Could not run the PDFReader with the command:',LF2
+    msg=. msg, cmd,LF2
+    if. IFQT do.
+      msg=. msg, 'You can change the PDFReader definition in Edit|Configure|Base',LF2
     end.
-    android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'application/pdf'
-  else.
-    if. 0 = #PDFReader do.
-      PDFReader=. dfltpdfreader''
-    end.
-    PDFReader=. dquote PDFReader
-    cmd=. '/' (I. cmd='\') } cmd
-    cmd=. PDFReader,' ',dquote cmd
-    try.
-      2!:1 cmd
-    catch.
-      msg=. 'Could not run the PDFReader with the command:',LF2
-      msg=. msg, cmd,LF2
-      if. IFQT do.
-        msg=. msg, 'You can change the PDFReader definition in Edit|Configure|Base',LF2
-      end.
-      sminfo 'Run PDFReader';msg
-    end.
+    sminfo 'Run PDFReader';msg
   end.
 end.
 EMPTY

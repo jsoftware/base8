@@ -38,33 +38,31 @@ case. 'Win' do.
     r=. ShellExecute 0;(uucp 'open');(uucp browser);(uucp dquote cmd);NULL;SW_SHOWNORMAL
   end.
   if. r<33 do. sminfo 'browse error:',browser,' ',cmd,LF2,1{::cderx'' end.
+case. 'Android' do.
+  cmd=. '/' (I. cmd='\') } cmd
+  if. -. isURL cmd do.
+    cmd=. 'file://',cmd
+  end.
+  android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'text/html'
 case. do.
-  if. (UNAME-:'Android') > isatty 0 do.
-    cmd=. '/' (I. cmd='\') } cmd
-    if. -. isURL cmd do.
-      cmd=. 'file://',cmd
+  if. 0 = #browser do.
+    browser=. dfltbrowser''
+  end.
+  browser=. dquote (browser;Browser_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
+  cmd=. '/' (I. cmd='\') } cmd
+  if. -. isURL cmd do.
+    cmd=. 'file://',cmd
+  end.
+  cmd=. browser,' ',dquote cmd
+  try.
+    2!:1 cmd, (0=nox)#' >/dev/null 2>&1 &'
+  catch.
+    msg=. 'Could not run the browser with the command:',LF2
+    msg=. msg, cmd,LF2
+    if. IFQT do.
+      msg=. msg, 'You can change the browser definition in Edit|Configure|Base',LF2
     end.
-    android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'text/html'
-  else.
-    if. 0 = #browser do.
-      browser=. dfltbrowser''
-    end.
-    browser=. dquote (browser;Browser_nox_j_){::~ nox=. IFUNIX *. (0;'') e.~ <2!:5 'DISPLAY'
-    cmd=. '/' (I. cmd='\') } cmd
-    if. -. isURL cmd do.
-      cmd=. 'file://',cmd
-    end.
-    cmd=. browser,' ',dquote cmd
-    try.
-      2!:1 cmd, (0=nox)#' >/dev/null 2>&1 &'
-    catch.
-      msg=. 'Could not run the browser with the command:',LF2
-      msg=. msg, cmd,LF2
-      if. IFQT do.
-        msg=. msg, 'You can change the browser definition in Edit|Configure|Base',LF2
-      end.
-      sminfo 'Run Browser';msg
-    end.
+    sminfo 'Run Browser';msg
   end.
 end.
 EMPTY
