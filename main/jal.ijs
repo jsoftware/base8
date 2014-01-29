@@ -106,8 +106,12 @@ if. IFWIN do.
   unzip_jpacman_ p;d
   if. -.fexist jpath '~install/jqt.cmd' do.
     smoutput 'move Qt library to bin'
-    spawn_jtask_ 'cmd /k rmdir /s /q "',('/\' charsub jpath '~install/plugins'),'" > nul'
-    (jpath '~install/plugins') frename (jpath '~install/qt/plugins')
+    plugins=. {.("1) 1!:0 jpath '~install/qt/plugins/*'
+    for_ps. plugins do.
+      spawn_jtask_ 'cmd /k rmdir /s /q "',('/\' charsub jpath '~bin/',>ps),'" > nul'
+      (jpath '~bin/',>ps) frename (jpath '~install/qt/plugins/',>ps)
+    end.
+    spawn_jtask_ 'cmd /k rmdir /s /q "',('/\' charsub jpath '~install/qt/plugins'),'" > nul'
     for_fn. {."(1) 1!:0 jpath '~install/qt/*' do.
       1!:55 ::0: <jpath '~bin/',>fn
       (jpath '~bin/',>fn) frename (jpath '~install/qt/',>fn)
