@@ -68,18 +68,28 @@ if. IFWIN do.
   unzip_jpacman_ p;d
 else.
   if. 'Linux'-:UNAME do.
-    hostcmd_jpacman_ 'cd ',(dquote d),' && tar xzf ',(dquote p)
+    if. (0~:FHS) do.
+      if. IFRASPI do.
+        d1=. '/usr/lib/arm-linux-gnueabihf/.'
+      elseif. IF64 do.
+        d1=. '/usr/lib/x86_64-linux-gnu/.'
+      elseif. do.
+        d1=. '/usr/lib/i386-linux-gnu/.'
+      end.
+      hostcmd_jpacman_ 'cd /usr/bin && tar --no-same-owner --no-same-permissions -xzf ',(dquote p), ' && chmod 755 jqt && chmod 644 libjqt.so && mv libjqt.so ',d1
+    else.
+      hostcmd_jpacman_ 'cd ',(dquote d),' && tar xzf ',(dquote p)
+    end.
   else.
     hostcmd_jpacman_ 'unzip -o ',(dquote p),' -d ',dquote d
   end.
-  f=. 4 : 'if. #1!:0 y do. x dirss y end.'
-  ('INSTALLPATH';jpath '~install') f jpath '~bin'
 end.
-if. #1!:0 jpath '~bin/',z1 do.
+ferase p
+if. #1!:0 ((0~:FHS)*.'Linux'-:UNAME){::(jpath '~bin/',z1);'/usr/bin/jqt' do.
   m=. 'Finished install of jqt binaries.'
 else.
   m=. 'Unable to install jqt binaries.',LF
-  m=. m,'check that you have write permission for: ',LF,jpath '~bin'
+  m=. m,'check that you have write permission for: ',LF,((0~:FHS)*.'Linux'-:UNAME){::(jpath '~bin');'/usr/bin'
 end.
 smoutput m
 
@@ -121,6 +131,7 @@ if. IFWIN do.
 else.
   hostcmd_jpacman_ 'unzip -o ',(dquote p),' -d ',dquote d
 end.
+ferase p
 if. #1!:0 tgt do.
   m=. 'Finished install of Qt binaries.'
 else.
