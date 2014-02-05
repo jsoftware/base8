@@ -29,14 +29,11 @@ end.
 NB. =========================================================
 NB. android specific
 startupandroid=: 3 : 0
+dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
 welcome=. jpath '~install/welcome.ijs'
 if. 1!:4 :: 0: <welcome do.
   18!:4 <'base'
-  try.
-    load welcome
-  catch.
-    smoutput 'An error occurred when loading welcome script: ',welcome
-  end.
+  0!:0 <welcome
 end.
 )
 
