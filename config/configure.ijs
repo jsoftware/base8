@@ -8,6 +8,7 @@ Browser
 Browser_nox
 DirTreeX
 Format
+MemoryLimit
 EPSReader
 PDFReader
 ReadCatalog
