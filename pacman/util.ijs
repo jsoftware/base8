@@ -376,13 +376,14 @@ if. IFUNIX do.
   if. IFIOS +. UNAME-:'Android' do.
 NB. busybox tar is faster than jtar
     notarcmd=. _1-: 2!:0 ::_1: 'which tar'
+    if. (UNAME-:'Android') > '/mnt/sdcard'-:2!:5'EXTERNAL_STORAGE' do. notarcmd=. 1 end.
   end.
   if. notarcmd do.
     require 'tar'
     'file dir'=. y
     if. (i.0 0) -: tar 'x';file;dir do. e=. '' end.
   else.
-    e=. shellcmd 'tar ',(('Darwin'-:UNAME){::'--no-same-owner --no-same-permissions';'-o -p'),' -xzf ',file,' -C ',dir
+    e=. shellcmd 'tar ',((IFIOS+:UNAME-:'Android')#(('Darwin'-:UNAME){::'--no-same-owner --no-same-permissions';'-o -p')),' -xzf ',file,' -C ',dir
   end.
   if. (0~:FHS) *. ('root'-:2!:5'USER') +. (<2!:5'HOME') e. 0;'/var/root';'/root';'';,'/' do.
     shellcmd ::0: 'find ',dir,' -type d -exec chmod a+rx {} \+'
