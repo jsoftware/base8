@@ -77,11 +77,9 @@ EMPTY
 NB. =========================================================
 configfolders=: 3 : 0
 UserFolders_j_=: i.0 2
-if. IFWIN do.
-  BINPATH_z_=: filecase BINPATH_z_
-  sf=. filecase each {:"1 SystemFolders_j_
-  SystemFolders_j_=: ({."1 SystemFolders_j_),.sf
-end.
+BINPATH_z_=: filecase BINPATH_z_
+sf=. filecase each {:"1 SystemFolders_j_
+SystemFolders_j_=: ({."1 SystemFolders_j_),.sf
 dat=. cbread1 'folders.cfg'
 if. (0=#dat) +. dat -: _1 do. return. end.
 ndx=. dat i.&> ' '

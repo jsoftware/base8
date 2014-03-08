@@ -30,10 +30,13 @@ path2proj=: ,'/',ProjExt ,~ spath
 NB. =========================================================
 NB. platform-dependant
 3 : 0''
-if. IFUNIX do.
+if. UNAME-:'Darwin' do.
+  filecase=: tolower
+  isroot=: '/' = {.
+elseif. IFUNIX do.
   filecase=: ]
   isroot=: '/' = {.
-else.
+elseif. do.
   filecase=: tolower
   isroot=: ':' = {.@}.
 end.
