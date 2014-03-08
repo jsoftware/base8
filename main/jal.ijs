@@ -10,7 +10,7 @@ NB.*install v install from jal
 NB.-Install from jal.
 NB.-
 NB.-y is either 'qtide' to install the Qt IDE, or 'all' to install all jal packages.
-install=: ''&$: : (4 : 0)
+install=: 3 : 0
 if. IFQT+.IFIOS+.'Android'-:UNAME do.
   smoutput 'must run from jconsole' return.
 end.
@@ -21,12 +21,12 @@ select. y
 case. 'qtide' do.
   'install' jpkg 'base library ide/qt'
   load'~system/main/stdlib.ijs'
-  x getqtbin 0
+  getqtbin 0
   smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';(fexist jpath '~install/jqt.cmd'){::'bin/jqt.exe';'jqt.cmd'
 case. 'all' do.
   'install' jpkg 'all'
   load'~system/main/stdlib.ijs'
-  x getqtbin 0
+  getqtbin 0
 end.
 )
 
@@ -39,7 +39,7 @@ NB.-
 NB.-For the qt library (required for mac and win):
 NB.- y is 0 - download if not present
 NB.-      1 - always download
-getqtbin=: ''&$: : (4 : 0)
+getqtbin=: 3 : 0
 if. (<UNAME) -.@e. 'Linux';'Darwin';'Win' do. return. end.
 if. IFQT+.IFIOS+.'Android'-:UNAME do.
   smoutput 'must run from jconsole' return.
@@ -55,7 +55,7 @@ if. 'Linux'-:UNAME do.
   if. IFRASPI do.
     z=. 'jqt-raspi-32.tar.gz'
   else.
-    z=. 'jqt-',((''-:x){::x;'linux'),'-',(IF64 pick 'x86';'x64'),'.tar.gz'
+    z=. 'jqt-linux-',(IF64 pick 'x86';'x64'),'.tar.gz'
   end.
   z1=. 'libjqt.so'
 elseif. IFWIN do.
