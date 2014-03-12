@@ -2,7 +2,7 @@ NB. install
 
 NB. =========================================================
 install=: 3 : 0
-dat=. y
+dat=. getdepend y
 'num siz'=. pmview_applycounts dat
 many=. 1 < num
 msg=. 'Installing ',(":num),' package',many#'s'
@@ -25,6 +25,7 @@ install_console=: 3 : 0
   if. pkgs -: ,<'all' do. pkgs=. 1 {"1 PKGDATA end.
   pkgs=. pkgs (e. # [) ~. (<'base library'), ((pkgnew +. pkgups) # 1&{"1@]) PKGDATA  NB.filter valid, new, upgradeable
   pkgs=. pkgs -. Ignore
+  pkgs=. getdepend_console pkgs
   if. 0 = num=. #pkgs do. '' return. end.
   many=. 1 < num
   msg=. 'Installing ',(":num),' package',many#'s'

@@ -36,6 +36,7 @@ NB. eg: 19 getintro 'This is too long to fit.'
 getintro=: ('...' ,~ -&3@[ {. ])^:(<#)
 info=: smoutput
 
+NB. =========================================================
 NB. getnames v Parses lists into package names
 getnames=: 3 : 0
 select. L.y
@@ -46,7 +47,7 @@ case. 0 do.                        NB. unboxed string
     y=. cutnames y
   end.
 case. 1 do.
-  if. 2 = #$y do.                 NB. boxed table
+  if. 2 = #$y do.                  NB. boxed table
     y=. {."1 y                     NB. first column is package names
   else.
     y=. ,y

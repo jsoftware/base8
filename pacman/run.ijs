@@ -1,3 +1,6 @@
 NB. run
 
-load 'pacman'
+load '~.Main/release/install/system/util/pacman.ijs'
+
+NB. 'install' jpkg 'plot'
+'install' jpkg 'graphics/plot'

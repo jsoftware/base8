@@ -155,11 +155,13 @@ else.
 end.
 )
 
+NB. =========================================================
 write_lastupdate=: 3 : 0
 txt=. ": 6!:0 ''
 txt fwrites ADDCFG,'lastupdate.txt'
 )
 
+NB. =========================================================
 NB. checklastupdate v Returns timestamp of last update of local JAL info
 NB. Could be integrated into existing checkstatus verb?
 checklastupdate=: 3 : 0
