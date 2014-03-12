@@ -20,12 +20,10 @@ if. -. checkaccess_jpacman_ '' do. return. end.
 select. y
 case. 'qtide' do.
   'install' jpkg 'base library ide/qt'
-  load'~system/main/stdlib.ijs'
   getqtbin 0
   smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';(fexist jpath '~install/jqt.cmd'){::'bin/jqt.exe';'jqt.cmd'
 case. 'all' do.
   'install' jpkg 'all'
-  load'~system/main/stdlib.ijs'
   getqtbin 0
 end.
 )
