@@ -3,7 +3,30 @@ NB. load
 Loaded=: ''
 Public=: i. 0 2
 UserFolders=: i. 0 2
-Ignore=: ;: 'colib convert coutil dates debug dir dll files libpath strings text'
+
+NB. =========================================================
+Ignore=: 3 : 0''
+r=. ' colib convert coutil dates debug dir dll files libpath strings text'
+if. IFIOS do.
+  r=. r, ' jview qtide ide/qt viewmat'
+else.
+  r=. r, ' ide/ios'
+end.
+if. -.IFQT do.
+  r=. r, ' qtide ide/qt'
+end.
+if. (((UNAME-:'Android')>IFQT+.IFJCDROID)+.IFIOS+.IFJHS) do.
+  r=. r,' wdclass gui/wdclass gl2 graphics/gl2'
+end.
+if. UNAME-:'Android' do.
+  r=. r, ' jview'
+end.
+if. -.IFJCDROID do.
+  r=. r,' droidwd gui/droidwd android gui/android'
+end.
+<;._1 r
+)
+
 
 NB. =========================================================
 buildpublic=: 3 : 0
@@ -81,12 +104,7 @@ if. 0=L.y do.
     y=. cutnames y
   end.
 end.
-y=. y -. Ignore, IFIOS#<;._1 ' jview qtide ide/qt viewmat'
-y=. y -. (-.IFIOS)#<;._1 ' ide/ios'
-y=. y -. (-.IFQT)#<;._1 ' qtide ide/qt'
-y=. y -. (((UNAME-:'Android')>IFQT+.IFJCDROID)+.IFIOS+.IFJHS)#<;._1 ' wdclass gui/wdclass gl2 graphics/gl2'
-y=. y -. (UNAME-:'Android')#<;._1 ' jview'
-y=. y -. (-.IFJCDROID)#<;._1 ' droidwd gui/droidwd android gui/android'
+y=. y -. Ignore
 if. 0=#y do. '' return. end.
 ndx=. ({."1 Public) i. y
 ind=. I. ndx < # Public
@@ -100,8 +118,7 @@ if. #ind do.
   y=. (addfname each ndx { y) ndx } y
   ndx=. ind #~ msk *. cnt > 0
   sel=. (<'~addons/') ,each (ndx{y) ,each <'.ijs'
-  smsk=. (1:@(1!:4) ::0:)@<@jpath &> sel
-  y=. (smsk#sel) (smsk#ndx) } y
+  y=. sel ndx} y
 end.
 fullname each jpath each y
 )
