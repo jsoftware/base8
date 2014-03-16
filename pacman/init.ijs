@@ -17,9 +17,61 @@ SECTION=: ,<'All'
 SYSNAME=: 'Package Manager'
 TIMEOUT=: 60
 WWWREV=: REV=: _1
-Ignore=: 0$<''
-Ignore=: Ignore, IFIOS#<;._1 ' api/gl3 api/jni api/x11 data/dbman data/ddmysql data/odbc demos/gldemo demos/glsimple demos/grid demos/isigraph demos/opengl demos/plot demos/wd demos/wdplot games/minesweeper games/nurikabe games/pousse games/solitaire general/pcall general/sfl graphics/d3 graphics/fvj3 graphics/gl1ut graphics/gl2 graphics/gnuplot graphics/graph graphics/graphviz graphics/grid graphics/jturtle graphics/opengl graphics/print graphics/tgsj graphics/treemap graphics/viewmat gui/monthview gui/util gui/wdclass ide/qt math/tabula media/animate media/gdiplus media/image3 media/ming media/paint media/wav'
-Ignore=: Ignore, (-.IFIOS)#<;._1 ' ide/ios'
+
+IgnoreIOS=: 0 : 0
+api/gl3
+api/jni
+api/x11
+data/dbman
+data/ddmysql
+data/odbc
+demos/gldemo
+demos/glsimple
+demos/grid
+demos/isigraph
+demos/opengl
+demos/plot
+demos/wd
+demos/wdplot
+games/minesweeper
+games/nurikabe
+games/pousse
+games/solitaire
+general/pcall
+general/sfl
+graphics/d3
+graphics/fvj3
+graphics/gl1ut
+graphics/gl2
+graphics/gnuplot
+graphics/graph
+graphics/graphviz
+graphics/grid
+graphics/jturtle
+graphics/opengl
+graphics/print
+graphics/tgsj
+graphics/treemap
+graphics/viewmat
+gui/monthview
+gui/util
+ide/qt
+math/tabula
+media/animate
+media/gdiplus
+media/image3
+media/ming
+media/paint
+media/wav
+)
+
+Ignore=: 3 : 0''
+if. IFIOS do.
+  <;._2 IgnoreIOS
+else.
+  <'ide/ios'
+end.
+)
 
 NB. =========================================================
 3 : 0''
