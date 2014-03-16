@@ -115,7 +115,8 @@ if. #ind do.
   y=. (addfname each ndx { y) ndx } y
   ndx=. ind #~ msk *. cnt > 0
   sel=. (<'~addons/') ,each (ndx{y) ,each <'.ijs'
-  y=. sel ndx} y
+  smsk=. (1:@(1!:4) ::0:)@<@jpath &> sel
+  y=. (smsk#sel) (smsk#ndx) } y
 end.
 fullname each jpath each y
 )
