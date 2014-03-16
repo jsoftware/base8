@@ -8,7 +8,7 @@ NB. =========================================================
 Ignore=: 3 : 0''
 r=. ' colib convert coutil dates debug dir dll files libpath strings text'
 if. IFIOS do.
-  r=. r, ' jview qtide ide/qt viewmat'
+  r=. r, ' qtide ide/qt viewmat'
 else.
   r=. r, ' ide/ios'
 end.
@@ -16,10 +16,7 @@ if. -.IFQT do.
   r=. r, ' qtide ide/qt'
 end.
 if. (((UNAME-:'Android')>IFQT+.IFJCDROID)+.IFIOS+.IFJHS) do.
-  r=. r,' wdclass gui/wdclass gl2 graphics/gl2'
-end.
-if. UNAME-:'Android' do.
-  r=. r, ' jview'
+  r=. r,' gl2 graphics/gl2'
 end.
 if. -.IFJCDROID do.
   r=. r,' droidwd gui/droidwd android gui/android'
