@@ -112,8 +112,9 @@ if. #ind do.
     ndx=. I. msk *. cnt=1
     bal=. (addfname each ndx { bal) ndx } bal
     ndx=. I. msk *. cnt > 0
-    bal=. (<'~addons/') ,each (ndx{bal) ,each <'.ijs'
-    y=. bal (ndx{ind) } y
+    bal=. (<jpath '~addons/') ,each (ndx{bal) ,each <'.ijs'
+    msk=. (1:@(1!:4) ::0:)"0 bal
+    y=. (msk#bal) (msk#ndx{ind) } y
   end.
 end.
 fullname each y
