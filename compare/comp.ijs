@@ -74,5 +74,3 @@ r=. r,nx,fx,'  ',(":2 pick dx),LF
 r=. r,ny,fy,'  ',(":2 pick dy),LF
 r,tx compare ty
 )
-
-
