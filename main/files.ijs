@@ -280,7 +280,7 @@ end.
 )
 
 NB. =========================================================
-NB.-*frename v renames file
+NB.*frename v renames file
 NB.-syntax:
 NB.+newname frename oldname
 NB.-
@@ -378,7 +378,7 @@ end.
 )
 
 NB. =========================================================
-NB.-*fview v view file (requires textview)
+NB.*fview v view file (requires textview)
 fview=: 3 : 0
 if. 3 ~: nc <'textview_z_' do.
   sminfo 'textview not available.' return.

@@ -86,39 +86,37 @@ end.
 )
 
 NB. =========================================================
-NB. getscripts        - getscripts namelist
-NB. converts any short names to full names
-NB. converts ~path names
-NB. converts path separator
-NB. converts paths of form abc/def/etc with no extension to
-NB. ~addons/abc/def/etc.ijs
 getscripts=: 3 : 0
 if. 0=#y do. '' return. end.
 if. 0=L.y do.
   if. fexist y do.
-    y=. <y
-  else.
-    y=. cutnames y
+    fullname each fboxname y return.
   end.
+  y=. cutnames y
 end.
 y=. y -. Ignore
 if. 0=#y do. '' return. end.
 ndx=. ({."1 Public) i. y
 ind=. I. ndx < # Public
 y=. ((ind { ndx) { 1 {"1 Public) ind } y
-ind=. (i.#y) -. ind
+ind=. (I.-.isroot&>y) -. ind
 if. #ind do.
-  sel=. ind { y
-  msk=. -. '.' e. &> sel
-  cnt=. +/ &> sel e. each <'/\'
-  ndx=. ind #~ msk *. cnt=1
-  y=. (addfname each ndx { y) ndx } y
-  ndx=. ind #~ msk *. cnt > 0
-  sel=. (<'~addons/') ,each (ndx{y) ,each <'.ijs'
-  smsk=. (1:@(1!:4) ::0:)@<@jpath &> sel
-  y=. (smsk#sel) (smsk#ndx) } y
+  bal=. jpath each ind { y
+  msk=. fexist &> bal
+  y=. (msk#bal) (msk#ind) } y
+  ind=. (-.msk)#ind
+  if. #ind do.
+    bal=. (-.msk)#bal
+    msk=. -. '.' e. &> bal
+    cnt=. +/ &> bal e. each <'/\'
+    ndx=. I. msk *. cnt=1
+    bal=. (addfname each ndx { bal) ndx } bal
+    ndx=. I. msk *. cnt > 0
+    bal=. (<'~addons/') ,each (ndx{bal) ,each <'.ijs'
+    y=. bal (ndx{ind) } y
+  end.
 end.
-fullname each jpath each y
+fullname each y
 )
 
 NB. =========================================================
