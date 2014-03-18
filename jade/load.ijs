@@ -89,9 +89,6 @@ NB. =========================================================
 getscripts=: 3 : 0
 if. 0=#y do. '' return. end.
 if. 0=L.y do.
-  if. fexist y do.
-    fullname each fboxname y return.
-  end.
   y=. cutnames y
 end.
 y=. y -. Ignore
@@ -102,13 +99,13 @@ y=. ((ind { ndx) { 1 {"1 Public) ind } y
 ind=. (I.-.isroot&>y) -. ind
 if. #ind do.
   bal=. jpath each ind { y
-  msk=. fexist &> bal
+  msk=. (isfile &> bal) +. '/'={:&> bal
   y=. (msk#bal) (msk#ind) } y
   ind=. (-.msk)#ind
   if. #ind do.
     bal=. (-.msk)#bal
     msk=. -. '.' e. &> bal
-    cnt=. +/ &> bal e. each <'/\'
+    cnt=. ('/' +/ .= ]) &> bal
     ndx=. I. msk *. cnt=1
     bal=. (addfname each ndx { bal) ndx } bal
     ndx=. I. msk *. cnt > 0

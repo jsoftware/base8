@@ -6,7 +6,7 @@ NB. add dependencies to gui install
 getdepend=: 3 : 0
 if. 0 = #y do. y return. end.
 dep=. getdepend_console 1{"1 y
-y, PKGDATA #~ (1{"1 PKGDATA) e. dep
+PKGDATA #~ (1{"1 PKGDATA) e. dep
 )
 
 NB. =========================================================
@@ -22,5 +22,5 @@ whilst. -. res-:old do.
   old=. res
   res=. ~. res, <;._1 ; ',' ,each (ids e. res) # dep
 end.
-res -. a:, y, {."1 ADDINS
+~. y, res -. a:, {."1 ADDINS
 )

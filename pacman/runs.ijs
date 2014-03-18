@@ -1,4 +1,4 @@
-NB. run
+NB. runs
 
 NB. =========================================================
 NB. initialize global values:
