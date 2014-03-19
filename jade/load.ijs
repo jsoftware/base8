@@ -89,6 +89,9 @@ NB. =========================================================
 getscripts=: 3 : 0
 if. 0=#y do. '' return. end.
 if. 0=L.y do.
+  if. isfile y do.
+    fullname each fboxname y return.
+  end.
   y=. cutnames y
 end.
 y=. y -. Ignore
