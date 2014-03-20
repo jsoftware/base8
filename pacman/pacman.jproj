@@ -17,4 +17,5 @@ refresh.ijs
 repos.ijs
 select.ijs
 runs.ijs
+stdlib.ijs
 zfns.ijs
