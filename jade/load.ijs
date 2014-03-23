@@ -18,8 +18,11 @@ end.
 if. (((UNAME-:'Android')>IFQT+.IFJCDROID)+.IFIOS+.IFJHS) do.
   r=. r,' gl2 graphics/gl2'
 end.
+if. -.IFJCDROID +. IFQT*.'Android'-:UNAME do.
+  r=. r,' android gui/android'
+end.
 if. -.IFJCDROID do.
-  r=. r,' droidwd gui/droidwd android gui/android'
+  r=. r,' droidwd gui/droidwd'
 end.
 <;._1 r
 )

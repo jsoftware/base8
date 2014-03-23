@@ -29,6 +29,7 @@ end.
 NB. =========================================================
 NB. android specific
 startupandroid=: 3 : 0
+load^:IFQT^:(fexist@jpath) '~addons/gui/android/android.ijs'
 dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
 welcome=. jpath '~install/welcome.ijs'
 if. 1!:4 :: 0: <welcome do.
