@@ -20,7 +20,7 @@ if. UNAME-:'Android' do.
   if. -. isURL file do.
     file=. 'file://',file
   end.
-  android_exec_host 'android.intent.action.VIEW';(utf8 file);'text/plain'
+  android_exec_host 'android.intent.action.VIEW';(utf8 file);'text/plain';0
   EMPTY return.
 end.
 editor=. (Editor_j_;Editor_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'

@@ -35,7 +35,7 @@ case. 'Android' do.
   if. -. isURL cmd do.
     cmd=. 'file://',cmd
   end.
-  android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'application/pdf'
+  android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'application/pdf';0
 case. do.
   if. 0 = #PDFReader do.
     PDFReader=. dfltpdfreader''
