@@ -26,7 +26,7 @@ break=. user,'/break'
 config=. user,'/config'
 snap=. user,'/snap'
 temp=. user,'/temp'
-temp=. >isroot{temp;'/tmp'
+temp=. >isroot{temp;(*#1!:0'/tmp'){::temp;'/tmp'
 ids=. ;:'addons bin break config home install snap system tools temp user'
 
 0!:0 :: ] <(({.~ i:&'/') jpathsep >{.4!:3''),'/profilex.ijs' NB. override
