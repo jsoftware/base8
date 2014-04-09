@@ -49,10 +49,10 @@ andunzip =: 3 : 0
 )
 
 NB. start new activity using intent
-NB. android_exec_host=: 3 : 0
-NB. 'intent uri mimetype'=. 3{.y
-NB. 2!:0 ::0: utf8 'am start -a ', intent, ' -d ', (dquote uri), (*#mimetype)#' -t ', mimetype
-NB. EMPTY
-NB. )
+android_exec_am=: 3 : 0
+'intent uri mimetype flags'=. 4{.y
+2!:0 ::0: utf8 'am start -a ', intent, ' -d ', (dquote uri), ((*#mimetype)#' -t ', mimetype), ((0~:flags)#' -f ', ":flags)
+EMPTY
+)
 
-android_exec_host=: 2!:1`StartActivityImplicit_ja_@.IFQT
+android_exec_host=: 2!:1`android_exec_am`StartActivityImplicit_ja_@.(IFQT+0=4!:0<'AndroidPackage')
