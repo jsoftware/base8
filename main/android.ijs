@@ -25,7 +25,7 @@ NB.- <= _100 negation of unsuccessful http response code (!=200), ie. _404 "Not 
 
 anddf=: 4 : '''libj.so android_download_file > i *c *c'' 15!:0 x;y'
 NB.-url for test image
-andurl =:'http://www.jsoftware.com/moin_static180/common/jwlogo.png'
+andurl=: 'http://www.jsoftware.com/moin_static180/common/jwlogo.png'
 
 NB. =========================================================
 NB.*andunzip v android zip
@@ -42,16 +42,17 @@ NB.- _1 generic i/o error
 NB.- _2 zipfile not found
 NB.- _3 output directory not writable
 NB.- _4 zip format exception
-andunzip =: 3 : 0
- '' andunzip y
+andunzip=: 3 : 0
+'' andunzip y
 :
- 'libj.so java_unzip_file > i *c *c' 15!:0 y;x
+'libj.so java_unzip_file > i *c *c' 15!:0 y;x
 )
 
 NB. start new activity using intent
 android_exec_am=: 3 : 0
 'intent uri mimetype flags'=. 4{.y
-2!:0 ::0: utf8 'am start -a ', intent, ' -d ', (dquote uri), ((*#mimetype)#' -t ', mimetype), ((0~:flags)#' -f ', ":flags)
+user=. (UserNumer_ja_"_)^:(0=4!:0<'UserNumer_ja_') (_1)
+2!:0 ::0: utf8 'am start ',((user>:0)#'--user ', ":user),' -a ', intent, ' -d ', (dquote uri), ((*#mimetype)#' -t ', mimetype), ((0~:flags)#' -f ', ":flags)
 EMPTY
 )
 
