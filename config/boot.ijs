@@ -31,6 +31,10 @@ NB. android specific
 startupandroid=: 3 : 0
 load^:IFQT^:(fexist@jpath) '~addons/gui/android/android.ijs'
 dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
+if. (0~:4!:0<'UserNumber_ja_')>IFQT do.
+NB. assume user 0, but may need to override in startup.ijs per user
+  UserNumber_ja_=: 0- 402 > 100#. 2{. 0&". ;._1'.', LF-.~ 2!:0 'getprop ro.build.version.release'
+end.
 welcome=. jpath '~install/welcome.ijs'
 if. 1!:4 :: 0: <welcome do.
   18!:4 <'base'

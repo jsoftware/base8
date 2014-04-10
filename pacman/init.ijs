@@ -80,7 +80,8 @@ if. IFUNIX do.
   if. UNAME-:'Darwin' do.
     HTTPCMD=: 'curl -o %O --stderr %L -f -s -S %U'
   elseif. do.
-    try. nc=. nc #~ 1 e. nc E. shell 'wget --help' catch. nc=. '' end.
+    if. 'Android'-:UNAME do. nc=. ''
+    else. try. nc=. nc #~ 1 e. nc E. shell 'wget --help' catch. nc=. '' end. end.
     HTTPCMD=: 'wget ',nc,' -O %O -o %L -t %t %U'
   end.
 else.
