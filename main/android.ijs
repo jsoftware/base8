@@ -51,7 +51,7 @@ andunzip=: 3 : 0
 NB. start new activity using intent
 android_exec_am=: 3 : 0
 'intent uri mimetype flags'=. 4{.y
-user=. (UserNumber_ja_"_)^:(0=4!:0<'UserNubmer_ja_') (_1)
+user=. (UserNumber_ja_"_)^:(0=4!:0<'UserNumber_ja_') (_1)
 2!:0 ::0: utf8 'am start ',((user>:0)#'--user ', ":user),' -a ', intent, ' -d ', (dquote uri), ((*#mimetype)#' -t ', mimetype), ((0~:flags)#' -f ', ":flags)
 EMPTY
 )
