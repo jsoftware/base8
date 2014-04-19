@@ -10,7 +10,7 @@ NB. create SystemFolders
 bin=. BINPATH
 install=. (bin i: '/'){.bin
 fhs=. (FHS"_)^:(0=4!:0<'FHS') (0)
-install=. (0&~:fhs){::install;'/usr/share/j/8.0.1'
+install=. (0&~:fhs){::install;'/usr/share/j/8.0.2'
 install=. (INSTALLROOT"_)^:(0=4!:0<'INSTALLROOT') install
 addons=. install,'/addons'
 system=. install,'/system'
@@ -18,7 +18,7 @@ tools=. install,'/tools'
 home=. >(systype-5){(2!:5'HOME');2!:5'USERPROFILE'
 home=. >(0-:home){home;,'/'
 isroot=. ('root'-:2!:5'USER') +. (<home) e. '/var/root';'/root';'';,'/'
-userx=. '/j',('64-'#~16={:$3!:3[2),'801-user'
+userx=. '/j',('64-'#~16={:$3!:3[2),'802-user'
 user=. home,userx
 user=. >isroot{user;install,'/user'
 home=. >isroot{home;install

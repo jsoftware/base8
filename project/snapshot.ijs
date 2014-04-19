@@ -27,7 +27,7 @@ p
 
 NB. =========================================================
 NB. return snap path for directory path
-NB. !!! 801
+NB. !!! 802
 snappath=: 3 : 0
 NB. jpath '~snap/.snp/',getsha1_jgtk_ y
 )
