@@ -10,7 +10,7 @@ select. y
 case. 'qtide' do.
   'install' jpkg 'base library ide/qt'
   getqtbin 0
-  smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';(fexist jpath '~install/jqt.cmd'){::'bin/jqt.exe';'jqt.cmd'
+  smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';(fexist jpath '~install/jqt.cmd'){::'bin\jqt.exe';'jqt.cmd'
 case. 'all' do.
   'install' jpkg 'all'
   getqtbin 0
@@ -39,7 +39,7 @@ elseif. do.
   z=. 'jqt-mac-',(IFPPC pick (IF64 pick 'x86';'x64');'ppc'),'.zip'
   z1=. 'libjqt.dylib'
 end.
-'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/jqt/',z
+'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j802/qtide/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
@@ -87,7 +87,7 @@ if. IFWIN do.
 else.
   z=. 'qt48-mac-',(IFPPC pick (IF64 pick 'x86';'x64');'ppc'),'.zip'
 end.
-'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/qtlib/',z
+'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j802/qtlib/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
