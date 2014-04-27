@@ -121,7 +121,7 @@ i.0 0
 NB. =========================================================
 NB. make directory, return success
 mkdir=: 3 : 0
-a=. termsep y
+a=. termsep jpath y
 if. #1!:0 }:a do. 1 return. end.
 for_n. I. a='/' do.
   1!:5 :: 0: < n{.a

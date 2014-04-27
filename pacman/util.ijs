@@ -146,8 +146,6 @@ fls=. ndx {.each fls
 zps=. <;._2 &> fls ,each '_'
 pfm=. 3 {"1 zps
 uname=. tolower UNAME
-if. UNAME-:'Darwin' do. uname=. 'linux' end.
-if. UNAME-:'Android' do. uname=. 'linux' end.
 msk=. (uname -: ({.~ i.&'.')) &> pfm
 if. 1 ~: +/msk do. msk=. 1,~ }:0*.msk end.
 msk # zps,.fls,.siz
@@ -255,9 +253,9 @@ case. 'Win' do.
 case. 'Linux' do.
   zps=. lnx # zps
 case. 'Android' do.
-  zps=. (lnx +. and) # zps
+  zps=. and # zps
 case. 'Darwin' do.
-  zps=. (lnx +. mac) # zps
+  zps=. mac # zps
   zps=. zps /: 3 {"1 zps
   zps=. (~: 3 {."1 zps) # zps
 end.

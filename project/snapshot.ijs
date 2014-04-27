@@ -1,106 +1,60 @@
-NB. snapshot
+NB. snapshot utilities
 
-ss_today=: 's' , 2 }. [: ": [: <. 100 #. 3 {. 6!:0
-SnapTrees=: ''
+pp_today=: 2 }. [: ": [: <. 100 #. 3 {. 6!:0
 
 NB. =========================================================
-snapfcopy=: 3 : 0
-'source dest'=. y
-if. IFWIN do.
-  0 pick 'kernel32 CopyFileW i *w *w i' cd (uucp source);(uucp dest);0
-else.
-  if. 0 = fpathcreate fpath dest do. 0 return. end.
-  if. _1 -: dat=. fread source do. 0 return. end.
-  -. _1 -: dat fwrite dest
-end.
+NB. get script snapshot list for given folder
+pic_files=: 3 : 0
+{."1 [1!:0 (snappath y),'/p','/*',~pp_today''
 )
 
 NB. =========================================================
-snapgetpath=: 3 : 0
-p=. snappath y
-if. 0 = #1!:0 p do.
-  if. -. ss_mkdir p do. 0 return. end.
-  y fwrite p,'/dir.txt'
-end.
-p
+NB. argument is date yymmdd
+pic_list=: 3 : 0
+t=. y,(0=#y)#pp_today''
+p=. (snappath each fpath each FolderTree) ,each <'/p*'
+d=. 1!:0 each p
+m=. I. 0 < # &> d
+if. 0 = #m do. EMPTY return. end.
+p=. ;t&pic_list1 each m
+s=. >}."1 p
+p=. ({."1 p),<'total'
+(>p),.' ',.":s,+/s
 )
 
 NB. =========================================================
-NB. return snap path for directory path
-NB. !!! 802
+pic_list1=: 4 : 0
+fp=. (snappath fpath y pick FolderTree),'/p',x,'/'
+d=. 1!:0 fp,'*'
+if. 0=#d do. i. 0 3 return. end.
+f=. {."1 d
+c=. (EAV+/ .=fread) each (<fp) ,each f
+s=. 2{"1 d
+m=. (<'/',~y pick FolderIds),each f
+m,.c,.s
+)
+
+NB. =========================================================
+NB. y = full filename
+NB. reads all records as boxed list
+pic_read=: 3 : 0
+'f p'=. fpathname y
+r=. fread (snappath f),'/p',(pp_today''),'/',p
+if. r -: _1 do. '' else. <;._2 r end.
+)
+
+NB. =========================================================
+NB. y = (full filename);index
+NB. reads record at index, removing timestamp
+pic_readx=: 3 : 0
+'f n'=. y
+_6 }. n pick pic_read f
+)
+
+NB. =========================================================
+NB. return snap path for directory path (Qt IDE only)
 snappath=: 3 : 0
-NB. jpath '~snap/.snp/',getsha1_jgtk_ y
-)
-
-NB. =========================================================
-NB. y=0 auto snap
-NB.   1 force snap
-snapshot=: 3 : 0
-if. Snapshots=0 do. return. end.
-snapshot1 y;(ss_today'');ProjectPath
-)
-
-NB. =========================================================
-NB. auto snapshot folder tree
-snapshot_tree=: 3 : 0
-if. Snapshots=0 do. return. end.
-if. (<Folder_j_) e. SnapTrees do. return. end.
-snapshot1 &> (<0;ss_today'') (,<@fpath) each y
-empty SnapTrees_jp_=: SnapTrees,<Folder_j_
-)
-
-NB. =========================================================
-NB. return 1 if snapshot completed
-snapshot1=: 3 : 0
-'force today path'=. y
-p=. snapgetpath path
-if. p = 0 do. return. end.
-
-NB. ---------------------------------------------------------
-NB. make a snapshot if none
-p=. p,'/'
-d=. 1!:0 p,'s*'
-pfx=. p,today
-if. 0=#d do. path ss_make pfx,'001' return. end.
-
-NB. ---------------------------------------------------------
-d=. \:~ {."1 d #~ 'd' = 4{"1 > 4{"1 d
-last=. 0 pick d
-iftoday=. today -: 7 {. last
-
-NB. ---------------------------------------------------------
-NB. force snap
-if. force do.
-  if. (p,last) ss_match ProjectPath do.
-    ss_info 'Last snapshot matches current project.'
-    0 return.
-  end.
-  if. iftoday do.
-    f=. pfx,_3 {. '00',": 1 + 0 ". _3 {. last
-  else.
-    f=. pfx,'001'
-  end.
-  path ss_make f
-  ss_info 'New snapshot: ',1 pick fpathname f
-  
-NB. ---------------------------------------------------------
-NB. auto snap
-else.
-  if. iftoday do. 0 return. end.
-  if. (p,last) ss_match path do. 0 return. end.
-  path ss_make pfx,'001'
-end.
-
-NB. ---------------------------------------------------------
-NB. only get here if new snapshot
-d=. (Snapshots-1) }. d
-for_s. d do.
-  f=. p,(>s),'/'
-  1!:55 f&, each {."1 [ 1!:0 f,'*'
-  1!:55 <f
-end.
-
-1
+jpath '~snap/.snp/',getsha1_jqtide_ projname2path remsep y
 )
 
 NB. =========================================================
@@ -136,6 +90,14 @@ d=. 1!:0 p,'*'
 d=. ('d' = 4 {"1 > 4 {"1 d) # {."1 d
 d=. (<p) ,each d
 d;<(1!:1 :: (''"_))@< each d ,each <'/dir.txt'
+)
+
+NB. =========================================================
+NB. single snapshot directory
+NB. argument is projectname
+ss_dir1=: 3 : 0
+if. 0=#y do. '' return. end.
+dir (snappath y),'/*'
 )
 
 NB. =========================================================
@@ -195,7 +157,7 @@ NB. ss_list v list of snapshots
 NB. argument is projectname
 ss_list=: 3 : 0
 if. 0=#y do. '' return. end.
-p=. snappath projname2path y
+p=. snappath y
 d=. 1!:0 p,'/s*'
 if. #d do.
   d=. d #~ 'd' = 4 {"1 > 4 {"1 d
@@ -203,52 +165,6 @@ if. #d do.
 else.
   ''
 end.
-)
-
-NB. =========================================================
-NB. ss_make - make a snapshot
-ss_make=: 4 : 0
-fm=. x,'/'
-to=. y,'/'
-if. 0 = ss_mkdir to do. 0 return. end.
-f=. {."1 ss_files fm
-fm=. (<fm) ,each f
-to=. (<to) ,each f
-res=. snapfcopy"1 fm ,. to
-if. 0 e. res do.
-  txt=. 'Unable to copy:',LF2,tolist (res=0)#fm
-  ss_info txt
-end.
-*./ res
-)
-
-NB. =========================================================
-NB. ss_mkdir - make snapshot directory
-ss_mkdir=: 3 : 0
-
-NB. ---------------------------------------------------------
-if. 0 -: fpathcreate y do.
-  if. 1 = # 1!:0 y do. 1 return. end.
-  ss_info 'Unable to create snapshot directory: ',y
-  0 return.
-end.
-
-NB. ---------------------------------------------------------
-arw=. 'rw' 0 1 } 1!:7 <y
-if. 0 -: arw 1!:7 :: 0: <y do.
-  ss_info 'Unable to set read/write attributes for snapshot directory.'
-  0 return.
-end.
-
-NB. ---------------------------------------------------------
-if. -.IFUNIX do.
-  ph=. 'h' 1 } 1!:6 <y
-  if. 0 -: ph 1!:6 :: 0: <y do.
-    ss_info 'Unable to set hidden attribute for snapshot directory.'
-  end.
-end.
-
-1
 )
 
 NB. =========================================================

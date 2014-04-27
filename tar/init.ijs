@@ -30,7 +30,6 @@ J gzip
   data gzip '~/temp/f.gz' - write data to f.gz
 )
 
-NB. !!! 802
 NB. for windows, copy zlib1.dll from gtk binary to j.dll folder or windows/system32
 libz=: IFUNIX{::'zlib1.dll';unxlib^:IFUNIX 'z'
 cv=: IFWIN#'+'
