@@ -5,7 +5,7 @@ Public=: i. 0 2
 UserFolders=: i. 0 2
 
 NB. =========================================================
-Ignore=: 3 : 0''
+getignore=: 3 : 0
 r=. ' colib convert coutil dates debug dir dll files libpath strings text'
 if. IFIOS do.
   r=. r, ' qtide ide/qt viewmat'
@@ -16,7 +16,7 @@ if. -.IFQT do.
   r=. r, ' qtide ide/qt'
 end.
 if. (((UNAME-:'Android')>IFQT+.IFJCDROID)+.IFIOS+.IFJHS) do.
-  r=. r,' gl2 graphics/gl2'
+  r=. r,' gl2 graphics/gl2 viewmat'
 end.
 if. -.IFJCDROID +. IFQT*.'Android'-:UNAME do.
   r=. r,' android gui/android'
@@ -24,9 +24,10 @@ end.
 if. -.IFJCDROID do.
   r=. r,' droidwd gui/droidwd'
 end.
-<;._1 r
+Ignore=: <;._1 r
 )
 
+getignore''
 
 NB. =========================================================
 buildpublic=: 3 : 0

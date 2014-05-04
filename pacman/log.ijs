@@ -1,7 +1,6 @@
 NB. log
 
 LOG=: 1 NB. if logging
-LOGMAX=: 100 NB. lines
 
 NB. =========================================================
 NB. add to log

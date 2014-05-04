@@ -1,5 +1,5 @@
 NB. jade utilities
-NB.%jade.ijs - J session utilities 
+NB.%jade.ijs - J session utilities
 NB.-This script defines J session utilities ((J application development environment)
 NB.-and is included in the J standard library.
 NB.-
