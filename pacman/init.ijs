@@ -19,18 +19,11 @@ TIMEOUT=: 60
 WWWREV=: REV=: _1
 
 IgnoreIOS=: 0 : 0
-api/gl3
 api/jni
-api/x11
 data/dbman
 data/ddmysql
 data/odbc
-demos/gldemo
-demos/glsimple
-demos/grid
 demos/isigraph
-demos/opengl
-demos/plot
 demos/wd
 demos/wdplot
 games/minesweeper
@@ -41,14 +34,11 @@ general/pcall
 general/sfl
 graphics/d3
 graphics/fvj3
-graphics/gl1ut
 graphics/gl2
 graphics/gnuplot
 graphics/graph
 graphics/graphviz
-graphics/grid
 graphics/jturtle
-graphics/opengl
 graphics/print
 graphics/tgsj
 graphics/treemap
