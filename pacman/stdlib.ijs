@@ -10,7 +10,7 @@ select. y
 case. 'qtide' do.
   'install' jpkg 'base library ide/qt'
   getqtbin 0
-  smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';(fexist jpath '~install/jqt.cmd'){::'bin\jqt.exe';'jqt.cmd'
+  smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';'bin\jqt.exe'
 case. 'all' do.
   'install' jpkg 'all'
   getqtbin 0
@@ -22,6 +22,9 @@ NB. do_getqtbin v get Qt binaries
 do_getqtbin=: 3 : 0
 IFPPC=. 0
 if. 'Darwin'-:UNAME do. IFPPC=. 1. e. 'powerpc' E. 2!:0 'uname -p' end.
+if. IFPPC +. ('Darwin'-:UNAME)>IF64 do.
+  smoutput 'Platform not supported' return.
+end.
 
 NB. ---------------------------------------------------------
 smoutput 'Installing JQt binaries...'
@@ -36,7 +39,7 @@ elseif. IFWIN do.
   z=. 'jqt-win-',(IF64 pick 'x86';'x64'),'.zip'
   z1=. 'jqt.dll'
 elseif. do.
-  z=. 'jqt-mac-',(IFPPC pick (IF64 pick 'x86';'x64');'ppc'),'.zip'
+  z=. 'jqt-mac-x64.zip'
   z1=. 'libjqt.dylib'
 end.
 'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j802/qtide/',z
@@ -78,36 +81,22 @@ NB. install Qt library:
 if. 'Linux'-:UNAME do. return. end.
 if. ('Darwin'-:UNAME) *. 1=#1!:0 jpath '/Library/Frameworks/QtCore.framework' do. return. end.
 
-tgt=. jpath '~install/',(IFWIN{'Qq'),'t'
+tgt=. jpath IFWIN{::'~install/Qt';'~bin/Qt5Core.dll'
 if. (0={.y,0) *. 1=#1!:0 tgt do. return. end.
 
 smoutput 'Installing Qt library...'
 if. IFWIN do.
-  z=. 'qt48-win-',(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'qt53-win-',(IF64 pick 'x86';'x64'),'.zip'
 else.
-  z=. 'qt48-mac-',(IFPPC pick (IF64 pick 'x86';'x64');'ppc'),'.zip'
+  z=. 'qt53-mac-x64.zip'
 end.
 'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j802/qtlib/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
-d=. jpath '~install'
+d=. jpath IFWIN{::'~install';'~bin'
 if. IFWIN do.
   unzip_jpacman_ p;d
-  if. -.fexist jpath '~install/jqt.cmd' do.
-    smoutput 'move Qt library to bin'
-    plugins=. {.("1) 1!:0 jpath '~install/qt/plugins/*'
-    for_ps. plugins do.
-      spawn_jtask_ 'cmd /k rmdir /s /q "',('/\' charsub jpath '~bin/',>ps),'" > nul'
-      (jpath '~bin/',>ps) frename (jpath '~install/qt/plugins/',>ps)
-    end.
-    spawn_jtask_ 'cmd /k rmdir /s /q "',('/\' charsub jpath '~install/qt/plugins'),'" > nul'
-    for_fn. {."(1) 1!:0 jpath '~install/qt/*' do.
-      1!:55 ::0: <jpath '~bin/',>fn
-      (jpath '~bin/',>fn) frename (jpath '~install/qt/',>fn)
-    end.
-    'Do not delete this folder' 1!:2 <jpath '~install/qt/dummy.txt'
-  end.
 else.
   hostcmd_jpacman_ 'unzip -o ',(dquote p),' -d ',dquote d
 end.
@@ -116,7 +105,7 @@ if. #1!:0 tgt do.
   m=. 'Finished install of Qt binaries.'
 else.
   m=. 'Unable to install Qt binaries.',LF
-  m=. m,'check that you have write permission for: ',LF,tgt
+  m=. m,'check that you have write permission for: ',LF,IFWIN{::tgt;jpath'~bin'
 end.
 smoutput m
 
