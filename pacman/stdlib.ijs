@@ -10,7 +10,8 @@ select. y
 case. 'qtide' do.
   'install' jpkg 'base library ide/qt'
   getqtbin 0
-  smoutput 'exit and restart J using ',IFWIN pick 'bin/jqt';'bin\jqt.exe'
+  msg=. (+/ 2 1 * IFWIN,'Darwin'-:UNAME) pick 'jqt.sh';'the jqt icon';'jqt.cmd'
+  smoutput 'exit and restart J using ',msg
 case. 'all' do.
   'install' jpkg 'all'
   getqtbin 0
@@ -20,9 +21,7 @@ end.
 NB. =========================================================
 NB. do_getqtbin v get Qt binaries
 do_getqtbin=: 3 : 0
-IFPPC=. 0
-if. 'Darwin'-:UNAME do. IFPPC=. 1. e. 'powerpc' E. 2!:0 'uname -p' end.
-if. IFPPC +. ('Darwin'-:UNAME)>IF64 do.
+if. ('Darwin'-:UNAME)>IF64 do.
   smoutput 'Platform not supported' return.
 end.
 
@@ -69,9 +68,9 @@ else.
 end.
 ferase p
 if. #1!:0 ((0~:FHS)*.'Linux'-:UNAME){::(jpath '~bin/',z1);'/usr/bin/jqt' do.
-  m=. 'Finished install of jqt binaries.'
+  m=. 'Finished install of JQt binaries.'
 else.
-  m=. 'Unable to install jqt binaries.',LF
+  m=. 'Unable to install JQt binaries.',LF
   m=. m,'check that you have write permission for: ',LF,((0~:FHS)*.'Linux'-:UNAME){::(jpath '~bin');'/usr/bin'
 end.
 smoutput m
