@@ -35,7 +35,7 @@ if. 'Linux'-:UNAME do.
   end.
   z1=. 'libjqt.so'
 elseif. IFWIN do.
-  z=. 'jqt-win-',(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'jqt-',((y-:'angle') pick 'win';'angle'),'-',(IF64 pick 'x86';'x64'),'.zip'
   z1=. 'jqt.dll'
 elseif. do.
   z=. 'jqt-mac-x64.zip'
