@@ -7,7 +7,7 @@ do_install=: 3 : 0
 if. -. checkaccess_jpacman_ '' do. return. end.
 'update' jpkg ''
 select. y
-case. 'qtide' do.
+case. 'qtide';'angle' do.
   'install' jpkg 'base library ide/qt'
   getqtbin 0
   msg=. (+/ 2 1 * IFWIN,'Darwin'-:UNAME) pick 'jqt.sh';'the jqt icon';'jqt.cmd'
@@ -35,7 +35,7 @@ if. 'Linux'-:UNAME do.
   end.
   z1=. 'libjqt.so'
 elseif. IFWIN do.
-  z=. 'jqt-',((y-:'angle') pick 'win';'angle'),'-',(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'jqt-win-',(IF64 pick 'x86';'x64'),'.zip'
   z1=. 'jqt.dll'
 elseif. do.
   z=. 'jqt-mac-x64.zip'
@@ -81,11 +81,12 @@ if. 'Linux'-:UNAME do. return. end.
 if. ('Darwin'-:UNAME) *. 1=#1!:0 jpath '/Library/Frameworks/QtCore.framework' do. return. end.
 
 tgt=. jpath IFWIN{::'~install/Qt';'~bin/Qt5Core.dll'
-if. (0={.y,0) *. 1=#1!:0 tgt do. return. end.
+y=. (*#y){::0;y
+if. (0={.(-.0-:y),0) *. 1=#1!:0 tgt do. return. end.
 
 smoutput 'Installing Qt library...'
 if. IFWIN do.
-  z=. 'qt53-win-',(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'qt53-',((y-:'angle') pick 'win';'angle'),'-',(IF64 pick 'x86';'x64'),'.zip'
 else.
   z=. 'qt53-mac-x64.zip'
 end.
