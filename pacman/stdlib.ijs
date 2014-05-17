@@ -9,7 +9,7 @@ if. -. checkaccess_jpacman_ '' do. return. end.
 select. y
 case. 'qtide';'angle' do.
   'install' jpkg 'base library ide/qt'
-  getqtbin 0
+  getqtbin (y-:'angle'){::0;'angle'
   msg=. (+/ 2 1 * IFWIN,'Darwin'-:UNAME) pick 'jqt.sh';'the jqt icon';'jqt.cmd'
   smoutput 'exit and restart J using ',msg
 case. 'all' do.
@@ -82,7 +82,7 @@ if. ('Darwin'-:UNAME) *. 1=#1!:0 jpath '/Library/Frameworks/QtCore.framework' do
 
 tgt=. jpath IFWIN{::'~install/Qt';'~bin/Qt5Core.dll'
 y=. (*#y){::0;y
-if. (0={.(-.0-:y),0) *. 1=#1!:0 tgt do. return. end.
+if. (0-:y) *. 1=#1!:0 tgt do. return. end.
 
 smoutput 'Installing Qt library...'
 if. IFWIN do.
