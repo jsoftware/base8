@@ -78,7 +78,6 @@ smoutput m
 NB. ---------------------------------------------------------
 NB. install Qt library:
 if. 'Linux'-:UNAME do. return. end.
-if. ('Darwin'-:UNAME) *. 1=#1!:0 jpath '/Library/Frameworks/QtCore.framework' do. return. end.
 
 tgt=. jpath IFWIN{::'~install/Qt';'~bin/Qt5Core.dll'
 y=. (*#y){::0;y
