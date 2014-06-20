@@ -144,10 +144,10 @@ dat=. y
 'fd sd'=. 2{. boxopen x
 assert. 1 = #fd
 if. #sd do.
-  if. 1=#~.sd do. sd=. ,{.sd       NB. single sd or two same
-  else. NB. replace diff start and end delims with single
-    s=. {.('|'=fd){ '|`'           NB. choose single sd
-    dat=. dat rplc ({.sd);s;({:sd);s
+  sd=. ~.sd
+  if. 1 < #sd do.                  NB. replace diff start and end delims with single
+    s=. {. '|`' -. fd              NB. choose single sd
+    dat=. dat charsub~ ,sd,.s
     sd=. s
   end.
   dat=. dat,fd
