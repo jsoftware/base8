@@ -81,7 +81,7 @@ if. 'Linux'-:UNAME do. return. end.
 
 tgt=. jpath IFWIN{::'~install/Qt';'~bin/Qt5Core.dll'
 y=. (*#y){::0;y
-if. (0-:y) *. 1=#1!:0 tgt do. return. end.
+NB. if. (0-:y) *. 1=#1!:0 tgt do. return. end.
 
 smoutput 'Installing Qt library...'
 if. IFWIN do.
