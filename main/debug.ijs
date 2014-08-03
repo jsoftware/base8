@@ -107,25 +107,25 @@ ctx=. ((,.ln=range){' >'),"1 '[',"1 (":,.range) ,"1 ('] ') ,"1 >def{~range=. min
 > (<'@@ ', name, '[', (dyad#':'), (":ln) ,'] *', (nc{' acv'),' @@ ', src), def0, <"1 ctx
 )
 
-NB. NB. =========================================================
-NB. NB.*dbg v turn debugging window on/off
-NB. dbg=: 3 : 0
-NB. if. y do.
-NB.   if. _1 = 4!:0 <'jdb_open_jdebug_' do.
-NB.     0!:0 <jpath '~system/util/debugs.ijs'
-NB.   end.
-NB.   jdb_open_jdebug_''
-NB.   smfocusact_jijs_''
-NB.   13!:0 [ 1
-NB. else.
-NB.   jdb_close_jdebug_ :: ] ''
-NB.   13!:15 ''
-NB.   13!:0 [ 0
-NB. end.
-NB. )
-
-NB.*dbg v reset, set suspension mode (0=disable, 1=enable)
-dbg=: 13!:0
+NB. =========================================================
+NB.*dbg v turn debugging window on/off
+dbg=: 3 : 0
+if. -.IFQT do.
+  13!:0 y return.
+end.
+if. y do.
+  if. _1 = 4!:0 <'jdb_open_jdebug_' do.
+    0!:0 <jpath '~addons/ide/qt/debugs.ijs'
+  end.
+  jdb_open_jdebug_''
+  jdb_smact_jdebug_''
+  13!:0 [ 1
+else.
+  jdb_close_jdebug_ :: ] ''
+  13!:15 ''
+  13!:0 [ 0
+end.
+)
 
 NB. =========================================================
 NB.*dblocals v display names and locals on stack

@@ -6,7 +6,7 @@ NB. errors may prevent startup
 NB. check SystemFolders_j_ before/after changes
 NB. install is J folder
 NB. home is HOME
-NB. userx is /j802-user or /j64-802-user
+NB. userx is /j803-user or /j64-803-user
 NB. see profile.ijs for more info
 
 NB. example 1: user in J folder
