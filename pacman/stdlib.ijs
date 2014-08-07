@@ -21,9 +21,6 @@ end.
 NB. =========================================================
 NB. do_getqtbin v get Qt binaries
 do_getqtbin=: 3 : 0
-if. ('Darwin'-:UNAME)>IF64 do.
-  smoutput 'Platform not supported' return.
-end.
 
 NB. ---------------------------------------------------------
 smoutput 'Installing JQt binaries...'
@@ -35,10 +32,10 @@ if. 'Linux'-:UNAME do.
   end.
   z1=. 'libjqt.so'
 elseif. IFWIN do.
-  z=. 'jqt-win-',(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'jqt-win',((y-:'slim')#'slim'),'-',(IF64 pick 'x86';'x64'),'.zip'
   z1=. 'jqt.dll'
 elseif. do.
-  z=. 'jqt-mac-x64.zip'
+  z=. 'jqt-mac',((y-:'slim')#'slim'),'-',(IF64 pick 'x86';'x64'),'.zip'
   z1=. 'libjqt.dylib'
 end.
 'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j803/qtide/',z
@@ -85,9 +82,9 @@ NB. if. (0-:y) *. 1=#1!:0 tgt do. return. end.
 
 smoutput 'Installing Qt library...'
 if. IFWIN do.
-  z=. 'qt53-',((y-:'angle') pick 'win';'angle'),'-',(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'qt53-',((y-:'angle') pick 'win';'angle'),'-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
 else.
-  z=. 'qt53-mac-x64.zip'
+  z=. 'qt53-mac-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
 end.
 'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j803/qtlib/',z
 if. rc do.
