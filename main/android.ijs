@@ -56,4 +56,4 @@ user=. (UserNumber_ja_"_)^:(0=4!:0<'UserNumber_ja_') (_1)
 EMPTY
 )
 
-android_exec_host=: 2!:1`android_exec_am@.(0=4!:0<'AndroidPackage')
+android_exec_host=: 2!:1@(3&{.)`android_exec_am@.(0=4!:0<'AndroidPackage')
