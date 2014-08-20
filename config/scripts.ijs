@@ -20,6 +20,7 @@ gl2        ~addons/graphics/gl2/gl2.ijs
 gles       ~addons/api/gles/gles.ijs
 graph      ~addons/graphics/graph/graph.ijs
 guid       ~addons/general/misc/guid.ijs
+jd         ~addons/data/jd/jd.ijs
 jfiles     ~addons/data/jfiles/jfiles.ijs
 jhs        ~addons/ide/jhs/core.ijs
 jmf        ~addons/data/jmf/jmf.ijs
