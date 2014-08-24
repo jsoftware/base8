@@ -34,6 +34,7 @@ pack       ~addons/general/misc/pack.ijs
 pacman     ~system/util/pacman.ijs
 parts      ~addons/general/misc/parts.ijs
 plot       ~addons/graphics/plot/plot.ijs
+png        ~addons/graphics/png/png.ijs
 primitives ~addons/general/primitives/primitives.ijs
 print      ~addons/graphics/print/print.ijs
 project    ~system/util/project.ijs
