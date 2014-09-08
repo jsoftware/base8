@@ -165,6 +165,7 @@ masknoun1=: 3 : 0
 if. 0=#y do. 0 return. end.
 if. 1 e. NOUNDEFINE 1&e.@E. &> <,y do. 1 return. end.
 if. (<'Note') ~: {.y do. 0 return. end.
+if. (,<'Note') -: y do. 1 return. end.
 if. -. (#y) e. 2 3 do. 0 return. end.
 ('NB.'-:3{.2 pick y,<'NB.') > (1{y) e. SystemDefs
 )

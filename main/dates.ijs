@@ -198,9 +198,9 @@ NB.-
 NB.- y = dates
 NB.-
 NB.- x = optional:
-NB.-   0 - dates in form <yyyy mm dd> (default)
-NB.-   1 - dates in form <yyyymmdd>
-NB.-   2 - dates in form <yyyy mm dd hh MM ss>
+NB.-   0 - dates in form YYYY MM DD (default)
+NB.-   1 - dates in form YYYYMMDD
+NB.-   2 - dates in form YYYY MM DD HH MM SS
 NB.-
 NB.-0 = todayno 1800 1 1, or earlier
 NB.-
@@ -355,7 +355,7 @@ NB.-
 NB.-Gives the year and weeknumber of date.
 NB.-
 NB.-A week belongs to a year iff 4 days of the week belong to that year.
-NB.-see http://www.phys.uu.nl/~vgent/calendar/isocalendar.htm
+NB.-see [iso 8601 calendar](http://www.phys.uu.nl/~vgent/calendar/isocalendar.htm)
 NB.-
 NB.-y = dates
 NB.-In the ISO 8601 calendar a week starts on monday.

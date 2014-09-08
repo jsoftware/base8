@@ -198,19 +198,21 @@ NB.-Read block of lines from file.
 NB.-
 NB.-Lines are terminated by LF.
 NB.-
-NB.-Blocksize is ~1e6
+NB.-Blocksize defaults to 1e6
 NB.-
 NB.-y is filename;start position
 NB.-
 NB.-returns: block;new start position
 freadblock=: 3 : 0
+1e6 freadblock y
+:
 'f p'=. y
 f=. > fboxname f
 s=. 1!:4 <f
 if. s = _1 do. return. end.
 if. (s = 0) +. p >: s do. '';p return. end.
-if. 1e6 < s-p do.
-  dat=. 1!:11 f;p,1e6
+if. x < s-p do.
+  dat=. 1!:11 f;p,x
   len=. 1 + dat i: LF
   if. len > #dat do.
     'file not in LF-delimited lines' 13!:8[3
