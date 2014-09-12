@@ -12,16 +12,17 @@ termLF=: , (0 < #) # LF -. {:
 NB. =========================================================
 NB. decomment
 NB. argument and result are text vectors
+NB. ignores any comments beginning NB.!
 decomment=: 3 : 0
 dat=. <;._2 termLF toJ y
 if. 2 > #dat do. y return. end.
 
-com=. ('NB.'&-:)@(3&{.)&> dat
+com=. (('NB.'-:3{.])>'NB.!'-:4{.])&> dat
 ncm=. com < (1|.0,}.com) +. (0,}._1|.com)
 msk=. com +: ncm *. dat=a:
 dat=. msk # dat
 
-f=. *./\ @ ('NB.'&E. <: ~:/\@(e.&''''))
+f=. *./\ @ (('NB.'&E.>'NB.!'&E.) <: ~:/\@(e.&''''))
 g=. f dtb@#^:(0 e. [) ]
 ; (g each dat) ,each LF
 )
