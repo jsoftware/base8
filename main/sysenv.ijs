@@ -52,17 +52,9 @@ if. notdef 'IFIOS' do.
 end.
 
 NB. ---------------------------------------------------------
-if. notdef 'IFQT' do.
-  IFQT=: 0
-  libjqt=: 'libjqt'  NB. avoid name undefined error
-end.
-
-NB. ---------------------------------------------------------
 if. notdef 'IFJCDROID' do.
   IFJCDROID=: 0
 end.
-
-assert. IFQT *: IFJCDROID
 
 NB. ---------------------------------------------------------
 if. notdef 'FHS' do.
@@ -103,6 +95,12 @@ else.
 end.
 
 NB. ---------------------------------------------------------
+if. notdef 'IFQT' do.
+  IFQT=: 0
+  libjqt=: ((BINPATH,'/')&,)^:(0=FHS) IFUNIX{::'jqt.dll';'libjqt',(UNAME-:'Darwin'){::'.so';'.dylib'
+end.
+
+NB. ---------------------------------------------------------
 if. UNAME-:'Android' do.
   if. IFQT do.
     AndroidLibPath=: ({.~i:&'/') libjqt
@@ -110,6 +108,8 @@ if. UNAME-:'Android' do.
     AndroidLibPath=: '/lib',~ ({.~i:&'/')^:2 BINPATH
   end.
 end.
+
+assert. IFQT *: IFJCDROID
 )
 
 NB. =========================================================
