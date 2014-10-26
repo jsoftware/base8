@@ -25,6 +25,7 @@ jfiles     ~addons/data/jfiles/jfiles.ijs
 jhs        ~addons/ide/jhs/core.ijs
 jmf        ~addons/data/jmf/jmf.ijs
 jni        ~addons/api/jni/jni.ijs
+jpeg       ~addons/graphics/jpeg/jpeg.ijs
 jpm        ~system/util/pm.ijs
 jzgraph    ~addons/graphics/graph/jzgraph.ijs
 jzplot     ~addons/graphics/plot/jzplot.ijs
