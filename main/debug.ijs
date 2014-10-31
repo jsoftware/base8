@@ -118,7 +118,6 @@ if. y do.
     0!:0 <jpath '~addons/ide/qt/debugs.ijs'
   end.
   jdb_open_jdebug_''
-  jdb_smact_jdebug_''
   13!:0 [ 1
 else.
   jdb_close_jdebug_ :: ] ''

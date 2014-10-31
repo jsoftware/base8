@@ -40,7 +40,7 @@ NB. =========================================================
 NB.*foldpara v fold single paragraph
 NB.-Fold string of text with no LF.
 NB.-
-NB.-See also [foldtext](foldtext) which calls this utility
+NB.-See also [foldtext](#foldtext) which calls this utility
 NB.-on each paragraph.
 NB.-
 NB.-syntax:

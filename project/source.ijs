@@ -39,7 +39,9 @@ writesource1=: 4 : 0
 'p t'=. y
 dat=. x readsource1 p
 if. _1 -: dat do. return. end.
-dat fwritenew jpath t
+t=. jpath t
+mkdir fpath t
+dat fwritenew t
 EMPTY
 )
 

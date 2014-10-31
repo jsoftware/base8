@@ -60,7 +60,7 @@ NB.-Box argument if open.
 NB.- e.g. if script=: 0!:0 @ boxopen, then either
 NB.-   script 'work.ijs'  or  script <'work.ijs'
 NB.-
-NB.-See also [boxxopen](boxxopen).
+NB.-See also [boxxopen](#boxxopen).
 NB.-
 NB.-Use [cutopen](#cutopen) to allow multiple arguments.
 boxopen=: <^:(L.=0:)
@@ -69,7 +69,7 @@ NB. =========================================================
 NB.*boxxopen v box argument if open and not empty
 NB.-Box argument if open and not empty.
 NB.-
-NB.-See also [boxxopen](boxxopen).
+NB.-See also [boxopen](#boxopen).
 boxxopen=: <^:(L.<*@#)
 
 NB. =========================================================
