@@ -52,11 +52,6 @@ if. notdef 'IFIOS' do.
 end.
 
 NB. ---------------------------------------------------------
-if. notdef 'BINPATH' do.
-  BINPATH=: ,'.'
-end.
-
-NB. ---------------------------------------------------------
 if. notdef 'IFJCDROID' do.
   IFJCDROID=: 0
 end.
@@ -102,7 +97,11 @@ end.
 NB. ---------------------------------------------------------
 if. notdef 'IFQT' do.
   IFQT=: 0
-  libjqt=: ((BINPATH,'/')&,)^:(0=FHS) IFUNIX{::'jqt.dll';'libjqt',(UNAME-:'Darwin'){::'.so';'.dylib'
+  if. IFIOS do.
+    libjqt=: 'libjqt.dylib'
+  else.
+    libjqt=: ((BINPATH,'/')&,)^:(0=FHS) IFUNIX{::'jqt.dll';'libjqt',(UNAME-:'Darwin'){::'.so';'.dylib'
+  end.
 end.
 NB. workaround non-ascii file path
 if. IFWIN do.
