@@ -52,6 +52,11 @@ if. notdef 'IFIOS' do.
 end.
 
 NB. ---------------------------------------------------------
+if. notdef 'BINPATH' do.
+  BINPATH=: ,'.'
+end.
+
+NB. ---------------------------------------------------------
 if. notdef 'IFJCDROID' do.
   IFJCDROID=: 0
 end.
