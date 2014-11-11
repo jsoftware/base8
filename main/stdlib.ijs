@@ -30,12 +30,14 @@ Debug=: 0
 'noun adverb conjunction verb monad dyad'=: 0 1 2 3 3 4
 
 NB. =========================================================
-NB.*alpha27 v add alpha channel
-alpha27=: (27 b.) & 16bffffff
+NB.*setalpha v set alpha channel
+setalpha=: 16bff&$: : (4 : 0)
+((_32&(34 b.))^:IF64 _8 (32 b.) x)&(23 b.) 16bffffff (17 b.) y
+)
 
 NB. =========================================================
-NB.*alpha17 v remove alpha channel
-alpha17=: (17 b.) & 16bffffff
+NB.*getalpha v get alpha channel
+getalpha=: 16bff (17 b.) _24&(34 b.)
 
 NB. =========================================================
 NB.*apply v apply verb x to y
