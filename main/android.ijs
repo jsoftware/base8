@@ -24,8 +24,6 @@ NB.-  _99 web request returns invalid '0' status code
 NB.- <= _100 negation of unsuccessful http response code (!=200), ie. _404 "Not Found"
 
 anddf=: 4 : '''libj.so android_download_file > i *c *c'' 15!:0 x;y'
-NB.-url for test image
-andurl=: 'http://www.jsoftware.com/moin_static180/common/jwlogo.png'
 
 NB. =========================================================
 NB.*andunzip v android zip
