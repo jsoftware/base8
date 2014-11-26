@@ -8,7 +8,7 @@ NB. =========================================================
 getignore=: 3 : 0
 r=. ' colib convert coutil dates dir dll files libpath strings text'
 if. IFIOS do.
-  r=. r, ' qtide ide/qt viewmat'
+  r=. r, ' qtide ide/qt'
 else.
   r=. r, ' ide/ios'
 end.

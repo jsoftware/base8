@@ -42,7 +42,6 @@ graphics/jturtle
 graphics/print
 graphics/tgsj
 graphics/treemap
-graphics/viewmat
 gui/monthview
 gui/util
 ide/qt
