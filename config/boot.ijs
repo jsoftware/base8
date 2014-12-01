@@ -89,14 +89,21 @@ if. -. IFIOS +. 'Android'-:UNAME do.
 end.
 
 NB. ---------------------------------------------------------
+18!:4 <'base'
+
+NB. ---------------------------------------------------------
 ndx=. <./ ARGV i. '-jp';'-jprofile'
 jsx=. ARGV i. <'-js'
 if. ndx < #ARGV do. p=. 2 + ndx else. p=. 1 end.
 load__ >{. p }. jsx {. ARGV
 
+NB. ---------------------------------------------------------
 if. jsx<#ARGV do.
-  ARGVVERB_z_=: 3 : ((>:jsx)}.ARGV) NB. define in z
-  ARGVVERB__'' NB. run in base
+  v=. (>:jsx)}.ARGV
+  if. #;v do.
+    ARGVVERB_z_=: 3 : v NB. define in z
+    ARGVVERB__'' NB. run in base
+  end.
 end.
 
 EMPTY
