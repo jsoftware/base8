@@ -371,8 +371,8 @@ unzip=: 3 : 0
 'file dir'=. dquote each y
 e=. 'Unexpected unzip error'
 if. IFUNIX do.
-  notarcmd=. 0
-  if. IFIOS +. UNAME-:'Android' do.
+  notarcmd=. IFIOS        NB. even tar is installed, there is no shell in iOS
+  if. UNAME-:'Android' do.
 NB. busybox tar is faster than jtar
     notarcmd=. _1-: 2!:0 ::_1: 'which tar'
     if. (UNAME-:'Android') > '/mnt/sdcard'-:2!:5'EXTERNAL_STORAGE' do. notarcmd=. 1 end.
