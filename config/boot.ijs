@@ -111,3 +111,5 @@ EMPTY
 
 NB. =========================================================
 18!:4 <'base' NB. end in base
+
+load^:('Android'-:UNAME)^:(fexist@jpath) '~install/bin/start.ijs'
