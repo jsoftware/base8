@@ -11,8 +11,6 @@ if. 0~:4!:0<'UserNumber_ja_' do.
 NB. assume user 0, but may need to override in startup.ijs per user
   UserNumber_ja_=: 0- 402 > 100#. 2{. 0&". ;._1'.', LF-.~ 2!:0 'getprop ro.build.version.release'
 end.
-load^:fexist '~install/welcome.ijs'
-load^:fexist '~install/bin/startup_android.ijs'
 )
 
 NB. =========================================================
@@ -57,7 +55,16 @@ NB. ---------------------------------------------------------
 18!:4 <'base'
 
 if. 'Android'-:UNAME do.
-  startupandroid'' return.
+  startupandroid''
+  f=. jpath '~install/bin/startup_android.ijs'
+  if. 1!:4 :: 0: <f do.
+    try.
+      load f
+    catch.
+      smoutput 'An error occurred when loading startup_android script: ',f
+    end.
+    return.
+  end.
 end.
 
 f=. jpath '~config/startup',((-.IFQT)#'_console'),'.ijs'
