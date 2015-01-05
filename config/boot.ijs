@@ -1,45 +1,18 @@
 18!:4 <'z' NB. start in z
 
 NB. =========================================================
-startupconsole=: 3 : 0
-f=. jpath '~config/startup_console.ijs'
-if. 1!:4 :: 0: <f do.
-  18!:4 <'base'
-  try.
-    load f
-  catch.
-    smoutput 'An error occurred when loading startup script: ',f
-  end.
-end.
-)
-
-NB. =========================================================
-startupide=: 3 : 0
-startup=. jpath '~config/startup.ijs'
-if. 1!:4 :: 0: <startup do.
-  18!:4 <'base'
-  try.
-    load startup
-  catch.
-    smoutput 'An error occurred when loading startup script: ',startup
-  end.
-end.
-)
-
-NB. =========================================================
 NB. android specific
 startupandroid=: 3 : 0
-load^:IFQT^:(fexist@jpath) '~addons/gui/android/android.ijs'
+if. IFQT do.
+  load^:fexist '~addons/gui/android/android.ijs'
+end.
 dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
 if. 0~:4!:0<'UserNumber_ja_' do.
 NB. assume user 0, but may need to override in startup.ijs per user
   UserNumber_ja_=: 0- 402 > 100#. 2{. 0&". ;._1'.', LF-.~ 2!:0 'getprop ro.build.version.release'
 end.
-welcome=. jpath '~install/welcome.ijs'
-if. 1!:4 :: 0: <welcome do.
-  18!:4 <'base'
-  0!:0 <welcome
-end.
+load^:fexist '~install/welcome.ijs'
+load^:fexist '~install/bin/startup_android.ijs'
 )
 
 NB. =========================================================
@@ -60,15 +33,13 @@ end.
 
 NB. ---------------------------------------------------------
 boot 'main/stdlib.ijs'
-load '~system/util/scripts.ijs'
+load sys,'util/scripts.ijs'
 load 'regex'
 load 'task'
-load '~system/util/configure.ijs'
-load '~system/main/ctag.ijs'
-load '~system/util/jadetag.ijs'
-load^:IFQT^:(fexist@jpath) '~addons/ide/qt/qt.ijs'
-startupandroid^:('Android'-:UNAME)''
-startupide''
+load sys,'util/configure.ijs'
+load sys,'main/ctag.ijs'
+load sys,'util/jadetag.ijs'
+load^:IFQT '~addons/ide/qt/qt.ijs'
 
 NB. ---------------------------------------------------------
 NB. JVERSION_z_ (used in about box)
@@ -83,13 +54,26 @@ r=. r,LF,'InstallPath: ',jpath '~install'
 JVERSION=: toJ r
 
 NB. ---------------------------------------------------------
-NB. set break
-if. -. IFIOS +. 'Android'-:UNAME do.
-  setbreak 'default'
+18!:4 <'base'
+
+if. 'Android'-:UNAME do.
+  startupandroid'' return.
+end.
+
+f=. jpath '~config/startup',((-.IFQT)#'_console'),'.ijs'
+if. 1!:4 :: 0: <f do.
+  try.
+    load f
+  catch.
+    smoutput 'An error occurred when loading startup script: ',f
+  end.
 end.
 
 NB. ---------------------------------------------------------
-18!:4 <'base'
+NB. set break
+if. -. IFIOS do.
+  setbreak 'default'
+end.
 
 NB. ---------------------------------------------------------
 ndx=. <./ ARGV i. '-jp';'-jprofile'
@@ -101,8 +85,8 @@ NB. ---------------------------------------------------------
 if. jsx<#ARGV do.
   v=. (>:jsx)}.ARGV
   if. #;v do.
-    ARGVVERB_z_=: 3 : v NB. define in z
-    ARGVVERB__'' NB. run in base
+    ARGVVERB_z_=: 3 : v
+    ARGVVERB__''
   end.
 end.
 
@@ -111,5 +95,3 @@ EMPTY
 
 NB. =========================================================
 18!:4 <'base' NB. end in base
-
-load^:('Android'-:UNAME)^:fexist '~install/bin/startup_android.ijs'
