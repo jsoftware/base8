@@ -54,16 +54,17 @@ JVERSION=: toJ r
 NB. ---------------------------------------------------------
 18!:4 <'base'
 
-if. 'Android'-:UNAME do.
+if. IFQT *. 'Android'-:UNAME do.
   startupandroid''
   f=. jpath '~install/bin/startup_android.ijs'
   if. 1!:4 :: 0: <f do.
     try.
       load f
     catch.
-      smoutput 'An error occurred when loading startup_android script: ',f
+      wdinfo ::0: 13!:12''
+      2!:55[0
     end.
-    return.
+    EMTPY return.
   end.
 end.
 
@@ -78,7 +79,7 @@ end.
 
 NB. ---------------------------------------------------------
 NB. set break
-if. -. IFIOS do.
+if. -. IFIOS +. 'Android'-:UNAME do.
   setbreak 'default'
 end.
 
