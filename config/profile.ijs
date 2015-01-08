@@ -30,7 +30,7 @@ temp=. >isroot{temp;(*#1!:0'/tmp'){::temp;'/tmp'
 ids=. ;:'addons bin break config home install snap system tools temp user'
 
 0!:0 :: ] <(({.~ i:&'/') jpathsep >{.4!:3''),'/profilex.ijs' NB. override
-0!:0 :: ] <home,>(systype-5){'/.jprofile.ijs';'/_jprofile.ijs' NB. override per user
+0!:0 :: ] ^:(0=#1!:0 (({.~ i:&'/') jpathsep >{.4!:3''),'/startup_android.ijs') <home,>(systype-5){'/.jprofile.ijs';'/_jprofile.ijs' NB. override per user except for standalone script
 
 SystemFolders_j_=: ids,.jpathsep@".&.>ids
 
