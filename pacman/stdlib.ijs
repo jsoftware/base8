@@ -38,7 +38,7 @@ elseif. do.
   z=. 'jqt-mac',((y-:'slim')#'slim'),'-',(IF64 pick 'x86';'x64'),'.zip'
   z1=. 'libjqt.dylib'
 end.
-'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j803/qtide/',z
+'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j804/qtide/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
@@ -86,7 +86,7 @@ if. IFWIN do.
 else.
   z=. 'qt53-mac-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
 end.
-'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j803/qtlib/',z
+'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j804/qtlib/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.

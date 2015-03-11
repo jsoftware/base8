@@ -90,7 +90,7 @@ ADDCFG=: jpath '~addons/config/'
 makedir ADDCFG
 ADDCFGIJS=: ADDCFG,'config.ijs'
 JRELEASE=: ({.~i.&'/') 9!:14''
-JRELEASE=: 'j803'
+JRELEASE=: 'j804'
 LIBTREE=: readtree''
 if. IFIOS do.
   WWW=: '/jal/',JRELEASE,'/'
