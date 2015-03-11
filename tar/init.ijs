@@ -18,7 +18,7 @@ J tar
 
 for example,
  on computer
-  $> tar -c -f ~/j64-804-user/temp/math.tar -C ~/j64-804/addons finance
+  $> tar -c -f ~/j8/temp/math.tar -C ~/j8/addons finance
   iTunes connect - move math.tar to J app folder
 
  on J
