@@ -32,6 +32,9 @@ case. 'Win' do.
   if. r<33 do. sminfo 'view pdf error:',PDFReader,' ',cmd,LF2,1{::cderx'' end.
 case. 'Android' do.
   cmd=. '/' (I. cmd='\') } cmd
+  if. ('/'~:{.cmd)>isURL cmd do.
+    cmd=. (1!:43''),'/',cmd
+  end.
   if. -. isURL cmd do.
     cmd=. 'file://',cmd
   end.

@@ -17,6 +17,9 @@ if. IFJHS do.         NB. open on client side
 end.
 if. UNAME-:'Android' do.
   file=. '/' (I. file='\') } file
+  if. ('/'~:{.file)>isURL file do.
+    file=. (1!:43''),'/',file
+  end.
   if. -. isURL file do.
     file=. 'file://',file
   end.

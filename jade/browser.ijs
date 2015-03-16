@@ -40,6 +40,9 @@ case. 'Win' do.
   if. r<33 do. sminfo 'browse error:',browser,' ',cmd,LF2,1{::cderx'' end.
 case. 'Android' do.
   cmd=. '/' (I. cmd='\') } cmd
+  if. ('/'~:{.cmd)>isURL cmd do.
+    cmd=. (1!:43''),'/',cmd
+  end.
   if. -. isURL cmd do.
     cmd=. 'file://',cmd
   end.
@@ -50,6 +53,9 @@ case. do.
   end.
   browser=. dquote (browser;Browser_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
   cmd=. '/' (I. cmd='\') } cmd
+  if. ('/'~:{.cmd)>isURL cmd do.
+    cmd=. (1!:43''),'/',cmd
+  end.
   if. -. isURL cmd do.
     cmd=. 'file://',cmd
   end.
