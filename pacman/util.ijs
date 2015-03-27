@@ -20,7 +20,6 @@ Files outside the system subdirectory, such as profile.ijs, are not changed.
 NB. =========================================================
 cutjal=: ([: (* 4 > +/\) ' ' = ]) <;._1 ]
 cutjsp=: ([: (* 5 > +/\) ' ' = ]) <;._1 ]
-dquote=: '"'&, @ (,&'"')
 fname=: #~ ([: *./\. ~:&'/')
 hostcmd=: [: 2!:0 '(' , ] , ' || true)'"_
 ischar=: 2 = 3!:0
