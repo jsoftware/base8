@@ -7,9 +7,9 @@ do_install=: 3 : 0
 if. -. checkaccess_jpacman_ '' do. return. end.
 'update' jpkg ''
 select. y
-case. 'qtide';'angle' do.
+case. 'qtide' do.
   'install' jpkg 'base library ide/qt'
-  getqtbin (y-:'angle'){::0;'angle'
+  getqtbin 0
   msg=. (+/ 2 1 * IFWIN,'Darwin'-:UNAME) pick 'jqt.sh';'the jqt icon';'jqt.cmd'
   smoutput 'exit and restart J using ',msg
 case. 'all' do.
@@ -82,9 +82,9 @@ NB. if. (0-:y) *. 1=#1!:0 tgt do. return. end.
 
 smoutput 'Installing Qt library...'
 if. IFWIN do.
-  z=. 'qt53-',((y-:'angle') pick 'win';'angle'),'-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'qt54-win-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
 else.
-  z=. 'qt53-mac-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'qt54-mac-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
 end.
 'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j804/qtlib/',z
 if. rc do.
