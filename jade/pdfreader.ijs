@@ -5,15 +5,13 @@ NB. viewpdf
 NB.
 NB. open filename in PDFReader
 viewpdf=: 3 : 0
-cmd=. dlb@dtb y
-isURL=. 1 e. '://'&E.
+cmd=. absolutepath dltb y
+if. -.fexist cmd do. EMPTY return. end.
 if. IFJHS do.
-  cmd=. '/' (I. cmd='\') } cmd
-  if. -.fexist cmd do. EMPTY return. end.
   redirecturl_jijxm_=: (' ';'%20') stringreplace cmd
   EMPTY return.
 elseif. IFIOS do.
-  jh '<a href="file://',(iospath y),'" >',cmd,'</a>'
+  jh '<a href="file://',(iospath cmd),'"</a>'
   EMPTY return.
 end.
 PDFReader=. PDFReader_j_
@@ -22,8 +20,6 @@ case. 'Win' do.
   ShellExecute=. 'shell32 ShellExecuteW > i x *w *w *w *w i'&cd
   SW_SHOWNORMAL=. 1
   NULL=. <0
-  cmd=. '/' (I. cmd='\') } cmd
-  if. -.fexist cmd do. EMPTY return. end.
   if. 0 = #PDFReader do.
     r=. ShellExecute 0;(uucp 'open');(uucp cmd);NULL;NULL;SW_SHOWNORMAL
   else.
@@ -31,10 +27,6 @@ case. 'Win' do.
   end.
   if. r<33 do. sminfo 'view pdf error:',PDFReader,' ',cmd,LF2,1{::cderx'' end.
 case. 'Android' do.
-  cmd=. '/' (I. cmd='\') } cmd
-  if. ('/'~:{.cmd)>isURL cmd do.
-    cmd=. (1!:43''),'/',cmd
-  end.
   if. -. isURL cmd do.
     cmd=. 'file://',cmd
   end.
@@ -44,7 +36,6 @@ case. do.
     PDFReader=. dfltpdfreader''
   end.
   PDFReader=. dquote PDFReader
-  cmd=. '/' (I. cmd='\') } cmd
   cmd=. PDFReader,' ',dquote cmd
   try.
     2!:1 cmd

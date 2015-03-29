@@ -10,14 +10,12 @@ NB. browse
 NB.
 NB. load url/filename in browser
 browse=: 3 : 0
-cmd=. dlb@dtb y
-isURL=. 1 e. '://'&E.
+cmd=. absolutepath dltb y
+if. -. isURL cmd do.
+  if. -.fexist cmd do. EMPTY return. end.
+  cmd=. 'file://', iospath^:IFIOS cmd
+end.
 if. IFJHS do.
-  cmd=. '/' (I. cmd='\') } cmd
-  if. -. isURL cmd do.
-    if. -.fexist cmd do. EMPTY return. end.
-    cmd=. 'file://',cmd
-  end.
   redirecturl_jijxm_=: (' ';'%20') stringreplace cmd
   EMPTY return.
 end.
@@ -27,11 +25,6 @@ case. 'Win' do.
   ShellExecute=. 'shell32 ShellExecuteW > i x *w *w *w *w i'&cd
   SW_SHOWNORMAL=. 1
   NULL=. <0
-  cmd=. '/' (I. cmd='\') } cmd
-  if. -. isURL cmd do.
-    if. -.fexist cmd do. EMPTY return. end.
-    cmd=. 'file://',cmd
-  end.
   if. 0 = #browser do.
     r=. ShellExecute 0;(uucp 'open');(uucp cmd);NULL;NULL;SW_SHOWNORMAL
   else.
@@ -39,26 +32,12 @@ case. 'Win' do.
   end.
   if. r<33 do. sminfo 'browse error:',browser,' ',cmd,LF2,1{::cderx'' end.
 case. 'Android' do.
-  cmd=. '/' (I. cmd='\') } cmd
-  if. ('/'~:{.cmd)>isURL cmd do.
-    cmd=. (1!:43''),'/',cmd
-  end.
-  if. -. isURL cmd do.
-    cmd=. 'file://',cmd
-  end.
   android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'text/html';16b0004000
 case. do.
   if. 0 = #browser do.
     browser=. dfltbrowser''
   end.
   browser=. dquote (browser;Browser_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
-  cmd=. '/' (I. cmd='\') } cmd
-  if. ('/'~:{.cmd)>isURL cmd do.
-    cmd=. (1!:43''),'/',cmd
-  end.
-  if. -. isURL cmd do.
-    cmd=. 'file://',cmd
-  end.
   cmd=. browser,' ',dquote cmd
   try.
     2!:1 cmd, (0=nox)#' >/dev/null 2>&1 &'

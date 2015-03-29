@@ -9,17 +9,13 @@ NB.   [x] xedit file [ ; row ]   (row is optional and is 0-based)
 NB.   x (default 0) 1: wait
 xedit=: 0&$: : (4 : 0)
 'file row'=. 2{.(boxopen y),<0
-file=. ,file
-isURL=. 1 e. '://'&E.
+file=. absolutepath dltb file
+if. -.fexist file do. EMPTY return. end.
 if. IFJHS do.         NB. open on client side
   xmr ::0: file
   EMPTY return.
 end.
 if. UNAME-:'Android' do.
-  file=. '/' (I. file='\') } file
-  if. ('/'~:{.file)>isURL file do.
-    file=. (1!:43''),'/',file
-  end.
   if. -. isURL file do.
     file=. 'file://',file
   end.
