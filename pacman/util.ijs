@@ -26,7 +26,6 @@ ischar=: 2 = 3!:0
 rnd=: [ * [: <. 0.5 + %~
 sep2under=: '/' & (I.@('_' = ])})
 termLF=: , (0 < #) # LF -. {:
-todel=: ; @: (DEL&, @ (,&(DEL,' ')) each)
 tolist=: }. @ ; @: (LF&,@,@":each)
 isjpkgout=: ((4 = {:) *. 2 = #)@$ *. 1 = L.
 
