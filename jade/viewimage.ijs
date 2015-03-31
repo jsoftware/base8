@@ -4,13 +4,14 @@ NB. viewimage
 NB.
 NB. open image filename
 viewimage=: 3 : 0
-cmd=. absolutepath dltb y
-if. -.fexist cmd do. EMPTY return. end.
+if. -. isURL cmd=. dltb y do.
+  if. -.fexist cmd do. EMPTY return. end.
+end.
 if. IFJHS do.
-  redirecturl_jijxm_=: (' ';'%20') stringreplace cmd
+  redirecturl_jijxm_=: (' ';'%20') stringreplace ('file://'&,)^:(-.isURL) iospath^:IFIOS abspath cmd
   EMPTY return.
 elseif. IFIOS do.
-  jh '<a href="file://',(iospath cmd),'"</a>'
+  jh '<a href="',(('file://'&,)^:(-.isURL) iospath abspath cmd),'"</a>'
   EMPTY return.
 end.
 select. UNAME
@@ -21,14 +22,8 @@ case. 'Win' do.
   r=. ShellExecute 0;(uucp 'open');(uucp cmd);NULL;NULL;SW_SHOWNORMAL
   if. r<33 do. sminfo 'view image error: ',cmd,LF2,1{::cderx'' end.
 case. 'Android' do.
-  if. -. isURL cmd do.
-    cmd=. 'file://',cmd
-  end.
-  android_exec_host 'android.intent.action.VIEW';(utf8 cmd);'image/*';0
+  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.isURL) cmd);'image/*';0
 case. do.
-  if. -. isURL cmd do.
-    cmd=. 'file://',cmd
-  end.
   browser=. Browser_j_
   if. 0 = #browser do.
     browser=. dfltbrowser''

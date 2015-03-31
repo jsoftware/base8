@@ -9,17 +9,14 @@ NB.   [x] xedit file [ ; row ]   (row is optional and is 0-based)
 NB.   x (default 0) 1: wait
 xedit=: 0&$: : (4 : 0)
 'file row'=. 2{.(boxopen y),<0
-file=. absolutepath dltb file
+file=. dltb file
 if. -.fexist file do. EMPTY return. end.
 if. IFJHS do.         NB. open on client side
   xmr ::0: file
   EMPTY return.
 end.
 if. UNAME-:'Android' do.
-  if. -. isURL file do.
-    file=. 'file://',file
-  end.
-  android_exec_host 'android.intent.action.VIEW';(utf8 file);'text/plain';0
+  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.isURL) file);'text/plain';0
   EMPTY return.
 end.
 editor=. (Editor_j_;Editor_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'

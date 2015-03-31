@@ -11,12 +11,12 @@ extnone=: {.~ i:&'.'
 extproj=: , (ProjExt #~ '.'&e. < 0 < #)
 extsrc=: , ('.ijs' #~ '.'&e. < 0 < #)
 
-absolutepath=: (1!:43@(''"_) , '/' , ])^:(('/' ~: {.) > isURL)@:jpathsep
+abspath=: (1!:43@(''"_) , '/' , ])^:(((IFWIN *. ':/' -: 2&{.@}.)+:('/' = {.)) > isURL)@:jpathsep
 addfname=: , ('/' ~: {:) # i:&'/' }. ]
 boxdraw=: 3 : '9!:7 y { Boxes'
 hostcmd=: [: 2!:0 '(' , ,&' || true)'
 fpath=: [: }: +./\.@:=&'/' # ]
-isURL=: 1 e. ':/'&E.
+isURL=: 1 e. '://'&E.
 maxrecent=: 3 : '(RecentMax <. #r) {. r=. ~.y'
 pack=: [: (,. ".&.>) ;: ::]
 pdef=: 3 : '0 0$({."1 y)=: {:"1 y'
