@@ -14,10 +14,10 @@ if. -. isURL cmd=. dltb y do.
   if. -.fexist cmd do. EMPTY return. end.
 end.
 if. IFJHS do.
-  redirecturl_jijxm_=: (' ';'%20') stringreplace ('file://'&,)^:(-.isURL) iospath^:IFIOS abspath cmd
+  redirecturl_jijxm_=: (' ';'%20') stringreplace ('file://'&,)^:(-.@isURL) iospath^:IFIOS abspath cmd
   EMPTY return.
 elseif. IFIOS do.
-  jh '<a href="',(('file://'&,)^:(-.isURL) iospath abspath cmd),'"</a>'
+  jh '<a href="',(('file://'&,)^:(-.@isURL) iospath abspath cmd),'"</a>'
   EMPTY return.
 end.
 browser=. Browser_j_
@@ -33,7 +33,7 @@ case. 'Win' do.
   end.
   if. r<33 do. sminfo 'browse error:',browser,' ',cmd,LF2,1{::cderx'' end.
 case. 'Android' do.
-  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.isURL) cmd);'text/html';16b0004000
+  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.@isURL) cmd);'text/html';16b0004000
 case. do.
   if. 0 = #browser do.
     browser=. dfltbrowser''

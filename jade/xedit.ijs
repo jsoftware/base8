@@ -16,7 +16,7 @@ if. IFJHS do.         NB. open on client side
   EMPTY return.
 end.
 if. UNAME-:'Android' do.
-  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.isURL) file);'text/plain';0
+  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.@isURL) file);'text/plain';0
   EMPTY return.
 end.
 editor=. (Editor_j_;Editor_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'

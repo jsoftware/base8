@@ -9,10 +9,10 @@ if. -. isURL cmd=. dltb y do.
   if. -.fexist cmd do. EMPTY return. end.
 end.
 if. IFJHS do.
-  redirecturl_jijxm_=: (' ';'%20') stringreplace ('file://'&,)^:(-.isURL) iospath^:IFIOS abspath cmd
+  redirecturl_jijxm_=: (' ';'%20') stringreplace ('file://'&,)^:(-.@isURL) iospath^:IFIOS abspath cmd
   EMPTY return.
 elseif. IFIOS do.
-  jh '<a href="',(('file://'&,)^:(-.isURL) iospath abspath cmd),'"</a>'
+  jh '<a href="',(('file://'&,)^:(-.@isURL) iospath abspath cmd),'"</a>'
   EMPTY return.
 end.
 PDFReader=. PDFReader_j_
@@ -28,7 +28,7 @@ case. 'Win' do.
   end.
   if. r<33 do. sminfo 'view pdf error:',PDFReader,' ',cmd,LF2,1{::cderx'' end.
 case. 'Android' do.
-  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.isURL) cmd);'application/pdf';0
+  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.@isURL) cmd);'application/pdf';0
 case. do.
   if. 0 = #PDFReader do.
     PDFReader=. dfltpdfreader''

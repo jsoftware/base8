@@ -8,10 +8,10 @@ if. -. isURL cmd=. dltb y do.
   if. -.fexist cmd do. EMPTY return. end.
 end.
 if. IFJHS do.
-  redirecturl_jijxm_=: (' ';'%20') stringreplace ('file://'&,)^:(-.isURL) iospath^:IFIOS abspath cmd
+  redirecturl_jijxm_=: (' ';'%20') stringreplace ('file://'&,)^:(-.@isURL) iospath^:IFIOS abspath cmd
   EMPTY return.
 elseif. IFIOS do.
-  jh '<a href="',(('file://'&,)^:(-.isURL) iospath abspath cmd),'"</a>'
+  jh '<a href="',(('file://'&,)^:(-.@isURL) iospath abspath cmd),'"</a>'
   EMPTY return.
 end.
 select. UNAME
@@ -22,7 +22,7 @@ case. 'Win' do.
   r=. ShellExecute 0;(uucp 'open');(uucp cmd);NULL;NULL;SW_SHOWNORMAL
   if. r<33 do. sminfo 'view image error: ',cmd,LF2,1{::cderx'' end.
 case. 'Android' do.
-  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.isURL) cmd);'image/*';0
+  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.@isURL) cmd);'image/*';0
 case. do.
   browser=. Browser_j_
   if. 0 = #browser do.
