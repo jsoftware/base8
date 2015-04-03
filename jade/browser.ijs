@@ -14,10 +14,10 @@ if. -. isURL cmd=. dltb y do.
   if. -.fexist cmd do. EMPTY return. end.
 end.
 if. IFJHS do.
-  redirecturl_jijxm_=: (' ';'%20') stringreplace ('file://'&,)^:(-.@isURL) iospath^:IFIOS abspath cmd
+  redirecturl_jijxm_=: file2url cmd
   EMPTY return.
 elseif. IFIOS do.
-  jh '<a href="',(('file://'&,)^:(-.@isURL) iospath abspath cmd),'"</a>'
+  jh '<a href="',(file2url cmd),'"</a>'
   EMPTY return.
 end.
 browser=. Browser_j_

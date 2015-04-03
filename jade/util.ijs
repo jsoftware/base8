@@ -11,7 +11,6 @@ extnone=: {.~ i:&'.'
 extproj=: , (ProjExt #~ '.'&e. < 0 < #)
 extsrc=: , ('.ijs' #~ '.'&e. < 0 < #)
 
-abspath=: (1!:43@(''"_) , '/' , ])^:(((IFWIN *. ':/' -: 2&{.@}.)+:('/' = {.)) > isURL)@:jpathsep
 addfname=: , ('/' ~: {:) # i:&'/' }. ]
 boxdraw=: 3 : '9!:7 y { Boxes'
 hostcmd=: [: 2!:0 '(' , ,&' || true)'
@@ -294,9 +293,9 @@ NB. htmlhelp v open file in browser
 htmlhelp=: 3 : 0
 f=. jpath '~addons/docs/help/',y
 if. fexist ({.~ i:&'#') f do.
-  browse 'file://',f
+  browse file2url f
 else.
-  f=. 'http://www.jsoftware.com/docs/help',}.(i.&'/'{.]) 9!:14''
+  f=. 'http://www.jsoftware.com/docs/help', '804'
   browse f,'/',y
 end.
 )

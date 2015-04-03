@@ -40,6 +40,19 @@ NB.*getalpha v get alpha channel
 getalpha=: 16bff (17 b.) _24&(34 b.)
 
 NB. =========================================================
+NB.*abspath v absolute file system path name
+abspath=: 3 : 0
+if. (1 e. '://'&E.) y=. ,jpathsep y do. y return. end.
+if. IFWIN do.
+  assert. 0<rc=. 'kernel32 GetFullPathNameW > i *w i *w *w'&cd (uucp y);((#;])f=. 1024$u:' '),<<0
+  y=. jpathsep utf8 rc{.f
+elseif. ('/' ~: {.) y do.
+  y=. iospath^:IFIOS (1!:43'') , '/' , utf8 y
+end.
+y
+)
+
+NB. =========================================================
 NB.*apply v apply verb x to y
 apply=: 128!:2
 
@@ -188,13 +201,16 @@ expand=: #^:_1
 NB. =========================================================
 NB.*file2url v convert to file:// format
 file2url=: 3 : 0
-y=. (' ';'%20';'\';'/') stringreplace y -. '"'
+if. (1 e. '://'&E.) ,y do. y return. end.
+y=. (' ';'%20') stringreplace abspath y -. '"'
 if. IFWIN do.
-  if. ':'~:{:2{.y do. ((' ';'%20';'\';'/') stringreplace 1!:43''),'/',y end.
-  'file:///', y
+  if. '//'-:2{.y do.
+    'file:',y
+  else.
+    'file:///',y
+  end.
 else.
-  if. '/'~:{.y do. ((' ';'%20') stringreplace 1!:43''),'/',y end.
-  'file://', y
+  'file://',y
 end.
 )
 
