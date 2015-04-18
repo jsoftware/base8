@@ -4,13 +4,7 @@ NB. =========================================================
 NB. android specific
 startupandroid=: 3 : 0
 if. IFQT do.
-  if. 21 <: v=. {.0".wd'qosver' do.
-    APILEVEL_ja_=: v
-    DM_density_ja_=: DM_scaledDensity_ja_=: 3
-    DM_densityDpi_ja_=: 480
-  else.
-    load^:fexist '~addons/gui/android/android.ijs'
-  end.
+  load^:fexist '~addons/gui/android/android.ijs'
 end.
 dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
 if. 0~:4!:0<'UserNumber_ja_' do.
