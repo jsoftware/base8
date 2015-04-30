@@ -3,13 +3,28 @@
 NB. =========================================================
 NB. android specific
 startupandroid=: 3 : 0
-if. IFQT do.
+dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
+if. 0~:4!:0<'APILEVEL_ja_' do.
+  APILEVEL_ja_=: 0&". LF-.~ 2!:0 'getprop ro.build.version.sdk'
+end.
+if. 0~:4!:0<'UserNumber_ja_' do.
+NB. multiple user space since APILEVEL 17
+NB. assume user 0, but may need to override in startup.ijs per user
+  UserNumber_ja_=: 0-APILEVEL_ja_<17
+end.
+NB. API level 18 (android 4.3) have wm command
+if. 18<:APILEVEL_ja_ do.
+  DM_densityDpi_ja_=: 0&". ' '-.~ (}.~ i:&' ') LF-.~ 2!:0 'wm density'
+  ('DM_widthPixels_ja_ DM_heightPixels_ja_')=: 0&". ;._1 'x', ' '-.~ (}.~ i:&' ') LF-.~ 2!:0 'wm size'
+NB. kludge
+  DM_density_ja_=: (0.5*DM_heightPixels_ja_>480) + (0.5*DM_heightPixels_ja_>320) + DM_densityDpi_ja_% 160
+end.
+NB. 21 is android 5.0
+if. IFQT *. 21>APILEVEL_ja_ do.
   load^:fexist '~addons/gui/android/android.ijs'
 end.
-dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
-if. 0~:4!:0<'UserNumber_ja_' do.
-NB. assume user 0, but may need to override in startup.ijs per user
-  UserNumber_ja_=: 0- 402 > 100#. 2{. 0&". ;._1'.', LF-.~ 2!:0 'getprop ro.build.version.release'
+if. 0~:4!:0<'DM_density_ja_' do.
+  DM_density_ja_=: 3
 end.
 EMPTY
 )
