@@ -51,7 +51,38 @@ android_exec_am=: 3 : 0
 'intent uri mimetype flags'=. 4{.y
 user=. (UserNumber_ja_"_)^:(0=4!:0<'UserNumber_ja_') (_1)
 2!:0 ::0: utf8 'am start ',((user>:0)#'--user ', ":user),' -a ', intent, ' -d ', (dquote uri), ((*#mimetype)#' -t ', mimetype), ((0~:flags)#' -f ', ":flags)
-EMPTY
+i.0 0
 )
 
 android_exec_host=: 2!:1@(3&{.)`android_exec_am@.(0=4!:0<'AndroidPackage')
+
+NB. return rotation, density, densityDpi, heightPixels, scaledDensity, widthPixels, xdpi, ydpi
+NB. rotation: 0=portrait, 1=landscape.  width and height varies with rotation
+NB. xdpi and ydpi are un-reliable
+android_getdisplaymetrics=: 3 : 0
+if. IFQT do.
+  ('"',libjqt,'" android_getdisplaymetrics > n *d')&(15!:0) <dm=. 8#0.5-0.5
+  dm
+else.
+NB. asus zenfone 6
+  dm=. 0 2 320 1280 2 720 243.247 244.273
+NB. API level 18 (android 4.3) have wm command
+  if. 18<:APILEVEL_ja_ do.
+    try.
+      densityDpi=. 0&". ' '-.~ (}.~ i:&' ') LF-.~ 2!:0 'wm density'
+      ('widthPixels heightPixels')=: 0&". ;._1 'x', ' '-.~ (}.~ i:&' ') LF-.~ 2!:0 'wm size'
+NB. kludge
+      density=. (0.5*heightPixels>480) + (0.5*heightPixels>320) + densityDpi% 160
+      dm=. 1 2 3 4 5 (density, densityDpi, heightPixels, density, widthPixels)}dm
+    catch. end.
+  end.
+end.
+dm
+)
+
+3 : 0''
+if. 'Android'-:UNAME do.
+  'DM_density_ja_ DM_densityDpi_ja_ DM_scaledDensity_ja_'=: 1 2 4{android_getdisplaymetrics 0
+end.
+i.0 0
+)
