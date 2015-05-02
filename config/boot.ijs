@@ -56,7 +56,7 @@ JVERSION=: toJ r
 NB. ---------------------------------------------------------
 18!:4 <'base'
 
-if. IFQT *. 'Android'-:UNAME do.
+if. 'Android'-:UNAME do.
   startupandroid''
   f=. jpath '~install/bin/startup_android.ijs'
   if. 1!:4 :: 0: <f do.

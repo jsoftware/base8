@@ -68,21 +68,21 @@ NB. asus zenfone 6
   dm=. 0 2 320 1280 2 720 243.247 244.273
 NB. API level 18 (android 4.3) have wm command
   if. 18<:APILEVEL_ja_ do.
-    try.
-      densityDpi=. 0&". ' '-.~ (}.~ i:&' ') LF-.~ 2!:0 'wm density'
-      ('widthPixels heightPixels')=: 0&". ;._1 'x', ' '-.~ (}.~ i:&' ') LF-.~ 2!:0 'wm size'
+NB. cache values because wm density/size are slow
+    if. 0=4!:0<'android_getdisplaymetrics_memo_ja_' do.
+      dm=. android_getdisplaymetrics_memo_ja_
+    else.
+      try.
+        densityDpi=. 0&". ' '-.~ (}.~ i:&' ') LF-.~ 2!:0 'wm density'
+        ('widthPixels heightPixels')=: 0&". ;._1 'x', ' '-.~ (}.~ i:&' ') LF-.~ 2!:0 'wm size'
 NB. kludge
-      density=. (0.5*heightPixels>480) + (0.5*heightPixels>320) + densityDpi% 160
-      dm=. 1 2 3 4 5 (density, densityDpi, heightPixels, density, widthPixels)}dm
-    catch. end.
+        density=. (0.5*heightPixels>480) + (0.5*heightPixels>320) + densityDpi% 160
+        dm=. 1 2 3 4 5 (density, densityDpi, heightPixels, density, widthPixels)}dm
+      catch. end.
+      android_getdisplaymetrics_memo_ja_=: dm
+    end.
   end.
 end.
+'DM_density_ja_ DM_densityDpi_ja_ DM_scaledDensity_ja_'=: 1 2 4{dm
 dm
-)
-
-3 : 0''
-if. 'Android'-:UNAME do.
-  'DM_density_ja_ DM_densityDpi_ja_ DM_scaledDensity_ja_'=: 1 2 4{android_getdisplaymetrics 0
-end.
-i.0 0
 )
