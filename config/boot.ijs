@@ -67,7 +67,7 @@ if. 'Android'-:UNAME do.
       wdinfo ::0: 13!:12''
       2!:55[0
     end.
-    EMTPY return.
+    EMPTY return.
   end.
 end.
 
