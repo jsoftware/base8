@@ -16,11 +16,11 @@ colortab   ~addons/graphics/color/colortab.ijs
 csv        ~addons/tables/csv/csv.ijs
 dd         ~addons/data/odbc/odbc.ijs
 debug      ~addons/ide/qt/debugs.ijs
-droidwd    ~addons/gui/droidwd/droidwd.ijs
 gl2        ~addons/graphics/gl2/gl2.ijs
 gles       ~addons/api/gles/gles.ijs
 graph      ~addons/graphics/graph/graph.ijs
 guid       ~addons/general/misc/guid.ijs
+jca        ~addons/ide/jca/jca.ijs
 jd         ~addons/data/jd/jd.ijs
 jfiles     ~addons/data/jfiles/jfiles.ijs
 jhs        ~addons/ide/jhs/core.ijs

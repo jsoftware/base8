@@ -16,7 +16,7 @@ NB. ---------------------------------------------------------
 NB. nouns:
 NB.*IF64          n if a 64 bit J system
 NB.*IFIOS         n if iOS (iPhone/iPad)
-NB.*IFJCDROID     n if JConsole for Android
+NB.*IFJCA         n if JConsole for Android with wd
 NB.*IFJHS         n if jhs libraries loaded
 NB.*IFQT          n if Qt libraries loaded
 NB.*IFRASPI       n if Raspberry Pi
@@ -26,7 +26,7 @@ NB.*IFWINCE       n if Windows CE
 NB.*IFWINE        n if Wine (Wine Is Not an Emulator)
 NB.*IFWOW64       n if running J32 on a 64 bit o/s
 NB.*UNAME         n name of UNIX o/s
-NB.*FHS           n filesystem hierarchy: 0=not used  1=linux
+NB.*FHS           n filesystem hierarchy: 0=not used  1=linux and installed under /usr/...
 
 18!:4 <'z'
 
@@ -52,9 +52,10 @@ if. notdef 'IFIOS' do.
 end.
 
 NB. ---------------------------------------------------------
-if. notdef 'IFJCDROID' do.
-  IFJCDROID=: 0
+if. notdef 'IFJCA' do.
+  IFJCA=: 0
 end.
+IFJCDROID=: 0   NB. deprecated and remove in the next release
 
 NB. ---------------------------------------------------------
 if. notdef 'FHS' do.
@@ -119,7 +120,7 @@ if. UNAME-:'Android' do.
   end.
 end.
 
-assert. IFQT *: IFJCDROID
+assert. IFQT *: IFJCA
 )
 
 NB. =========================================================
