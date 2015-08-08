@@ -40,7 +40,7 @@ load sys,'util/configure.ijs'
 load sys,'main/ctag.ijs'
 load sys,'util/jadetag.ijs'
 load^:IFQT '~addons/ide/qt/qt.ijs'
-load^:IFJCA '~addons/ide/jca/jca.ijs'
+load^:IFJA '~addons/ide/ja/ja.ijs'
 
 NB. ---------------------------------------------------------
 NB. JVERSION_z_ (used in about box)

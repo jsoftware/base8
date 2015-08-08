@@ -9,7 +9,6 @@ NB. Public definitions
 NB. form:  shortname fpathname
 buildpublic 0 : 0
 afm        ~addons/graphics/afm/afm.ijs
-android    ~addons/gui/android/android.ijs
 bmp        ~addons/graphics/bmp/bmp.ijs
 color16    ~addons/graphics/color/color16.ijs
 colortab   ~addons/graphics/color/colortab.ijs
@@ -20,7 +19,7 @@ gl2        ~addons/graphics/gl2/gl2.ijs
 gles       ~addons/api/gles/gles.ijs
 graph      ~addons/graphics/graph/graph.ijs
 guid       ~addons/general/misc/guid.ijs
-jca        ~addons/ide/jca/jca.ijs
+ja         ~addons/ide/ja/ja.ijs
 jd         ~addons/data/jd/jd.ijs
 jfiles     ~addons/data/jfiles/jfiles.ijs
 jhs        ~addons/ide/jhs/core.ijs

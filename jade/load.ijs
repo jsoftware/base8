@@ -6,7 +6,7 @@ UserFolders=: i. 0 2
 
 NB. =========================================================
 getignore=: 3 : 0
-r=. ' colib convert coutil dates dir dll files libpath strings text droidwd gui/droidwd'
+r=. ' colib convert coutil dates dir dll files libpath strings text'
 if. IFIOS do.
   r=. r, ' qtide ide/qt'
 else.
@@ -15,14 +15,11 @@ end.
 if. -.IFQT do.
   r=. r, ' qtide ide/qt'
 end.
-if. (((UNAME-:'Android')>IFQT+.IFJCA)+.IFIOS+.IFJHS) do.
+if. (((UNAME-:'Android')>IFQT+.IFJA)+.IFIOS+.IFJHS) do.
   r=. r,' gl2 graphics/gl2'
 end.
-if. -.IFJCA +. IFQT*.'Android'-:UNAME do.
-  r=. r,' android gui/android'
-end.
-if. -.IFJCA do.
-  r=. r,' jca ide/jca'
+if. -.IFJA do.
+  r=. r,' ja ide/ja'
 end.
 Ignore=: <;._1 r
 )

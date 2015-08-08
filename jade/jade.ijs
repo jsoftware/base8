@@ -85,7 +85,7 @@ NB.-example:
 NB.+   show 'IF*' nl_z_ 0
 NB.+IF64=: 1
 NB.+IFIOS=: 0
-NB.+IFJCA=: 0
+NB.+IFJA=: 0
 NB.+...
 
 show=: 3 : 0
