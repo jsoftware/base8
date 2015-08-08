@@ -3,19 +3,23 @@ NB.-This definitions are called from the standard library
 
 NB. =========================================================
 NB. do_install v install from jal
+NB. y is one of:
+NB. 'all'    install all (including jqt binaries)
+NB. 'qtide'  just qtide and jqt binaries
+NB. other    usual call to 'install' jpkg other
 do_install=: 3 : 0
 if. -. checkaccess_jpacman_ '' do. return. end.
 'update' jpkg ''
-select. y
-case. 'qtide' do.
-  'install' jpkg 'base library ide/qt'
-  getqtbin 0
-  msg=. (+/ 2 1 * IFWIN,'Darwin'-:UNAME) pick 'jqt.sh';'the jqt icon';'jqt.cmd'
-  smoutput 'exit and restart J using ',msg
-case. 'all' do.
-  'install' jpkg 'all'
-  getqtbin 0
+if. -. (<y) e. 'all';'qtide' do.
+  'install' jpkg y return.
 end.
+if. IFQT+.IFIOS+.'Android'-:UNAME do.
+  smoutput 'Must run from jconsole' return.
+end.
+'install' jpkg (y-:'all') pick 'base library ide/qt';'all'
+getqtbin 0
+msg=. (+/ 2 1 * IFWIN,'Darwin'-:UNAME) pick 'jqt.sh';'the jqt icon';'jqt.cmd'
+smoutput 'Exit and restart J using ',msg
 )
 
 NB. =========================================================

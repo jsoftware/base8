@@ -9,11 +9,9 @@ NB. =========================================================
 NB.*install v install from jal
 NB.-Install from jal.
 NB.-
-NB.-y is either 'qtide' to install the Qt IDE, or 'all' to install all jal packages.
+NB.-y is either 'qtide' to install the Qt IDE, or 'all' to install all jal packages
+NB.-or else calls 'install' jpkg y
 install=: 3 : 0
-if. IFQT+.IFIOS+.'Android'-:UNAME do.
-  smoutput 'must run from jconsole' return.
-end.
 require 'pacman'
 do_install_jpacman_ y
 )

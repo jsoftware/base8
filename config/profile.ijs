@@ -3,7 +3,7 @@ NB. JFE sets BINPATH_z_ and ARGV_z_
 NB. add your sentences in startup.ijs
 
 systype=. 9!:12''
-jpathsep_z_=: '/'&(('\' I.@:= ])}) NB. convert to / separator
+jpathsep_z_=: '/'&(('\' I.@:= ])})
 BINPATH_z_=: jpathsep BINPATH_z_
 
 NB. create SystemFolders
