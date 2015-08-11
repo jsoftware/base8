@@ -22,8 +22,9 @@ ncm=. com < (1|.0,}.com) +. (0,}._1|.com)
 msk=. com +: ncm *. dat=a:
 dat=. msk # dat
 
+d=. #~ ([: +./\. -.@e.&(' ',TAB))
 f=. *./\ @ (('NB.'&E.>'NB.!'&E.) <: ~:/\@(e.&''''))
-g=. f dtb@#^:(0 e. [) ]
+g=. f d@#^:(0 e. [) ]
 ; (g each dat) ,each LF
 )
 
