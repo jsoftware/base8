@@ -48,6 +48,8 @@ r=. 'Engine: ',9!:14''
 r=. r,LF,'Library: ',LF -.~ 1!:1<jpath '~system/config/version.txt'
 if. IFQT do.
   r=. r,LF,'Qt IDE: ',wd'version'
+elseif. IFJA do.
+  r=. r,LF,'J Android: ',wd'version'
 end.
 r=. r,LF,'Platform: ',UNAME,' ',IF64 pick '32';'64'
 r=. r,LF,'Installer: ',LF -.~ 1!:1 :: ('unknown'"_) <jpath'~bin/installer.txt'
