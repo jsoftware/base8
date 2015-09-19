@@ -15,7 +15,7 @@ end.
 if. -.IFQT do.
   r=. r, ' qtide ide/qt'
 end.
-if. (((UNAME-:'Android')>IFQT+.IFJA)+.IFIOS+.IFJHS) do.
+if. (((UNAME-:'Android')>IFJA)+.IFIOS+.IFJHS) do.
   r=. r,' gl2 graphics/gl2'
 end.
 if. -.IFJA do.

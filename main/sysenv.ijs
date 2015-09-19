@@ -103,20 +103,10 @@ if. notdef 'IFQT' do.
     libjqt=: ((BINPATH,'/')&,)^:(0=FHS) IFUNIX{::'jqt.dll';'libjqt',(UNAME-:'Darwin'){::'.so';'.dylib'
   end.
 end.
-NB. workaround non-ascii file path
-if. IFWIN do.
-  if. 1 e. 127< a.&i. libjqt do.
-    libjqt=: 'jqt.dll'
-  end.
-end.
 
 NB. ---------------------------------------------------------
 if. UNAME-:'Android' do.
-  if. IFQT do.
-    AndroidLibPath=: ({.~i:&'/') libjqt
-  else.
-    AndroidLibPath=: '/lib',~ ({.~i:&'/')^:2 BINPATH
-  end.
+  AndroidLibPath=: '/lib',~ ({.~i:&'/')^:2 BINPATH
 end.
 
 assert. IFQT *: IFJA

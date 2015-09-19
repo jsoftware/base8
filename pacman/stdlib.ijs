@@ -13,7 +13,7 @@ if. -. checkaccess_jpacman_ '' do. return. end.
 if. -. (<y) e. 'all';'qtide' do.
   'install' jpkg y return.
 end.
-if. IFQT+.IFIOS+.'Android'-:UNAME do.
+if. IFQT do.
   smoutput 'Must run from jconsole' return.
 end.
 'install' jpkg (y-:'all') pick 'base library ide/qt';'all'

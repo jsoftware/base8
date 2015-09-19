@@ -33,7 +33,7 @@ NB.-For windows:
 NB.-y is 'angle' for the ANGLE binaries
 getqtbin=: 3 : 0
 if. (<UNAME) -.@e. 'Linux';'Darwin';'Win' do. return. end.
-if. IFQT+.IFIOS+.'Android'-:UNAME do.
+if. IFQT do.
   smoutput 'must run from jconsole' return.
 end.
 require 'pacman'
