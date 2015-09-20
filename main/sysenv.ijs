@@ -77,7 +77,8 @@ end.
 NB. ---------------------------------------------------------
 if. notdef 'IFRASPI' do.
   if. UNAME -: 'Linux' do.
-    IFRASPI=: 1 e. 'BCM2708' E. 2!:0 'cat /proc/cpuinfo'
+    cpu=. 2!:0 'cat /proc/cpuinfo'
+    IFRASPI=: (1 e. 'BCM2708' E. cpu) +. 1 e. 'BCM2709' E. cpu
   else.
     IFRASPI=: 0
   end.
