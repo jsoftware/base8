@@ -73,7 +73,6 @@ if. 'Android'-:UNAME do.
   end.
 end.
 
-NB. !!! will rework later
 NB. f=. jpath '~config/startup',((-.IFQT)#'_console'),'.ijs'
 f=. jpath '~config/startup.ijs'
 if. 1!:4 :: 0: <f do.
