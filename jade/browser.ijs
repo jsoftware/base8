@@ -59,6 +59,7 @@ NB. dfltbrowser ''
 NB.     return default browser, or ''
 dfltbrowser=: verb define
 select. UNAME
+case. 'Android' do. ''
 case. 'Win' do. ''
 case. 'Darwin' do. 'open'
 case. do.

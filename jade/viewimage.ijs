@@ -27,6 +27,9 @@ case. 'Android' do.
   android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.@isURL) cmd);'image/*';0
 case. do.
   if. 0 = #ImageViewer do.
+    ImageViewer=. dfltimageviewer''
+  end.
+  if. 0 = #ImageViewer do.
     browser=. Browser_j_
     if. 0 = #browser do.
       browser=. dfltbrowser''
@@ -48,4 +51,20 @@ case. do.
   end.
 end.
 EMPTY
+)
+
+NB. =========================================================
+NB. dfltimageviewer ''
+NB.     return default imageviewer, or ''
+dfltimageviewer=: verb define
+select. UNAME
+case. 'Android' do. ''
+case. 'Win' do. ''
+case. 'Darwin' do. 'open'
+case. do.
+  try.
+    2!:0'which eog'
+    'eog' return. catch. end.
+  '' return.
+end.
 )
