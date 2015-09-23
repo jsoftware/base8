@@ -15,7 +15,8 @@ elseif. IFIOS do.
   jh '<a href="',(file2url cmd),'"</a>'
   EMPTY return.
 end.
-PDFReader=. PDFReader_j_
+nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
+PDFReader=. nox{::PDFReader_j_;PDFReader_nox_j_
 select. UNAME
 case. 'Win' do.
   ShellExecute=. 'shell32 ShellExecuteW > i x *w *w *w *w i'&cd

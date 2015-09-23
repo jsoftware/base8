@@ -14,6 +14,8 @@ elseif. IFIOS do.
   jh '<a href="',(file2url cmd),'"</a>'
   EMPTY return.
 end.
+nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
+ImageViewer=. nox{::ImageViewer_j_;ImageViewer_nox_j_
 select. UNAME
 case. 'Win' do.
   ShellExecute=. 'shell32 ShellExecuteW > i x *w *w *w *w i'&cd
@@ -24,21 +26,25 @@ case. 'Win' do.
 case. 'Android' do.
   android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.@isURL) cmd);'image/*';0
 case. do.
-  browser=. Browser_j_
-  if. 0 = #browser do.
-    browser=. dfltbrowser''
+  if. 0 = #ImageViewer do.
+    browser=. Browser_j_
+    if. 0 = #browser do.
+      browser=. dfltbrowser''
+    end.
+    browser=. dquote (browser;Browser_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
+  else.
+    browser=. dquote ImageViewer
   end.
-  browser=. dquote (browser;Browser_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
   cmd=. browser,' ',dquote cmd
   try.
     2!:1 cmd, (0=nox)#' >/dev/null 2>&1 &'
   catch.
-    msg=. 'Could not run the browser with the command:',LF2
+    msg=. 'Could not run the image viewer with the command:',LF2
     msg=. msg, cmd,LF2
     if. IFQT do.
-      msg=. msg, 'You can change the browser definition in Edit|Configure|Base',LF2
+      msg=. msg, 'You can change the imageviewer definition in Edit|Configure|Base',LF2
     end.
-    sminfo 'Run Browser';msg
+    sminfo 'Run image viewer';msg
   end.
 end.
 EMPTY

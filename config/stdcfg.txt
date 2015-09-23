@@ -36,7 +36,10 @@ FORMSIZES form sizes
 MemoryLimit memory limit
 NEWUSER if newuser
 Output output definition
+ImageViewer viewing image files
+ImageViewer_nox viewing image files (without X)
 PDFReader reading Adoble pdf files
+PDFReader_nox reading Adoble pdf files (without X)
 PRINTPREC print precision
 READONLY open file read state
 SHOWSIP if show soft keyboard on PPC

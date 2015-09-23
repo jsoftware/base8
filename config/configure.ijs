@@ -10,7 +10,10 @@ DirTreeX
 Format
 MemoryLimit
 EPSReader
+ImageViewer
+ImageViewer_nox
 PDFReader
+PDFReader_nox
 ReadCatalog
 RecentMax
 XDiff
