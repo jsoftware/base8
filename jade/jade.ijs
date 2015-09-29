@@ -13,7 +13,7 @@ NB.-example:
 NB.+   jpath '~bin/profile.ijs'
 NB.+/home/elmo/j8/bin/profile.ijs
 NB.-
-NB.-For more information, on folder names see [Folders and Projects](http://www.jsoftware.com/jwiki/Guides/Folders%20and%20Projects).
+NB.-For more information, on folder names see [Folders and Projects](http://code.jsoftware.com/wiki/Guides/Folders%20and%20Projects).
 jpath=: jpath_j_
 
 NB. =========================================================
