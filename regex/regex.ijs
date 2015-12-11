@@ -45,6 +45,8 @@ while. 1 do.
   if. _1 = 0{0{m do. break. end.
   m=. m+ ($m)$o,0
   rxm=. rxm , m
+NB. stop if anchor at the beginning
+  if. '^'={.ph do. break. end.
 NB. Advance the offset o beyond this match.
 NB. The match length can be zero (with the *? operators),
 NB. so take special care to advance at least to the next
