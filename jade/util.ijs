@@ -188,7 +188,7 @@ d=. 1!:0 y
 if. 1 ~: #d do. r return. end.
 if. 'd' ~: 4 { 4 pick {. d do. r return. end.
 if. IFWIN do.
-  shell_jtask_ 'rmdir ',y,' /S /Q'
+  shell_jtask_ 'rmdir "',y,'" /S /Q'
 else.
   hostcmd_j_ 'rm -rf --preserve-root ',y
 end.

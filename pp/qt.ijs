@@ -9,4 +9,3 @@ if. 0=L.res do. '0',res return. end.
 'line msg'=. res
 '1',(":line),' ',msg
 )
-
