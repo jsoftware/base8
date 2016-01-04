@@ -44,7 +44,15 @@ load^:IFJA '~addons/ide/ja/ja.ijs'
 
 NB. ---------------------------------------------------------
 NB. JVERSION_z_ (used in about box)
-r=. 'Engine: ',9!:14''
+v=. 9!:14''
+if. 1=+/v='/' do.
+  r=. 'Engine: ',v
+  f=. 'www.jsoftware.com'
+else.
+  'a b c d e f g'=. <;._1 '/',v
+  r=. 'Engine: ', a,'/',b,'/',c
+  r=. r,LF,(toupper {.d),(}.d),': ',e,'/',g
+end.
 r=. r,LF,'Library: ',LF -.~ 1!:1<jpath '~system/config/version.txt'
 if. IFQT do.
   r=. r,LF,'Qt IDE: ',wd'version'
@@ -54,6 +62,7 @@ end.
 r=. r,LF,'Platform: ',UNAME,' ',IF64 pick '32';'64'
 r=. r,LF,'Installer: ',LF -.~ 1!:1 :: ('unknown'"_) <jpath'~bin/installer.txt'
 r=. r,LF,'InstallPath: ',jpath '~install'
+r=. r,LF,'Contact: ',f
 JVERSION=: toJ r
 
 NB. ---------------------------------------------------------
