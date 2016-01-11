@@ -36,7 +36,8 @@ long=. ndx }. each dat
 long=. extsrc@jpathsep@deb each long
 msk=. (<'system','/') = 7 {. each long
 long=. (msk{'';'~') ,each long
-Public=: sort ~. Public,~ short,.long
+msk=. (i. ~.) {."1 Public=: Public,~ short,.long
+Public=: sort msk{Public
 empty''
 )
 
