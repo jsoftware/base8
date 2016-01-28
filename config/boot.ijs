@@ -45,7 +45,7 @@ load^:IFJA '~addons/ide/ja/ja.ijs'
 NB. ---------------------------------------------------------
 NB. JVERSION_z_ (used in about box)
 v=. 9!:14''
-if. 1=+/v='/' do.
+if. 6>+/v='/' do.
   r=. 'Engine: ',v
   f=. 'www.jsoftware.com'
 else.
