@@ -14,9 +14,11 @@ if. (0~:FHS) *: 'Linux'-:UNAME do.
     f=. jpath '~tools/regex/',t
   end.
 
-NB. fall back one more time for android
+NB. fall back one more time
   if. ('Android'-:UNAME) *. 0 = 1!:4 :: 0: <f do.
     f=. AndroidLibPath,'/',t
+  elseif. 0 = 1!:4 :: 0: <f do.
+    f=. t
   end.
 
   rxdll=: f
