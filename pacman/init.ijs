@@ -34,6 +34,7 @@ general/pcall
 general/sfl
 graphics/d3
 graphics/fvj3
+graphics/fvj4
 graphics/gl2
 graphics/gnuplot
 graphics/graph
@@ -49,6 +50,7 @@ math/tabula
 media/animate
 media/gdiplus
 media/image3
+media/imagekit
 media/ming
 media/paint
 media/wav
