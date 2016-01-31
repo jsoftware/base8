@@ -46,7 +46,7 @@ else.
   ProjectName=: ''
 end.
 projread''
-recentproj_add_j_ Project
+NB. recentproj_add_j_ Project
 )
 
 NB. =========================================================
