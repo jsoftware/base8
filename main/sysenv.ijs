@@ -98,10 +98,9 @@ end.
 NB. ---------------------------------------------------------
 if. notdef 'IFQT' do.
   IFQT=: 0
-  if. IFIOS do.
-    libjqt=: 'libjqt.dylib'
-  else.
-    libjqt=: ((BINPATH,'/')&,)^:(0=FHS) IFUNIX{::'jqt.dll';'libjqt',(UNAME-:'Darwin'){::'.so';'.dylib'
+  libjqt=: IFUNIX{::'jqt.dll';'libjqt',(UNAME-:'Darwin'){::'.so';'.dylib'
+  if. 0 ~: 1!:4 :: 0: < ((BINPATH,'/')&,) libjqt do.
+    libjqt=: ((BINPATH,'/')&,) libjqt
   end.
 end.
 

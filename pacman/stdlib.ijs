@@ -47,11 +47,12 @@ if. rc do.
   smoutput 'unable to download: ',z return.
 end.
 d=. jpath '~bin'
+fhs=. ('Linux'-:UNAME) *. '/usr/lib/'-:9{.libjqt
 if. IFWIN do.
   unzip_jpacman_ p;d
 else.
   if. 'Linux'-:UNAME do.
-    if. (0~:FHS) do.
+    if. fhs do.
       if. IFRASPI do.
         d1=. '/usr/lib/arm-linux-gnueabihf/.'
       elseif. IF64 do.
@@ -68,11 +69,11 @@ else.
   end.
 end.
 ferase p
-if. #1!:0 ((0~:FHS)*.'Linux'-:UNAME){::(jpath '~bin/',z1);'/usr/bin/jqt' do.
+if. #1!:0 fhs{::(jpath '~bin/',z1);'/usr/bin/jqt' do.
   m=. 'Finished install of JQt binaries.'
 else.
   m=. 'Unable to install JQt binaries.',LF
-  m=. m,'check that you have write permission for: ',LF,((0~:FHS)*.'Linux'-:UNAME){::(jpath '~bin');'/usr/bin'
+  m=. m,'check that you have write permission for: ',LF,fhs{::(jpath '~bin');'/usr/bin'
 end.
 smoutput m
 
