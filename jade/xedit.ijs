@@ -16,7 +16,15 @@ if. IFJHS do.         NB. open on client side
   EMPTY return.
 end.
 if. UNAME-:'Android' do.
-  android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.@isURL) file);'text/plain';0
+  if. IFJA do.
+    android_exec_host 'android.intent.action.VIEW';(utf8 ('file://'&,)@abspath^:(-.@isURL) file);'text/plain';0
+  elseif. 1=ftype '/system/bin/vi' do.
+    2!:1 '/system/bin/vi', ' ', (dquote >@fboxname file)
+  elseif. 1=ftype '/system/xbin/vi' do.
+    2!:1 '/system/xbin/vi', ' ', (dquote >@fboxname file)
+  elseif. #Editor_j_ do.
+    2!:1 Editor_j_, ' ', (dquote >@fboxname file)
+  end.
   EMPTY return.
 end.
 editor=. (Editor_j_;Editor_nox_j_){::~ nox=. (UNAME-:'Linux') *. (0;'') e.~ <2!:5 'DISPLAY'
