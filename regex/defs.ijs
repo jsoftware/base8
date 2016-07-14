@@ -6,7 +6,7 @@ NB. rxdll is in bin or tools/regex
 select. UNAME
 case. 'Win' do. t=. 'jpcre.dll'
 case. 'Darwin' do. t=. 'libjpcre.dylib'
-case. 'Linux' do.
+fcase. 'Linux' do.
   if. 2 0-:('libpcreposix.so.3 dummyfunction n')&(15!:0) ::(15!:10) '' do.
     rxdll=: 'libpcreposix.so.3'
     jregcomp=: ('"',rxdll,'" pcreposix_regcomp + i *x *c i')&(15!:0)
