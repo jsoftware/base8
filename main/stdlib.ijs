@@ -277,7 +277,7 @@ end.
 )
 
 NB. =========================================================
-NB.*isutf8 v if character string is valid utf8
+NB.*isutf8 v if character string is valid UTF-8
 isutf8=: 1:@(7&u:) :: 0:
 
 NB. =========================================================
@@ -510,19 +510,19 @@ t=. <;._1 '/invalid name/not defined/noun/adverb/conjunction/verb/unknown'
 type=: {&t@(2&+)@(4!:0)&boxopen
 
 NB. =========================================================
-NB.*ucp v convert text to unicode code point
-NB.-This is 7-bit ascii (if possible) or utf16
+NB.*ucp v convert text to UTF-16
+NB.-This is 7-bit ascii (if possible) or wchar with UTF-16 encoding
 NB.-(compare [uucp](#uucp)).
 NB.-
 NB.-inverse is [utf8](#utf8).
 ucp=: 7&u:
 
 NB. =========================================================
-NB.*ucpcount v unicode code point count
-NB.-Counts number of unicode code points (glyphs) in a string.
+NB.*ucpcount v wchar count
+NB.-Counts number of wchar in a string when converted to UTF-16
 NB.-
-NB.-A unicode character has one code point, even though it
-NB.-may have several bytes in its representation.
+NB.-A unicode codepoint has one or two wchar, this gives the
+NB.-number of wchar, not unicode codepoint
 ucpcount=: # @ (7&u:)
 
 NB. =========================================================
@@ -539,17 +539,17 @@ EMPTY
 )
 
 NB. =========================================================
-NB.*utf8 v convert string to utf8
-NB.-Convert string to utf8.
+NB.*utf8 v convert string to UTF-8
+NB.-Convert string to literal with UTF-8 encoding
 NB.-
 NB.-Inverse of [ucp](#ucp).
 utf8=: 8&u:
 
 NB. =========================================================
-NB.*uucp v convert text to unicode code point
-NB.-Convert text to unicode code point.
+NB.*uucp v convert text to UTF-16
+NB.-Convert text to wchar with UTF-16 encoding
 NB.-
-NB.-This is always utf16 (compare [ucp](#ucp))
+NB.-This is always wchar (compare [ucp](#ucp))
 uucp=: u:@(7&u:)
 
 NB. =========================================================
