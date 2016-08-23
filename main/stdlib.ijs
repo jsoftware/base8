@@ -132,11 +132,12 @@ if. 1 < #$y do. <"_1 y return. end.
 
 NB. =========================================================
 NB.*datatype v noun datatype
+NB.-unicode/unicode4 are literal2/literal4 in J dictionary
 datatype=: 3 : 0
 n=. 1 2 4 8 16 32 64 128 1024 2048 4096 8192 16384 32768 65536 131072 262144
 t=. '/boolean/literal/integer/floating/complex/boxed/extended/rational'
 t=. t,'/sparse boolean/sparse literal/sparse integer/sparse floating'
-t=. t,'/sparse complex/sparse boxed/symbol/wchar/literal4'
+t=. t,'/sparse complex/sparse boxed/symbol/unicode/unicode4'
 (n i. 3!:0 y) pick <;._1 t
 )
 
@@ -511,18 +512,18 @@ type=: {&t@(2&+)@(4!:0)&boxopen
 
 NB. =========================================================
 NB.*ucp v convert text to UTF-16
-NB.-This is 7-bit ascii (if possible) or wchar with UTF-16 encoding
+NB.-This is 7-bit ascii (if possible) or literal2 with UTF-16 encoding
 NB.-(compare [uucp](#uucp)).
 NB.-
 NB.-inverse is [utf8](#utf8).
 ucp=: 7&u:
 
 NB. =========================================================
-NB.*ucpcount v wchar count
-NB.-Counts number of wchar in a string when converted to UTF-16
+NB.*ucpcount v literal2 count
+NB.-Counts number of literal2 in a string when converted to UTF-16
 NB.-
-NB.-A unicode codepoint has one or two wchar, this gives the
-NB.-number of wchar, not unicode codepoint
+NB.-A unicode codepoint has one or two literal2, this gives the
+NB.-number of literal2, not unicode codepoint
 ucpcount=: # @ (7&u:)
 
 NB. =========================================================
@@ -547,9 +548,9 @@ utf8=: 8&u:
 
 NB. =========================================================
 NB.*uucp v convert text to UTF-16
-NB.-Convert text to wchar with UTF-16 encoding
+NB.-Convert text to literal2 with UTF-16 encoding
 NB.-
-NB.-This is always wchar (compare [ucp](#ucp))
+NB.-This is always literal2 (compare [ucp](#ucp))
 uucp=: u:@(7&u:)
 
 NB. =========================================================
