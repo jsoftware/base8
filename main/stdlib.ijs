@@ -282,6 +282,10 @@ NB.*isutf8 v if character string is valid UTF-8
 isutf8=: 1:@(7&u:) :: 0:
 
 NB. =========================================================
+NB.*isutf16 v if character string is valid UTF-16
+isutf16=: 1:@(8&u:) :: 0:
+
+NB. =========================================================
 NB.*items a name for ("_1)
 items=: "_1
 
