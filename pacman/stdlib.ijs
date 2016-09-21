@@ -87,9 +87,9 @@ NB. if. (0-:y) *. 1=#1!:0 tgt do. return. end.
 
 smoutput 'Installing Qt library...'
 if. IFWIN do.
-  z=. 'qt54-win-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'qt56-win-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
 else.
-  z=. 'qt54-mac-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
+  z=. 'qt56-mac-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
 end.
 'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j805/qtlib/',z
 if. rc do.
