@@ -85,7 +85,7 @@ if. notdef 'IFRASPI' do.
 end.
 
 NB. ---------------------------------------------------------
-if. IF64 +. IFIOS +. IFRASPI +. UNAME-:'Android' do.
+if. IF64 +. IFIOS +. IFRASPI do.
   IFWOW64=: 0
 else.
   if. IFUNIX do.

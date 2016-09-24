@@ -3,6 +3,7 @@ mkdir_j_ jpath '~.Main/release/install/system/defs'
 
 F=. cutopen 0 : 0
 hostdefs_aix
+hostdefs_android_64
 hostdefs_android
 hostdefs_darwin_64
 hostdefs_darwin
@@ -12,6 +13,7 @@ hostdefs_sunos
 hostdefs_win_64
 hostdefs_win
 netdefs_aix
+netdefs_android_64
 netdefs_android
 netdefs_darwin_64
 netdefs_darwin
