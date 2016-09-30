@@ -19,20 +19,11 @@ fcase. 'Linux' do.   NB. fall throught
     rxdll=: ''
   end.
   if. #rxdll do.
-    if. 15!:21 ::0: rxdll,' pcreposix_regcomp i *x *c i' do.
-      jregcomp=: (rxdll,' pcreposix_regcomp i *x *c i')&(15!:0)
-      jregexec=: (rxdll,' pcreposix_regexec i *x *c x *i i')&(15!:0)
-      jregerror=: (rxdll,' pcreposix_regerror x i * *c x')&(15!:0)
-      jregfree=: (rxdll,' pcreposix_regfree n *x')&(15!:0)
-    elseif. 15!:21 ::0: rxdll,' regcomp i *x *c i' do.
-      jregcomp=: (rxdll,' regcomp i *x *c i')&(15!:0)
-      jregexec=: (rxdll,' regexec i *x *c x *i i')&(15!:0)
-      jregerror=: (rxdll,' regerror x i * *c x')&(15!:0)
-      jregfree=: (rxdll,' regfree n *x')&(15!:0)
-    elseif. do.
-      rxdll=: ''
-    end.
-    if. #rxdll do. '' return. end.
+    jregcomp=: (rxdll,' pcreposix_regcomp i *x *c i')&(15!:0)
+    jregexec=: (rxdll,' pcreposix_regexec i *x *c x *i i')&(15!:0)
+    jregerror=: (rxdll,' pcreposix_regerror x i * *c x')&(15!:0)
+    jregfree=: (rxdll,' pcreposix_regfree n *x')&(15!:0)
+    '' return.
   end.
 case. do. t=. 'libjpcre.so'
 end.
