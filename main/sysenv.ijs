@@ -85,11 +85,11 @@ if. notdef 'IFRASPI' do.
 end.
 
 NB. ---------------------------------------------------------
-if. IF64 +. IFIOS +. IFRASPI do.
+if. IF64 +. IFIOS do.
   IFWOW64=: 0
 else.
   if. IFUNIX do.
-    IFWOW64=: '64'-:_2{.(2!:0 'uname -m')-.10{a.
+    IFWOW64=: '64'-:_2{.(2!:0 (UNAME-:'Android'){::'uname -m';'getprop ro.product.cpu.abi')-.10{a.
   else.
     IFWOW64=: 'AMD64'-:2!:5'PROCESSOR_ARCHITEW6432'
   end.
