@@ -37,8 +37,6 @@ load sys,'util/scripts.ijs'
 load 'regex'
 load 'task'
 load sys,'util/configure.ijs'
-load sys,'main/ctag.ijs'
-load sys,'util/jadetag.ijs'
 load^:IFQT '~addons/ide/qt/qt.ijs'
 load^:IFJA '~addons/ide/ja/ja.ijs'
 
