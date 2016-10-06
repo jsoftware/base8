@@ -57,7 +57,11 @@ if. IFQT do.
 elseif. IFJA do.
   r=. r,LF,'J Android: ',wd'version'
 end.
-r=. r,LF,'Platform: ',UNAME,' ',IF64 pick '32';'64'
+if. UNAME-:'Android' do.
+  r=. r,LF,'Platform: ',UNAME,' ',(IF64 pick '32';'64'),' (', ')',~ LF-.~ 2!:0'getprop ro.product.cpu.abi'
+else.
+  r=. r,LF,'Platform: ',UNAME,' ',IF64 pick '32';'64'
+end.
 r=. r,LF,'Installer: ',LF -.~ 1!:1 :: ('unknown'"_) <jpath'~bin/installer.txt'
 r=. r,LF,'InstallPath: ',jpath '~install'
 r=. r,LF,'Contact: ',f
