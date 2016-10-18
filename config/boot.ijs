@@ -3,7 +3,7 @@
 NB. =========================================================
 NB. android specific
 startupandroid=: 3 : 0
-dver_z_=: 3 : '1!:55 ::0: <jpath ''~install/assets_version.txt'''
+dver_z_=: 3 : '1!:55 ::0: <jpath ''~bin/../../shared_prefs/JPrefs.xml'' [ 1!:55 ::0: <jpath ''~install/assets_version.txt'''
 if. 0~:4!:0<'APILEVEL_ja_' do.
   APILEVEL_ja_=: 0&". LF-.~ 2!:0 'getprop ro.build.version.sdk'
 end.
