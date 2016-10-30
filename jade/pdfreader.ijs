@@ -35,7 +35,7 @@ case. do.
     PDFReader=. dfltpdfreader''
   end.
   PDFReader=. dquote PDFReader
-  cmd=. PDFReader,' ',dquote cmd
+  cmd=. PDFReader,' ',(dquote cmd),' &'
   try.
     2!:1 cmd
   catch.
