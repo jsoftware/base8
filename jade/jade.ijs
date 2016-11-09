@@ -116,6 +116,6 @@ wcsize=: 3 : 0
 if. (-.IFQT+.IFJHS+.IFIOS) *. UNAME-:'Linux' do.
   |.@".@(-.&LF)@(2!:0) :: (Cwh_j_"_) '/bin/stty size 2>/dev/null'
 else.
-  Cwh_j_
+  (0 ". wd) :: (Cwh_j_"_) 'sm get termcwh'
 end.
 )
