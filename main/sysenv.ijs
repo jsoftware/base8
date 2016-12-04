@@ -80,6 +80,10 @@ if. notdef 'UNAME' do.
 end.
 
 NB. ---------------------------------------------------------
+NB. Linux sporadic problem in non-English locale
+'libc.so.6 setlocale > x i *c'&(15!:0)^:(UNAME-:'Linux') 1;,'C'
+
+NB. ---------------------------------------------------------
 if. notdef 'IFRASPI' do.
   if. UNAME -: 'Linux' do.
     cpu=. 2!:0 'cat /proc/cpuinfo'
