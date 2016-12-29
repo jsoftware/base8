@@ -39,6 +39,7 @@ graphics/gl2
 graphics/gnuplot
 graphics/graph
 graphics/graphviz
+graphics/grid
 graphics/jturtle
 graphics/print
 graphics/tgsj
@@ -46,6 +47,8 @@ graphics/treemap
 gui/monthview
 gui/util
 ide/qt
+ide/ja
+ide/jnet
 math/tabula
 media/animate
 media/gdiplus

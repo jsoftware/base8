@@ -8,18 +8,25 @@ NB. =========================================================
 getignore=: 3 : 0
 r=. ' colib compare convert coutil dates dir dll files libpath strings text'
 if. IFIOS do.
-  r=. r, ' qtide ide/qt'
+  r=. r,' qtide ide/qt'
+  r=. r,' ja ide/ja'
+  r=. r,' ide/jnet'
 else.
-  r=. r, ' ide/ios'
+  r=. r,' ide/ios'
 end.
 if. -.IFQT do.
-  r=. r, ' qtide ide/qt'
+  r=. r,' qtide ide/qt'
 end.
 if. (((UNAME-:'Android')>IFJA)+.IFIOS+.IFJHS) do.
   r=. r,' gl2 graphics/gl2'
 end.
 if. -.IFJA do.
   r=. r,' ja ide/ja'
+end.
+if. -.IFJNET do.
+  r=. r,' ide/jnet'
+  r=. r,' ide/jnet/util/jadefull'
+  r=. r,' ide/jnet/util/jview'
 end.
 Ignore=: <;._1 r
 )
