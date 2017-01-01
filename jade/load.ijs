@@ -23,7 +23,7 @@ end.
 if. -.IFJA do.
   r=. r,' ja ide/ja'
 end.
-if. -.IFJNET do.
+if. -.((;:'jwin32 jjava')e.~<11!:0 ::0:'qwd') do.
   r=. r,' ide/jnet'
   r=. r,' ide/jnet/util/jadefull'
   r=. r,' ide/jnet/util/jview'

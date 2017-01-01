@@ -39,8 +39,8 @@ load 'task'
 load sys,'util/configure.ijs'
 load^:IFQT '~addons/ide/qt/qt.ijs'
 load^:IFJA '~addons/ide/ja/ja.ijs'
-load^:IFJNET 'ide/jnet'
-load^:IFJNET 'ide/jnet/util/jadefull'
+load^:((;:'jwin32 jjava')e.~<11!:0 ::0:'qwd') 'ide/jnet'
+load^:((;:'jwin32 jjava')e.~<11!:0 ::0:'qwd') 'ide/jnet/util/jadefull'
 
 NB. ---------------------------------------------------------
 NB. JVERSION_z_ (used in about box)
