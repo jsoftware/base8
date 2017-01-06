@@ -19,6 +19,7 @@ end.
 'install' jpkg (y-:'all') pick 'base library ide/qt';'all'
 getqtbin 0
 msg=. (+/ 2 1 * IFWIN,'Darwin'-:UNAME) pick 'jqt.sh';'the jqt icon';'jqt.cmd'
+if. '/usr/share/j/' -: 13{. jpath'~install' do. msg=. 'jqt' end.
 smoutput 'Exit and restart J using ',msg
 )
 
@@ -47,7 +48,7 @@ if. rc do.
   smoutput 'unable to download: ',z return.
 end.
 d=. jpath '~bin'
-fhs=. ('Linux'-:UNAME) *. '/usr/lib/'-:9{.libjqt
+fhs=. '/usr/share/j/' -: 13{. jpath'~install'
 if. IFWIN do.
   unzip_jpacman_ p;d
 else.
@@ -60,6 +61,7 @@ else.
       elseif. do.
         d1=. '/usr/lib/i386-linux-gnu/.'
       end.
+      echo 'cd /usr/bin && tar --no-same-owner --no-same-permissions -xzf ',(dquote p), ' && chmod 755 jqt && chmod 644 libjqt.so && mv libjqt.so ',d1
       hostcmd_jpacman_ 'cd /usr/bin && tar --no-same-owner --no-same-permissions -xzf ',(dquote p), ' && chmod 755 jqt && chmod 644 libjqt.so && mv libjqt.so ',d1
     else.
       hostcmd_jpacman_ 'cd ',(dquote d),' && tar xzf ',(dquote p)
