@@ -371,7 +371,7 @@ NB.- 1 = file
 NB.- 2 = directory
 ftype=: 3 : 0
 NB. windows needs 1!:4 for synchronization
-(1:@(1!:4) :: 0:)^:IFWIN < f=. }: ^: ('/' = {:) > fboxname y
+(1:@(1!:4) :: 0:)^:IFWIN < f=. }: ^: ('/' = {:) , > fboxname y
 d=. 1!:0 f
 if. #d do.
   >: 'd' = 4 { > 4 { ,d
