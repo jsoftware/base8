@@ -323,7 +323,7 @@ end.
 NB. =========================================================
 shellcmd=: 3 : 0
 if. IFUNIX do.
-  hostcmd y
+  hostcmd_j_ y
 else.
   spawn_jtask_ y
 end.
