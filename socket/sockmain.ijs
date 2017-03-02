@@ -93,7 +93,7 @@ if. 0=nc<'SOCKETS_jsocket_' do. 0 return. end.
 SOCKETS_jsocket_=: ''
 if. IFUNIX do. 0 return. end.
 NB. 257 is version 1.1
-if. 0~:res WSAStartupJ 257;1000$' ' do. _1[mbinfo'Socket Error' else. 0 end.
+if. 0~:res WSAStartupJ 257;1000$' ' do. _1[sminfo'Socket Error' else. 0 end.
 )
 
 NB. =========================================================

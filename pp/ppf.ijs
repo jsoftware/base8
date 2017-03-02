@@ -13,7 +13,7 @@ y=. boxopen y
 if. 1<#y do. ppf &> y return. end.
 
 old=. 'b' freads y
-if. old -: _1 do. mbinfo 'Unable to read form' return. end.
+if. old -: _1 do. sminfo 'Unable to read form' return. end.
 
 new=. ppform old
 if. 0 = new -: old do.
@@ -75,7 +75,7 @@ msk=. ';xywh' E. blk
 
 NB. if first element is not xywh, this is nonstandard:
 if. 0 = {.msk do.
-  mbinfo 'Child controls do not start with xywh command.'
+  sminfo 'Child controls do not start with xywh command.'
   dat return.
 end.
 
@@ -86,7 +86,7 @@ pos=. <@('xywh '&,) "1 ": 0 ". ndx {.&> blk
 def=. (1+ndx) }.each blk
 
 if. 0 e. 'cc'&-: @ (2&{.) &> def do.
-  mbinfo 'xywh command not followed by cc command'
+  sminfo 'xywh command not followed by cc command'
   dat return.
 end.
 

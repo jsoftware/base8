@@ -48,7 +48,7 @@ noun \define
 
 NB. =========================================================
 findfor=: 'for_'&-: @ (4&{.) *. ('.'&=) @ {:
-info=: mbinfo @ ('Lint'&;)
+info=: sminfo @ ('Lint'&;)
 lastones=: > (}. , 0:)  NB. last ones in partition
 tolist=: }.@;@:(LF&,@,@":&.>) NB. boxed to list
 findcontrols=: (1: e. (CONTS"_ (1: e. E.) &> <)) &>
