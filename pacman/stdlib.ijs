@@ -7,8 +7,10 @@ NB. y is one of:
 NB. 'all'    install all (including jqt binaries)
 NB. 'qtide'  just qtide and jqt binaries
 NB. other    usual call to 'install' jpkg other
-do_install=: 3 : 0
+do_install=: 4 : 0
 if. -. checkaccess_jpacman_ '' do. return. end.
+if. x-:'jengine' do. jengine_install y return. end.
+if. -. x-:'' do. smoutput 'Invalid left argument' return. end.
 'update' jpkg ''
 if. -. (<y) e. 'all';'qtide' do.
   'install' jpkg y return.

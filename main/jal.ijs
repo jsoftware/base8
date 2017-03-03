@@ -6,14 +6,19 @@ NB.-Definitions are loaded into the z locale.
 cocurrent 'z'
 
 NB. =========================================================
-NB.*install v install from jal
-NB.-Install from jal.
+NB.*install v call pacman install
+NB.-Call pacman install
 NB.-
-NB.-y is either 'qtide' to install the Qt IDE, or 'all' to install all jal packages
-NB.-or else calls 'install' jpkg y
+NB.-If x not given or empty, then y is:
+NB.- 'qtide'          - install the Qt IDE
+NB.- 'all'            - install all jal packages
+NB.-  package names   - install those packages
+NB.-If x is 'jengine' - install the engine given in y
 install=: 3 : 0
+'' install y
+:
 require 'pacman'
-do_install_jpacman_ y
+x do_install_jpacman_ y
 )
 
 NB. =========================================================
