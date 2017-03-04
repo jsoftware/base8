@@ -37,6 +37,7 @@ jengine_set 'j805-release'  NB. !!! hardwired for now
 jengine_status''
 if. 0=#y do. return. end.
 if. _1=nc<'JENEW' do. return. end.
+if. UNAME-:'Android' do. return. end.
 jengine_update y
 )
 
@@ -90,6 +91,9 @@ end.
 renamed frename bname
 echo bname,' renamed as ',renamed
 JENEW fwrite bname
+if. (UNAME-:'Linux') *. '/usr/lib/'-:9{.bname do.
+ shellcmd ' chmod 644 ',bname
+end.
 erase'JENEW'
 echo'new JE installed'
 echo'this J instance continues to use the old image'
@@ -146,9 +150,6 @@ linux/j32/libj.so
 darwin/j64/libj.dylib
 darwin/j64avx/libj.dylib
 raspberry/j32/libj.so
-android/j32/armeabi-v7a/libj.so
-android/j32/armeabi/libj.so
-android/j32/x86/libj.so
 )
 
 NB. y is j805-release or j805-beta
