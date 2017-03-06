@@ -81,6 +81,9 @@ end.
 renamed frename bname
 echo bname,' renamed as ',renamed
 jenew fwrite bname
+if. (UNAME-:'Linux') *. 1~:ftype '~bin/',name do.
+  hostcmd_j_ ' chmod 644 ',bname
+end.
 echo'new JE installed'
 echo'this J instance continues to use the old image'
 echo'shutdown J, restart, and check 9!:14'''''
