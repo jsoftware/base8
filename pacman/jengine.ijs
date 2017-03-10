@@ -99,8 +99,8 @@ bname=. '~bin/',name
 if. 1~:ftype bname do.
   if. UNAME-:'Linux' do.
     v=. ({.~i.&'/')}.9!:14''
-    sub=. '' [ '.',({.v),'.',}.v    NB. x j806 -> libj.so.8.05
-    sub=. '.8.05' NB. hardwired
+    sub=. '' [ '.',({.v),'.',}.v    NB. x j806 -> libj.so.8.06
+    sub=. '.8.06' NB. hardwired
     if. IFRASPI do.
       bname=. '/usr/lib/arm-linux-gnueabihf/',name,sub
     elseif. IF64 do.
