@@ -9,7 +9,6 @@ check.ijs
 depend.ijs
 httpget.ijs
 install.ijs
-jengine.ijs
 show.ijs
 remove.ijs
 log.ijs
