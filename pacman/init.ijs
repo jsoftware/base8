@@ -35,7 +35,6 @@ general/sfl
 graphics/d3
 graphics/fvj3
 graphics/fvj4
-graphics/gl2
 graphics/gnuplot
 graphics/graph
 graphics/graphviz
