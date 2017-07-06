@@ -105,6 +105,11 @@ else.
 end.
 
 NB. ---------------------------------------------------------
+if. notdef 'BINPATH' do.
+  BINPATH=: '/j/bin'
+end.
+
+NB. ---------------------------------------------------------
 if. notdef 'IFQT' do.
   IFQT=: 0
   libjqt=: IFUNIX{::'jqt.dll';'libjqt',(UNAME-:'Darwin'){::'.so';'.dylib'
