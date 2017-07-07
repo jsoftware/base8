@@ -52,17 +52,22 @@ jpkg=: 4 : 0
   case. 'history';'manifest' do.
     x showfiles_console y
   case. 'install' do.
+    if. -. HASFILEACCESS*.HASADDONSDIR do. 'file permission error' return. end.
     install_console y
   case. 'reinstall' do.
+    if. -. HASFILEACCESS*.HASADDONSDIR do. 'file permission error' return. end.
     remove_console y
     install_console y
   case. 'remove' do.
+    if. -. HASFILEACCESS*.HASADDONSDIR do. 'file permission error' return. end.
     remove_console y
   case. ;:'show search showinstalled shownotinstalled showupgrade status' do.
     x show_console y
   case. 'update'  do.
+    if. -. HASFILEACCESS*.HASADDONSDIR do. 'file permission error' return. end.
     updatejal ''
   case. 'upgrade' do.  NB. upgrades previously installed packages to latest versions
+    if. -. HASFILEACCESS*.HASADDONSDIR do. 'file permission error' return. end.
     upgrade_console y
   case. do.
     msg=. 'Valid options are:',LF
