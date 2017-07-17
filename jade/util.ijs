@@ -39,7 +39,7 @@ elseif. IFUNIX do.
   isroot=: '/' = {.
 elseif. do.
   filecase=: tolower
-  isroot=: ':' = {.@}.
+  isroot=: ('\\' -: 2&{.) +. ('//' -: 2&{.) +. (':' = {.@}.)
 end.
 0
 )
