@@ -33,9 +33,9 @@ init_console=: 3 : 0
   if. 0=#y do. y=. 'read' end.
   select. y
   fcase. 'edit';'server' do.
-    if. -. checkaccess'' do. 0 return. end.
+    if. -. HASFILEACCESS do. 0 return. end.
   case. 'read' do.
-    if. -. checkaddonsdir'' do. 0 return. end.
+    if. -. HASADDONSDIR do. 0 return. end.
     setfiles''
     readlocal''
     pacman_init ''
@@ -48,6 +48,11 @@ init_console=: 3 : 0
 
 NB. =========================================================
 jpkg=: 4 : 0
+  if. -.INITDONE_jpacman_ do.
+    checkaccess''
+    checkaddonsdir''
+    INITDONE_jpacman_=: 1
+  end.
   select. x
   case. 'history';'manifest' do.
     x showfiles_console y
