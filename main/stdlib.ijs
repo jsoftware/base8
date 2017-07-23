@@ -432,7 +432,8 @@ sminfo=: 3 : 0
 if. IFQT do. wdinfo_jqtide_ y
 elseif. IFJA do. wdinfo_ja_ y
 elseif. IFJNET do. wdinfo_jnet_ y
-elseif. do. smoutput >_1{.boxopen y end.
+elseif. (0-:11!:0 ::0:'qwd') < 3=4!:0<'wdinfo' do. wdinfo y
+elseif. do. smoutput >{:boxopen y end.
 )
 
 NB. =========================================================
