@@ -33,7 +33,11 @@ NB. ---------------------------------------------------------
 smoutput 'Installing JQt binaries...'
 if. 'Linux'-:UNAME do.
   if. IFRASPI do.
-    z=. 'jqt-raspi-32.tar.gz'
+    if. IF64 do.
+      z=. 'jqt-',((y-:'slim') pick 'raspi';'raspi-slim'),'-64.tar.gz'
+    else.
+      z=. 'jqt-raspi-32.tar.gz'
+    end.
   else.
     z=. 'jqt-',((y-:'slim') pick 'linux';'slim'),'-',(IF64 pick 'x86';'x64'),'.tar.gz'
   end.
@@ -57,11 +61,9 @@ else.
   if. 'Linux'-:UNAME do.
     if. fhs do.
       if. IFRASPI do.
-        d1=. '/usr/lib/arm-linux-gnueabihf/.'
-      elseif. IF64 do.
-        d1=. '/usr/lib/x86_64-linux-gnu/.'
+        d1=. IF64{::'/usr/lib/arm-linux-gnueabihf/.';'/usr/lib/aarch64-linux-gnu/.'
       elseif. do.
-        d1=. '/usr/lib/i386-linux-gnu/.'
+        d1=. IF64{::'/usr/lib/i386-linux-gnu/.';'/usr/lib/x86_64-linux-gnu/.'
       end.
       echo 'cd /usr/bin && tar --no-same-owner --no-same-permissions -xzf ',(dquote p), ' && chmod 755 jqt && chmod 644 libjqt.so && mv libjqt.so ',d1,' && ldconfig'
       hostcmd_jpacman_ 'cd /usr/bin && tar --no-same-owner --no-same-permissions -xzf ',(dquote p), ' && chmod 755 jqt && chmod 644 libjqt.so && mv libjqt.so ',d1,' && ldconfig'
