@@ -16,10 +16,10 @@ NB. ---------------------------------------------------------
 NB. nouns:
 NB.*IF64          n if a 64 bit J system
 NB.*IFIOS         n if iOS (iPhone/iPad)
-NB.*IFJA          n if J Android
+NB.*IFJA          n if J Android (not jconsole)
 NB.*IFJHS         n if jhs libraries loaded
 NB.*IFQT          n if Qt libraries loaded
-NB.*IFRASPI       n if Raspberry Pi
+NB.*IFRASPI       n if Raspberry Pi or Linux arm64
 NB.*IFUNIX        n if UNIX
 NB.*IFWIN         n if Windows (2000 and up)
 NB.*IFWINCE       n if Windows CE
