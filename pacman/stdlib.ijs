@@ -33,11 +33,7 @@ NB. ---------------------------------------------------------
 smoutput 'Installing JQt binaries...'
 if. 'Linux'-:UNAME do.
   if. IFRASPI do.
-    if. IF64 do.
-      z=. 'jqt-',((y-:'slim') pick 'raspi';'raspislim'),'-64.tar.gz'
-    else.
-      z=. 'jqt-raspi-32.tar.gz'
-    end.
+    z=. 'jqt-',((y-:'slim') pick 'raspi';'raspislim'),'-',(IF64 pick '32';'64'),'.tar.gz'
   else.
     z=. 'jqt-',((y-:'slim') pick 'linux';'slim'),'-',(IF64 pick 'x86';'x64'),'.tar.gz'
   end.
