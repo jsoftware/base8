@@ -24,7 +24,6 @@ sdgethostbyaddr
 sdgetsockets
 sdasync
 sdcleanup
-sdreset
 sdcheck
 sderror
 )

@@ -47,5 +47,5 @@ if. -. 1 0 0 0 -: a. i. 2 ic 1 do.
   bytes=. , _4 |.\ bytes
 end.
 bitvec=. , _8 |.\ , (8#2)&#: a. i. bytes
-fds=. I.  bitvec
+fds=. I. bitvec
 )

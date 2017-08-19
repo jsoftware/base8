@@ -21,7 +21,7 @@ case. do.
   wcdm=: 1 : ']'
   LIB=: c
   closesocketJ=: 'close i i' scdm
-  ioctlsocketJ=: 'ioctl i i i *i' scdm
+  ioctlsocketJ=: 'ioctl i i x *i' scdm
 end.
 empty''
 )

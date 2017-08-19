@@ -2,8 +2,7 @@ NB. defs
 
 coclass 'jpm'
 
-SIZE=: 1e7                NB. default size
-SCREENGLOBALS=: 0         NB. if screen globals have been defined
+SIZE=: IF64{1e8 1e9       NB. default size
 
 NB. =========================================================
 unpack=: 6!:11            NB. unpack PM data

@@ -1,31 +1,31 @@
 
 cocurrent 'base'
-require 'format'
+require '~.Main/release/install/system/util/pm.ijs'
 
-NB. NB. === 0
-NB. foo=: 3 : 0
-NB. 0 1 start_jpm_ 100$' '
-NB. f=: 3 : ' +: y.'
-NB. f 3
-NB. showtotal_jpm_ ''
-NB. )
-NB.
-NB. NB. === 1
-NB. goo=: 3 : 0
-NB. y1=: 100$' '
-NB. NB. 0 1 crashes too
-NB. (1 1) 6!:10 y1
-NB. 6!:12 ]1
-NB. f=: 3 : '+: y'
-NB. f 3
-NB. f 3
-NB. 6!:11''
-NB. )
+NB. =========================================================
+f=: 3 : 0
+a=. +: y
+b=. 2 + i.a
+y
+)
 
-dbg 1
-NB. start_jpm_ ''
+NB. =========================================================
+foo=: 3 : 0
+start_jpm_''
+f &> i.100
+smoutput showdetail_jpm_ 'f'
+smoutput showtotal_jpm_ ''
+)
+
 foo ''
-NB. smoutput 0 0 100 showtotal_jpm_ ''
-NB. smoutput ''
-NB. smoutput showdetail_jpm_ 'foo'
 
+NB. =========================================================
+goo=: 3 : 0
+y1=: 100$' '
+(1 1) 6!:10 y1
+6!:12 ]1
+f &> i.100
+6!:11''
+)
+
+goo''
