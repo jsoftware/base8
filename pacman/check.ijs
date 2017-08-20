@@ -43,7 +43,7 @@ Select No if not connected, to complete setup later. After Setup is done, reposi
 
 NB. =========================================================
 checkaccess=: 3 : 0
-if. testaccess'' do. 1 [ HASFILEACCESS=: 1 return. end.
+if. testaccess'' do. 1 [ HASFILEACCESS_jpacman_=: 1 return. end.
 msg=. 'Package Manager will run in read-only mode, as you do not have access to the installation folder.'
 if. IFWIN do.
   msg=. msg,LF2,'To run as Administrator, right-click the J icon, select Run as... and '
@@ -59,7 +59,7 @@ NB. =========================================================
 NB. check addons directory exists
 checkaddonsdir=: 3 : 0
 d=. jpath '~addons'
-if. # 1!:0 d do. 1 [ HASADDONSDIR=: 1 return. end.
+if. # 1!:0 d do. 1 [ HASADDONSDIR_jpacman_=: 1 return. end.
 if. 1!:5 :: 0: <d do.
   log 'Created addons directory: ',d
   1 [ HASADDONSDIR=: 1 return.
