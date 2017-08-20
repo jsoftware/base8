@@ -20,31 +20,31 @@ NB. installs packages not currently installed
 NB. upgrades currently installed packages to latest JAL version
 NB. up-to-date packages are ignored
 install_console=: 3 : 0
-  if. -. init_console 'server' do. '' return. end.
-  pkgs=. getnames y
-  if. pkgs -: ,<'all' do. pkgs=. 1 {"1 PKGDATA end.
-  pkgs=. pkgs (e. # [) ~. (<'base library'), ((pkgnew +. pkgups) # 1&{"1@]) PKGDATA  NB.filter valid, new, upgradeable
-  pkgs=. pkgs -. Ignore
-  pkgs=. getdepend_console pkgs
-  if. 0 = num=. #pkgs do. '' return. end.
-  many=. 1 < num
-  msg=. 'Installing ',(":num),' package',many#'s'
-  log msg
-  installdo pkgs
-  log 'Done.'
-  readlocal''
-  pacman_init ''
-  checkstatus''
+if. -. init_console 'server' do. '' return. end.
+pkgs=. getnames y
+if. pkgs -: ,<'all' do. pkgs=. 1 {"1 PKGDATA end.
+pkgs=. pkgs (e. # [) ~. (<'base library'), ((pkgnew +. pkgups) # 1&{"1@]) PKGDATA  NB.filter valid, new, upgradeable
+pkgs=. pkgs -. Ignore
+pkgs=. getdepend_console pkgs
+if. 0 = num=. #pkgs do. '' return. end.
+many=. 1 < num
+msg=. 'Installing ',(":num),' package',many#'s'
+log msg
+installdo pkgs
+log 'Done.'
+readlocal''
+pacman_init ''
+checkstatus''
 )
 
 NB. =========================================================
 NB. upgrade_console v Upgrades already installed packages for console
 upgrade_console=: 3 : 0
-  if. -. init_console 'read' do. '' return. end.
-  pkgs=. getnames y
-  if. (0=#pkgs) +. pkgs -: ,<'all' do. pkgs=. 1{"1 PKGDATA end.
-  pkgs=. pkgs (e. # [) (pkgups # 1&{"1@])PKGDATA NB.filter valid, upgradeable
-  install_console pkgs
+if. -. init_console 'read' do. '' return. end.
+pkgs=. getnames y
+if. (0=#pkgs) +. pkgs -: ,<'all' do. pkgs=. 1{"1 PKGDATA end.
+pkgs=. pkgs (e. # [) (pkgups # 1&{"1@])PKGDATA NB.filter valid, upgradeable
+install_console pkgs
 )
 
 NB. =========================================================

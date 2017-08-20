@@ -56,11 +56,11 @@ NB. pattern (ie not pat1|pat2).
 
 NB. droptrail drops all trailing  * + ? and {m,n} components
 trail=. 1 : 'x&=@{: *. <:@<:@# enlbs ]'
- q1=. '?' trail
- q2=. '+' trail
- q3=. '*' trail
- q4=. '}'&=@{: * >:@(i.&'{')@|.
- qt=. (q1 >. q2 >. q3 >. q4)@(' '&,)  NB. # of trailing chars to drop
+q1=. '?' trail
+q2=. '+' trail
+q3=. '*' trail
+q4=. '}'&=@{: * >:@(i.&'{')@|.
+qt=. (q1 >. q2 >. q3 >. q4)@(' '&,)  NB. # of trailing chars to drop
 droptrail=. (-@qt }. ])^:_    NB. drop trailing chars repeatedly
 
 NB. surrounds returns 1 if the left arg surrounds the right
@@ -72,9 +72,9 @@ mainmask=: 0: = +/\@(-/)@(0 _1&(|.!.0"0 1))@('()'&eq) f.
 submask=: -.@mainmask f.
 
 issingle=. (onechar +. isset +. issub)@droptrail
-  onechar=. 1: = #
-  isset=. '[]'&surrounds
-  issub=. '()'&surrounds
+onechar=. 1: = #
+isset=. '[]'&surrounds
+issub=. '()'&surrounds
 
 sub=: '('"_ , ] , ')'"_
 

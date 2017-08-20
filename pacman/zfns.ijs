@@ -16,12 +16,12 @@ NB.        remove, search, show, showupgrade, showinstalled,
 NB.        shownotinstalled, update, upgrade.
 NB. require 'pacman'
 jpkg_z_=: 3 : 0
-  'help' jpkg y
-  :
-  a=. conew 'jpacman'
-  res=. x jpkg__a y
-  destroy__a''
-  res
+'help' jpkg y
+:
+a=. conew 'jpacman'
+res=. x jpkg__a y
+destroy__a''
+res
 )
 
 NB.*jpkgv v Same as jpkg but with more compact output

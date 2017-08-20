@@ -31,7 +31,7 @@ NB.   Jeol         end of line
 )
 
 run_regbuild_=: 3 : 0
-Q=.''''
+Q=. ''''
 quote=: (Q&,@(,&Q))@ (#~ >:@(=&Q))
 def=. 3 : ('y,''=: '',(quote ".y),'''',LF')
 

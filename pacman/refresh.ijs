@@ -54,11 +54,11 @@ NB. =========================================================
 NB. updatejal v Retrieves latest info from JAL server and reports status
 NB. eg: updatejal ''
 updatejal=: 3 : 0
-  log 'Updating server catalog...'
-  if. -. init_console 'server' do. '' return. end.
-  refreshaddins''
-  readlocal''
-  pacman_init''
-  res=. checklastupdate''
-  res,LF,checkstatus''
+log 'Updating server catalog...'
+if. -. init_console 'server' do. '' return. end.
+refreshaddins''
+readlocal''
+pacman_init''
+res=. checklastupdate''
+res,LF,checkstatus''
 )
