@@ -4,22 +4,22 @@ NB.-This definitions are called from the standard library
 NB. =========================================================
 NB. do_install v install from jal
 NB. y is one of:
-NB. 'all'    install all (including jqt binaries)
-NB. 'qtide'  just qtide and jqt binaries
+NB. 'qtide'  qtide and jqt full binaries
+NB. 'slim'   qtide and jqt slim binaries
+NB. 'all'    all addons
 NB. other    usual call to 'install' jpkg other
 do_install=: 4 : 0
 if. -. checkaccess_jpacman_ '' do. return. end.
-if. x-:'jengine' do. jengine_install y return. end.
 if. -. x-:'' do. smoutput 'Invalid left argument' return. end.
 'update' jpkg ''
-if. -. (<y) e. 'all';'qtide' do.
+if. -. (<y) e. 'qtide';'slim' do.
   'install' jpkg y return.
 end.
 if. IFQT do.
   smoutput 'Must run from jconsole' return.
 end.
-'install' jpkg (y-:'all') pick 'base library ide/qt';'all'
-getqtbin 0
+'install' jpkg 'base library ide/qt'
+getqtbin y
 msg=. (+/ 2 1 * IFWIN,'Darwin'-:UNAME) pick 'jqt.sh';'the jqt icon';'jqt.cmd'
 if. '/usr/share/j/' -: 13{. jpath'~install' do. msg=. 'jqt' end.
 smoutput 'Exit and restart J using ',msg
@@ -29,8 +29,10 @@ NB. =========================================================
 NB. do_getqtbin v get Qt binaries
 do_getqtbin=: 3 : 0
 
+bin=. 'JQt ',(((y-:'slim')#'slim ')),'binaries.'
+
 NB. ---------------------------------------------------------
-smoutput 'Installing JQt binaries...'
+smoutput 'Installing ',bin,'..'
 if. 'Linux'-:UNAME do.
   if. IFRASPI do.
     z=. 'jqt-',((y-:'slim') pick 'raspi';'raspislim'),'-',(IF64 pick '32';'64'),'.tar.gz'
@@ -73,9 +75,9 @@ else.
 end.
 ferase p
 if. #1!:0 fhs{::(jpath '~bin/',z1);'/usr/bin/jqt' do.
-  m=. 'Finished install of JQt binaries.'
+  m=. 'Finished install of ',bin
 else.
-  m=. 'Unable to install JQt binaries.',LF
+  m=. 'Unable to install ',bin,LF
   m=. m,'check that you have write permission for: ',LF,fhs{::(jpath '~bin');'/usr/bin'
 end.
 smoutput m
@@ -86,7 +88,6 @@ if. 'Linux'-:UNAME do. return. end.
 
 tgt=. jpath IFWIN{::'~install/Qt';'~bin/Qt5Core.dll'
 y=. (*#y){::0;y
-NB. if. (0-:y) *. 1=#1!:0 tgt do. return. end.
 
 smoutput 'Installing Qt library...'
 if. IFWIN do.
@@ -106,9 +107,9 @@ else.
 end.
 ferase p
 if. #1!:0 tgt do.
-  m=. 'Finished install of Qt binaries.'
+  m=. 'Finished install of Qt library.'
 else.
-  m=. 'Unable to install Qt binaries.',LF
+  m=. 'Unable to install Qt library.',LF
   m=. m,'check that you have write permission for: ',LF,IFWIN{::tgt;jpath'~bin'
 end.
 smoutput m
