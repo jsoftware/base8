@@ -12,11 +12,16 @@ do_install=: 4 : 0
 if. -. checkaccess_jpacman_ '' do. return. end.
 if. -. x-:'' do. smoutput 'Invalid left argument' return. end.
 'update' jpkg ''
-if. -. (<y) e. 'qtide';'slim' do.
+if. y -: 'addons' do. y=. 'all' end.
+if. -. (<y) e. 'full';'qtide';'slim' do.
   'install' jpkg y return.
 end.
 if. IFQT do.
   smoutput 'Must run from jconsole' return.
+end.
+if. y-:'qtide' do.
+  s=. 'slim'-: 4 {. ;getjqtversion_jpacman_''
+  y=. s pick 'full';'slim'
 end.
 'install' jpkg 'base library ide/qt'
 getqtbin y

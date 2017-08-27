@@ -290,6 +290,17 @@ end.
 )
 
 NB. =========================================================
+NB. read version from jqt binary
+getjqtversion=: 3 : 0
+dat=. fread '~bin/jqt',IFWIN#'.exe'
+if. dat-:_1 do. '' return. end.
+ndx=. I. 'jqtversion:' E. dat
+if. 0=#ndx do. '' return. end.
+dat=. 50 {. (11+{.ndx) }. dat
+<;._1 '/',(dat i. ':') {. dat
+)
+
+NB. =========================================================
 platformparent=: 3 : 0
 ((< _2 {. y) e. '32';'64') # _2 }. y
 )
