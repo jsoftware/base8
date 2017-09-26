@@ -4,13 +4,13 @@ NB.-This definitions are called from the standard library
 NB. =========================================================
 NB. do_install v install from jal
 NB. y is one of:
-NB. 'qtide'  qtide and jqt full binaries
-NB. 'slim'   qtide and jqt slim binaries
-NB. 'all'    all addons
-NB. other    usual call to 'install' jpkg other
-do_install=: 4 : 0
+NB.- 'qtide'     - install/upgrade the Qt IDE
+NB.- 'full'      - install the full Qt IDE
+NB.- 'slim'      - install the slim Qt IDE
+NB.- 'all'       - install all addon packages
+NB.-  other      - install those packages, i.e. 'install' jpkg other
+do_install=: 3 : 0
 if. -. checkaccess_jpacman_ '' do. return. end.
-if. -. x-:'' do. smoutput 'Invalid left argument' return. end.
 'update' jpkg ''
 if. y -: 'addons' do. y=. 'all' end.
 if. -. (<y) e. 'full';'qtide';'slim' do.

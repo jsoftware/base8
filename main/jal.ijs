@@ -7,18 +7,10 @@ cocurrent 'z'
 
 NB. =========================================================
 NB.*install v call pacman install
-NB.-Call pacman install
-NB.-
-NB.-If x not given or empty, then y is:
-NB.- 'qtide'          - install the Qt IDE
-NB.- 'all'            - install all jal packages
-NB.-  package names   - install those packages
-NB.-If x is 'jengine' - install the engine given in y
+NB.-Call pacman install.
 install=: 3 : 0
-'' install y
-:
 require 'pacman'
-x do_install_jpacman_ y
+do_install_jpacman_ y
 )
 
 NB. =========================================================
