@@ -1,6 +1,6 @@
 
 cocurrent 'base'
-require '~.Main/release/install/system/util/pm.ijs'
+load '~.Main/release/install/system/util/pm.ijs'
 
 NB. =========================================================
 f=: 3 : 0
@@ -28,4 +28,4 @@ f &> i.100
 6!:11''
 )
 
-goo''
+smoutput goo''

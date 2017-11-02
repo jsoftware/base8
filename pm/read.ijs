@@ -33,15 +33,18 @@ PMSTATS=: 6!:13 ''
 6!:10 ''
 
 NB. ---------------------------------------------------------
-NB. nonce - store a copy in PM
-PM=: PMTIME
-
-NB. ---------------------------------------------------------
-locndx=. (1;0) {:: PMTIME
-PMNAMES=: 6 pick PMTIME
-PMLOCALES=: locndx }. PMNAMES
-PMNAMES=: locndx {. PMNAMES
+NB. read and rework PMTIME to separate object and locale names
+'nms lcs all'=. 0 1 6 { PMTIME
+PMNAMES=: (~.nms){all
+nms=. PMNAMES i. nms{all
+locndx=. #nms
+PMLOCALES=: (~.lcs){all
+lcs=. locndx + PMLOCALES i. lcs{all
+PMTIME=: (nms;lcs;<PMNAMES,PMLOCALES) 0 1 6} PMTIME
 PMNDX=: > 3 {. PMTIME
+
+NB. store a copy in PM
+PM=: PMTIME
 
 NB. ---------------------------------------------------------
 NB. drop __obj off name, and total with calls in same locale
