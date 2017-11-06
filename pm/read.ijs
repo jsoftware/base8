@@ -21,26 +21,34 @@ read=: 3 : 0
 NB. don't re-read:
 if. PMREAD do. 1 return. end.
 
-NB. ---------------------------------------------------------
-NB. initially, use PMTIME for all data:
 if. 0 = +/ 6!:13'' do.
   smoutput 'There are no PM records'
   0 return.
 end.
 
+NB. ---------------------------------------------------------
+NB. initially, use PMTIME for all data:
 PMTIME=: 6!:11 ''
 PMSTATS=: 6!:13 ''
 6!:10 ''
 
 NB. ---------------------------------------------------------
+a=. 'recorded ',(0{PMSTATS) pick 'entry and exit only';'all lines'
+a=. a,LF,'used and max record count:',;' ' ,each 'c' (8!:0) 3 2 { PMSTATS
+if. 4 { PMSTATS do.
+  a=. a,LF,'the PM data area has overflowed and records have been lost'
+end.
+smoutput a,LF
+
+NB. ---------------------------------------------------------
 NB. read and rework PMTIME to separate object and locale names
-'nms lcs all'=. 0 1 6 { PMTIME
-PMNAMES=: (~.nms){all
-nms=. PMNAMES i. nms{all
-locndx=. #nms
-PMLOCALES=: (~.lcs){all
-lcs=. locndx + PMLOCALES i. lcs{all
-PMTIME=: (nms;lcs;<PMNAMES,PMLOCALES) 0 1 6} PMTIME
+'namx locx all'=. 0 1 6 { PMTIME
+PMNAMES=: (~.namx){all
+namx=. PMNAMES i. namx{all
+locndx=. #namx
+PMLOCALES=: (~.locx){all
+locx=. locndx + PMLOCALES i. locx{all
+PMTIME=: (namx;locx;<PMNAMES,PMLOCALES) 0 1 6} PMTIME
 PMNDX=: > 3 {. PMTIME
 
 NB. store a copy in PM
@@ -74,11 +82,6 @@ NB. ensure locales match:
 
   ndx merge nms
 end.
-
-NB. ---------------------------------------------------------
-NB. redefine name indices (duplicate names should have same index):
-ind=. (0 { PMNDX) { PMNAMES i. PMNAMES
-PMNDX=: ind 0 } PMNDX
 
 NB. ---------------------------------------------------------
 PMLINES=: 3 pick PMTIME

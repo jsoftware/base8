@@ -131,6 +131,8 @@ if. bnx do.
   mend=. bnx }. mend
 end.
 
+if. 0 e. (#mbgn),#mend do. i.0 4 return. end.
+
 msk=. 0 < mbgn usage mend
 
 if. 0 e. msk do.

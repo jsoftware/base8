@@ -16,7 +16,9 @@ jd 'info schema tab'
 jd 'reads * from tab'
 
 NB. =========================================================
-start_jpm_''
+len=: 1
+start_jpm_ ''
 jd 'reads * from tab'
+a=. jd each len#<'reads * from tab'
 smoutput showtotal_jpm_''
 smoutput showdetail_jpm_'getdb_jd_'
