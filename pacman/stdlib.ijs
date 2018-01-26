@@ -52,7 +52,7 @@ elseif. do.
   z=. 'jqt-mac',((y-:'slim')#'slim'),'-',(IF64 pick 'x86';'x64'),'.zip'
   z1=. 'libjqt.dylib'
 end.
-'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j806/qtide/',z
+'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j807/qtide/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
@@ -70,7 +70,7 @@ else.
       end.
       echo 'install libjqt.so to ',d1
       hostcmd_jpacman_ 'cd ',(dquote jpath '~temp'),' && tar --no-same-owner --no-same-permissions -xzf ',(dquote p), ' && chmod 755 jqt && mv jqt /usr/bin/jqt-8.06 && chmod 644 libjqt.so && mv libjqt.so ',d1,'/libjqt.so.8.06 && ldconfig'
-      hostcmd_jpacman_ 'update-alternatives --install /usr/bin/jqt jqt /usr/bin/jqt-8.06 806'
+      hostcmd_jpacman_ 'update-alternatives --install /usr/bin/jqt jqt /usr/bin/jqt-8.07 807'
     else.
       hostcmd_jpacman_ 'cd ',(dquote d),' && tar xzf ',(dquote p)
     end.
@@ -100,7 +100,7 @@ if. IFWIN do.
 else.
   z=. 'qt56-mac-',((y-:'slim')#'slim-'),(IF64 pick 'x86';'x64'),'.zip'
 end.
-'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j806/qtlib/',z
+'rc p'=. httpget_jpacman_ 'http://www.jsoftware.com/download/j807/qtlib/',z
 if. rc do.
   smoutput 'unable to download: ',z return.
 end.
