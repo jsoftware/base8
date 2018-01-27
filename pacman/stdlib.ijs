@@ -69,7 +69,8 @@ else.
         d1=. IF64{::'/usr/lib/i386-linux-gnu/.';'/usr/lib/x86_64-linux-gnu/.'
       end.
       echo 'install libjqt.so to ',d1
-      hostcmd_jpacman_ 'cd ',(dquote jpath '~temp'),' && tar --no-same-owner --no-same-permissions -xzf ',(dquote p), ' && chmod 755 jqt && mv jqt /usr/bin/jqt-8.06 && chmod 644 libjqt.so && mv libjqt.so ',d1,'/libjqt.so.8.06 && ldconfig'
+      hostcmd_jpacman_ 'rm -f /usr/bin/jqt'
+      hostcmd_jpacman_ 'cd ',(dquote jpath '~temp'),' && tar --no-same-owner --no-same-permissions -xzf ',(dquote p), ' && chmod 755 jqt && mv jqt /usr/bin/jqt-8.07 && chmod 644 libjqt.so && mv libjqt.so ',d1,'/libjqt.so.8.07 && ldconfig'
       hostcmd_jpacman_ 'update-alternatives --install /usr/bin/jqt jqt /usr/bin/jqt-8.07 807'
     else.
       hostcmd_jpacman_ 'cd ',(dquote d),' && tar xzf ',(dquote p)

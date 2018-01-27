@@ -26,7 +26,7 @@ ischar=: 2 = 3!:0
 rnd=: [ * [: <. 0.5 + %~
 sep2under=: '/' & (I.@('_' = ])})
 termLF=: , (0 < #) # LF -. {:
-tolist=: }. @ ; @: (LF&,@,@":each)
+NB. tolist=: }. @ ; @: (LF&,@,@":each)
 isjpkgout=: ((4 = {:) *. 2 = #)@$ *. 1 = L.
 
 NB. getintro v Returns maximum of first x characters of literal list y
@@ -292,7 +292,7 @@ end.
 NB. =========================================================
 NB. read version from jqt binary
 getjqtversion=: 3 : 0
-suffix=. (IFUNIX>'/'e.LIBFILE)#'-8.06'  NB. deb install
+suffix=. (IFUNIX>'/'e.LIBFILE)#'-8.07'  NB. deb install
 dat=. fread '~bin/jqt',suffix,IFWIN#'.exe'
 if. dat-:_1 do. '' return. end.
 ndx=. I. 'jqtversion:' E. dat

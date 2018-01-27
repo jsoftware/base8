@@ -499,6 +499,10 @@ NB.-See also [timespacex](#timespacex).
 timex=: 6!:2
 
 NB. =========================================================
+NB.*tolist v convert boxed to list
+tolist=: }.@;@:(LF&,@,@":&.>)
+
+NB. =========================================================
 NB.*tolower v convert text to lower case
 NB.*toupper v convert text to upper case
 tolower=: 3 : 0

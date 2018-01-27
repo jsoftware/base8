@@ -23,7 +23,7 @@ seldir=: #~ '-d'&-:"1 @ (1 4&{"1) @ > @ (4&{"1)
 spath=: #~ [: *./\. '/'&~:
 termLF=: , (0 < #) # LF -. {:
 termsep=: , (0 < #) # '/' -. {:
-tolist=: }.@;@:(LF&,each)
+NB. tolist=: }.@;@:(LF&,each)
 remsep=: }.~ [: - '/' = {:
 
 path2proj=: ,'/',ProjExt ,~ spath
