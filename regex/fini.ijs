@@ -1,4 +1,15 @@
-NB. zdefs
+NB. fini
+
+NB. =========================================================
+3 : 0''
+if. _1=nc <'cmhandles' do.
+  cmhandles=: cmpatterns=: $0
+  cmseq=: 0
+  cmtable=: i.0 3
+end.
+lasterror=: ''
+regclear''
+)
 
 NB. =========================================================
 NB. define z locale names:

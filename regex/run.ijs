@@ -1,3 +1,2 @@
 
-load 'regex'
-load '~Main/regex/test0.ijs'
+load '~.Main/release/install/system/main/regex.ijs'

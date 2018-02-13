@@ -65,9 +65,6 @@ if. 0={:opt do. fls=. 1#~#dr=. fls#dr end.
 if. 0=#dr do. empty'' return. end.
 nms=. {."1 dr
 nms=. nms ,&.> fls{ps;''
-if. IFWIN do.
-  nms=. tolower &.> nms
-end.
 ndx=. /: (":,.fls),.>nms
 if. 0=opt do.
   list >ndx{nms
@@ -78,9 +75,6 @@ elseif. fmt<2=opt do.
   ndx{nms,.}."1 dr
 elseif. fmt do.
   'nms ts size'=. |:3{."1 dr
-  if. IFWIN do.
-    nms=. tolower L:0 nms
-  end.
   ds=. '   <dir>    ' ((-.fls)#i.#fls) } 12 ":,.size
   mth=. _3[\'   JanFebMarAprMayJunJulAugSepOctNovDec'
   f=. > @ ([: _2&{. [: '0'&, ": )&.>
@@ -288,9 +282,6 @@ if. x do.
   r=. r #~ h &> r
 end.
 if. #t do. r=. r,<}:t end.
-if. IFWIN do.
-  r=. tolower each r
-end.
 /:~ r
 )
 
@@ -417,10 +408,7 @@ if. #dl=. 1!:0 path,'*' do.
     r=. r,;x&dirtree@(path&,@,&(ps,ext)) &.> dr
   end.
 end.
-r=. r #~ (ts x) <: ts &> 1{"1 r
-if. IFWIN *. #r do.
-  (tolower L:0 {."1 r) 0 }"0 1 r
-end.
+r #~ (ts x) <: ts &> 1{"1 r
 )
 
 NB. =========================================================

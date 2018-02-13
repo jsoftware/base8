@@ -3,7 +3,6 @@ NB. config build
 cf=. (jpath '~Main/config/') , ]
 ct=. (jpath '~.Main/release/install/system/config/') , ]
 cu=. (jpath '~.Main/release/install/system/util/') , ]
-cc=. (jpath '~.system/user/config/') , ]
 
 mkdir_j_ ct''
 mkdir_j_ cu''
@@ -13,6 +12,7 @@ t fcopynew cf 'boot.ijs'
 
 fl=. cutopen 0 : 0
 base.cfg
+case.cfg
 folders.cfg
 version.txt
 )

@@ -1,5 +1,4 @@
 NB. nouns for applying regular expressions to J code
-NB. (built from file: system/packages/regex/regjbld.ijs)
 NB.
 NB.   Jname        name
 NB.   Jnumitem     numeric item

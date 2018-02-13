@@ -29,7 +29,9 @@ NB. y is class to signal - '' treated as 'default'
 break=: 3 : 0
 class=. >(0=#y){y;'default'
 p=. 9!:46''
-q=. (>:p i: '/'){.p
+if. '~' = {.q=. jpath '~break/' do.
+  q=. (>:p i: '/'){.p
+end.
 fs=. (<q),each {."1[1!:0<q,'*.',class
 fs=. fs-.<p NB. don't break us
 for_f. fs do.

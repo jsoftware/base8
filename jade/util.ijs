@@ -23,10 +23,24 @@ seldir=: #~ '-d'&-:"1 @ (1 4&{"1) @ > @ (4&{"1)
 spath=: #~ [: *./\. '/'&~:
 termLF=: , (0 < #) # LF -. {:
 termsep=: , (0 < #) # '/' -. {:
-NB. tolist=: }.@;@:(LF&,each)
 remsep=: }.~ [: - '/' = {:
 
 path2proj=: ,'/',ProjExt ,~ spath
+
+NB. =========================================================
+NB. lower case except in case-sensitive drive or folder
+win2lower=: 3 : 0
+if. 0=#CasePaths_j_ do. tolower y return. end.
+p=. jpathsep y
+n=. 1 + p i. ':'
+d=. n {. p
+if. (<d) e. CasePaths_j_ do. y return. end.
+b=. n }. p
+p=. d,(('/'~:{.b)#'/'), b,'/'
+p=. (1 + p i: '/') {. p
+p=. (I.p='/') {.each <p
+if. 1 e. p e. CasePaths_j_ do. y else. tolower y end.
+)
 
 NB. =========================================================
 NB. platform-dependant
@@ -38,7 +52,7 @@ elseif. IFUNIX do.
   filecase=: ]
   isroot=: '/' = {.
 elseif. do.
-  filecase=: tolower
+  filecase=: win2lower
   isroot=: ('\\' -: 2&{.) +. ('//' -: 2&{.) +. (':' = {.@}.)
 end.
 0
