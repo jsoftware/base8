@@ -7,7 +7,7 @@ R=~/j8/tools/regex
 S=~/svn/pcre2
 # ----------------
 
-cd ~/svn/pcre2
+cd $S
 
 rm -f $R/*.dylib src/*.o
 
