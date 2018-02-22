@@ -16,6 +16,7 @@ select. UNAME
 case. 'Win' do. t=. 'jpcre2.dll'
 case. 'Darwin' do. t=. 'libjpcre2.dylib'
 case. 'Linux' do. t=. 'libjpcre2.so'
+case. 'Android' do. t=. 'libjpcre2.so'
 end.
 
 f=. BINPATH,'/',t
@@ -25,8 +26,7 @@ end.
 
 NB. fall back one more time
 if. ('Android'-:UNAME) *. 0 = 1!:4 :: 0: <f do.
-  arch=. LF-.~ 2!:0'getprop ro.product.cpu.abi'
-  f=. jpath '~bin/../libexec/',arch,'/',t
+  f=. (({.~i:&'/')LIBFILE),'/',t
 elseif. 0 = 1!:4 :: 0: <f do.
   f=. t
 end.

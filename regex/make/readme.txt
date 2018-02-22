@@ -12,3 +12,7 @@ On linux, run:
 On OSX, run:
 
   makeosx.sh     builds m64
+
+On Android, run:
+
+  copy Android.mk to pcre2 folder
