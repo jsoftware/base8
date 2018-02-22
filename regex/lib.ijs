@@ -27,6 +27,8 @@ end.
 NB. fall back one more time
 if. ('Android'-:UNAME) *. 0 = 1!:4 :: 0: <f do.
   f=. (({.~i:&'/')LIBFILE),'/',t
+elseif. ('Linux'-:UNAME) *. (IFUNIX>'/'e.LIBFILE) *. 0 = 1!:4 :: 0: <f do.
+  f=. 'libpcre2-8.so.0'
 elseif. 0 = 1!:4 :: 0: <f do.
   f=. t
 end.
