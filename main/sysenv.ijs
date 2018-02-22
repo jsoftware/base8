@@ -62,8 +62,8 @@ if. notdef 'IFJNET' do.
 end.
 
 NB. ---------------------------------------------------------
-if. notdef 'FHS' do.
-  FHS=: 0
+if. notdef 'BINPATH' do.
+  BINPATH=: '/j/bin'
 end.
 
 NB. ---------------------------------------------------------
@@ -77,6 +77,16 @@ if. notdef 'UNAME' do.
   elseif. do.
     UNAME=: 'Win'
   end.
+end.
+
+NB. ---------------------------------------------------------
+if. notdef 'LIBFILE' do.
+  LIBFILE=: BINPATH,'/',IFUNIX{::'j.dll';(UNAME-:'Darwin'){::'libj.so';'libj.dylib'
+end.
+
+NB. ---------------------------------------------------------
+if. notdef 'FHS' do.
+  FHS=: IFUNIX>'/'e.LIBFILE
 end.
 
 NB. ---------------------------------------------------------
@@ -102,11 +112,6 @@ else.
   else.
     IFWOW64=: 'AMD64'-:2!:5'PROCESSOR_ARCHITEW6432'
   end.
-end.
-
-NB. ---------------------------------------------------------
-if. notdef 'BINPATH' do.
-  BINPATH=: '/j/bin'
 end.
 
 NB. ---------------------------------------------------------
