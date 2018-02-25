@@ -53,7 +53,7 @@ else.
   r=. 'Engine: ', a,'/',b,'/',c
   r=. r,LF,(toupper {.d),(}.d),': ',e,'/',g
 end.
-r=. r,LF,'Library: ',LF -.~ 1!:1<jpath '~system/config/version.txt'
+r=. r,LF,'Library: ',LF -.~ freads '~system/config/version.txt'
 if. IFQT do.
   r=. r,LF,'Qt IDE: ',wd'version'
 elseif. IFJA do.

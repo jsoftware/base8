@@ -96,7 +96,8 @@ setfiles=: 3 : 0
 ADDCFG=: jpath '~addons/config/'
 makedir ADDCFG
 ADDCFGIJS=: ADDCFG,'config.ijs'
-JRELEASE=: 'j807'
+ver=. LF -.~ freads '~system/config/version.txt'
+JRELEASE=: 'j','.'-.~({.~i:&'.') ver
 LIBTREE=: readtree''
 if. IFIOS do.
   WWW=: '/jal/',JRELEASE,'/'

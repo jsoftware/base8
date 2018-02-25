@@ -15,6 +15,7 @@ NB.*IFDEF v        if DEFxxx exists
 NB. ---------------------------------------------------------
 NB. nouns:
 NB.*IF64          n if a 64 bit J system
+NB.*IFBE          n if a big-endian system
 NB.*IFIOS         n if iOS (iPhone/iPad)
 NB.*IFJA          n if J Android (not jconsole)
 NB.*IFJHS         n if jhs libraries loaded
@@ -42,6 +43,7 @@ IFDEF=: 3 : '0=4!:0<''DEF'',y,''_z_'''
 
 NB. ---------------------------------------------------------
 IF64=: 16={:$3!:3[2
+IFBE=: 'a'~:{.2 (3!:4) a.i.'a'
 'IFUNIX IFWIN IFWINCE'=: 5 6 7 = 9!:12''
 IFJHS=: 0
 IFWINE=: (0 ~: 'ntdll wine_get_version >+ x'&(15!:0)) ::0:`0:@.IFUNIX ''
