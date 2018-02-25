@@ -14,7 +14,6 @@ remove.ijs
 log.ijs
 read.ijs
 refresh.ijs
-repos.ijs
 select.ijs
 runs.ijs
 stdlib.ijs

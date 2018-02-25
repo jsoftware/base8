@@ -26,6 +26,7 @@ NB.*IFWIN         n if Windows (2000 and up)
 NB.*IFWINCE       n if Windows CE
 NB.*IFWINE        n if Wine (Wine Is Not an Emulator)
 NB.*IFWOW64       n if running J32 on a 64 bit o/s
+NB.*JLIB          n J library version
 NB.*UNAME         n name of UNIX o/s
 NB.*FHS           n filesystem hierarchy: 0=not used  1=linux and installed under /usr/...
 
@@ -33,6 +34,8 @@ NB.*FHS           n filesystem hierarchy: 0=not used  1=linux and installed unde
 
 NB. =========================================================
 3 : 0 ''
+
+JLIB=: 'JLIBVERSION'
 
 notdef=. 0: ~: 4!:0 @ <
 hostpathsep=: ('/\'{~6=9!:12'')&(I. @ (e.&'/\')@] })

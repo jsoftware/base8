@@ -96,15 +96,13 @@ setfiles=: 3 : 0
 ADDCFG=: jpath '~addons/config/'
 makedir ADDCFG
 ADDCFGIJS=: ADDCFG,'config.ijs'
-ver=. LF -.~ freads '~system/config/version.txt'
-JRELEASE=: 'j','.'-.~({.~i:&'.') ver
+JRELEASE=: 'j','.'-.~({.~i:&'.') JLIB
 LIBTREE=: readtree''
 if. IFIOS do.
   WWW=: '/jal/',JRELEASE,'/'
 else.
   WWW=: 'http://www.jsoftware.com/jal/',JRELEASE,'/'
 end.
-LIBVER=: jpath '~system/config/version.txt'
 )
 
 NB. =========================================================

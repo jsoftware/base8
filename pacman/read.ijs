@@ -3,7 +3,7 @@ NB. read
 NB. =========================================================
 NB. read installed library
 readlin=: 3 : 0
-LIN=: 6 1 1 >. fixver freads LIBVER
+LIN=: 6 1 1 >. fixver JLIB
 )
 
 NB. =========================================================
