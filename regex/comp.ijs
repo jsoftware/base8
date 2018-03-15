@@ -19,7 +19,7 @@ lasthandle=: ndx{cmhandles
 )
 
 NB. =========================================================
-rxfree=: 3 : 0
+rxfree1=: 3 : 0
 ndx=. cmhandles i. y
 if. ndx=#cmhandles do. EMPTY return. end.
 if. -. lastpattern -: ndx pick cmpatterns do.
@@ -33,6 +33,8 @@ cmhandles=: ndx{cmhandles
 cmpatterns=: ndx{cmpatterns
 EMPTY
 )
+
+rxfree=: EMPTY [ rxfree1 &>
 
 NB. =========================================================
 rxinfo=: 3 : 0

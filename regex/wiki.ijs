@@ -73,8 +73,7 @@ pat1 rxmatch '10 one xxx1234 match'
 
 rxhandles''
 rxinfo pat1
-rxfree pat1
-rxfree pat2
+rxfree pat1, pat2
 
 NB. =========================================================
 NB. a bad pattern
