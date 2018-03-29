@@ -45,12 +45,12 @@ if. IFIOS +. UNAME-:'Android' do.
   end.
 elseif. do.
   try.
-    e=. shellcmd cmd
+    fail=. _1-: e=. shellcmd cmd
   catch. fail=. 1 end.
 end.
 if. fail +. 0 >: fsize p do.
   if. _1-:msg=. freads q do.
-    if. 0=#msg=. e do. msg=. 'Unexpected error' end. end.
+    if. (_1-:msg) +. 0=#msg=. e do. msg=. 'Unexpected error' end. end.
   log 'Connection failed: ',msg
   info 'Connection failed:',LF2,msg
   r=. 1;msg
