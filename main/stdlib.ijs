@@ -44,8 +44,8 @@ NB.*abspath v absolute file system path name
 abspath=: 3 : 0
 if. (1 e. '://'&E.) y=. ,jpathsep y do. y return. end.
 if. IFWIN do.
-  assert. 0<rc=. 'kernel32 GetFullPathNameW > i *w i *w *w'&cd (uucp y);((#;])f=. 1024$u:' '),<<0
-  y=. jpathsep utf8 rc{.f
+  assert. 0<rc=. >@{. cdrc=. 'kernel32 GetFullPathNameW   i *w i *w *w'&cd (uucp y);((#;])1024$u:' '),<<0
+  y=. jpathsep utf8 rc{.3{::cdrc
 elseif. ('/' ~: {.) y do.
   y=. iospath^:IFIOS (1!:43'') , '/' , utf8 y
 end.

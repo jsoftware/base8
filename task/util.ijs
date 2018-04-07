@@ -41,19 +41,19 @@ cdk=: 1 : '(''kernel32 '',m)&cd'
 WaitForSingleObject=: 'WaitForSingleObject > i x i' cdk
 CloseHandle=:         'CloseHandle         > i x' cdk"0
 TerminateProcess=:    'TerminateProcess    > i x i' cdk
-ReadFile=:            'ReadFile            > i x *c i *i x' cdk
-WriteFile=:           'WriteFile           > i x *c i *i x' cdk
+ReadFile=:            'ReadFile              i x *c i *i x' cdk
+WriteFile=:           'WriteFile             i x *c i *i x' cdk
 GetCurrentProcess=:   'GetCurrentProcess   > x' cdk
 
-DuplicateHandleF=:    'DuplicateHandle     > i  x x  x *x  i i i' cdk
-CreatePipeF=:         'CreatePipe          > i *x *x *c i' cdk
-CreateProcessF=:      'CreateProcessW      > i x *w x x i  i x x *c *c' cdk
+DuplicateHandleF=:    'DuplicateHandle       i  x x  x *x  i i i' cdk
+CreatePipeF=:         'CreatePipe            i *x *x *c i' cdk
+CreateProcessF=:      'CreateProcessW        i x *w x x i  i x x *c *c' cdk
 
 DuplicateHandle=: 3 : 0
 p=. GetCurrentProcess ''
-r=. DuplicateHandleF p;y;p;(h=.,_1);0;0;DUPLICATE_SAME_ACCESS
+h=. {. 4{:: DuplicateHandleF p;y;p;(,_1);0;0;DUPLICATE_SAME_ACCESS
 CloseHandle y
-{.h
+h
 )
 
 NB. =========================================================
@@ -67,9 +67,7 @@ CreatePipe=: 3 : 0
 sa=. szero SECURITYATTR
 sa=. (sint #SECURITYATTR) 'Cbyt' sset SECURITYATTR sa
 sa=. (sint *inh) 'Inhe' sset SECURITYATTR sa
-r=. CreatePipeF (hRead=.,_1);(hWrite=.,_1);sa;size
-hRead=. {. hRead
-hWrite=. {. hWrite
+'hRead hWrite'=. ; 1 2{ CreatePipeF (,_1);(,_1);sa;size
 if. 1=inh do. hRead=. DuplicateHandle hRead end.
 if. 2=inh do. hWrite=. DuplicateHandle hWrite end.
 hRead,hWrite
@@ -97,7 +95,7 @@ if. +/ir,ow do.
   if. ir do. si=. (sptr ir) Inph sset STARTUPINFO si end.
 end.
 pi=. szero PROCESSINFO
-r=. CreateProcessF 0;(uucp y);0;0;inh; f;0;0;si;pi
+'r pi'=. 0 _1{ CreateProcessF 0;(uucp y);0;0;inh; f;0;0;si;pi
 if. 0=r do. 0 return. end.
 ph=. ptr Proh sget PROCESSINFO pi
 th=. ptr Thrh sget PROCESSINFO pi
@@ -124,7 +122,7 @@ ReadAll=: 3 : 0
 ret=. ''
 str=. 4096#'z'
 while. 1 do.
-  r=. ReadFile y;str;(#str);(len=.,_1);0
+  'r len'=. 0 4{ ReadFile y;str;(#str);(,_1);0
   len=. {.len
   if. (0=r)+.0=len do.
     'ec es'=: cderx''
@@ -145,8 +143,8 @@ NB. CloseHandle hr,ph
 WriteAll=: 3 : 0
 :
 while. #x do.
-  r=. WriteFile y;x;(#x);(len=.,_1);0
-  len=. {. len
+  'r len'=. 0 4{ WriteFile y;x;(#x);(,_1);0
+  len=. {.len
   if. (0=r)+.0=len do.
     'ec es'=: cderx''
     if. -.ec e.0 109 do. ret=. _1 end.
