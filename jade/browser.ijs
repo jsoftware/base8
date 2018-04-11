@@ -64,20 +64,23 @@ case. 'Win' do. ''
 case. 'Darwin' do. 'open'
 case. do.
   try.
-    2!:0'which google-chrome'
+    2!:0'which x-www-browser 2>/dev/null'
+    'x-www-browser' return. catch. end.
+  try.
+    2!:0'which google-chrome 2>/dev/null'
     'google-chrome' return. catch. end.
   try.
-    2!:0'which chromium'
+    2!:0'which chromium 2>/dev/null'
     'chromium' return. catch. end.
   try.
-    2!:0'which firefox'
+    2!:0'which firefox 2>/dev/null'
     'firefox' return. catch. end.
   try.
-    2!:0'which konqueror'
+    2!:0'which konqueror 2>/dev/null'
     'konqueror' return. catch. end.
   try.
-    2!:0'which netscape'
-    'netscape' return. catch. end.
+    2!:0'which opera 2>/dev/null'
+    'opera' return. catch. end.
   '' return.
 end.
 )

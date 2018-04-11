@@ -59,19 +59,19 @@ case. 'Win' do. ''
 case. 'Darwin' do. 'open'
 case. do.
   try.
-    2!:0'which evince'
+    2!:0'which evince 2>/dev/null'
     'evince' return. catch. end.
   try.
-    2!:0'which kpdf'
+    2!:0'which kpdf 2>/dev/null'
     'kpdf' return. catch. end.
   try.
-    2!:0'which xpdf'
+    2!:0'which xpdf 2>/dev/null'
     'xpdf' return. catch. end.
   try.
-    2!:0'which okular'
+    2!:0'which okular 2>/dev/null'
     'okular' return. catch. end.
   try.
-    2!:0'which acroread'
+    2!:0'which acroread 2>/dev/null'
     'acroread' return. catch. end.
   '' return.
 end.

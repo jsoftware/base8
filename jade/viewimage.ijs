@@ -63,7 +63,7 @@ case. 'Win' do. ''
 case. 'Darwin' do. 'open'
 case. do.
   try.
-    2!:0'which eog'
+    2!:0'which eog 2>/dev/null'
     'eog' return. catch. end.
   '' return.
 end.

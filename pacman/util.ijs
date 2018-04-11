@@ -384,7 +384,7 @@ if. IFUNIX do.
   notarcmd=. IFIOS        NB. even tar is installed, there is no shell in iOS
   if. UNAME-:'Android' do.
 NB. busybox tar is faster than jtar
-    notarcmd=. _1-: 2!:0 ::_1: 'which tar'
+    notarcmd=. _1-: 2!:0 ::_1: 'which tar 2>/dev/null'
     if. (UNAME-:'Android') > '/mnt/sdcard'-:2!:5'EXTERNAL_STORAGE' do. notarcmd=. 1 end.
   end.
   if. notarcmd do.
