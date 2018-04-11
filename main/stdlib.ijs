@@ -429,7 +429,8 @@ sign=: *
 NB. =========================================================
 NB.*sminfo v info box or output to session
 sminfo=: 3 : 0
-if. IFQT do. wdinfo_jqtide_ y
+if. IFJHS do. smoutput >{:boxopen y
+elseif. IFQT do. wdinfo_jqtide_ y
 elseif. IFJA do. wdinfo_ja_ y
 elseif. IFJNET do. wdinfo_jnet_ y
 elseif. (0-:11!:0 ::0:'qwd') < 3=4!:0<'wdinfo' do. wdinfo y
