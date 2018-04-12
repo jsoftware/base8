@@ -14,10 +14,12 @@ NB.*memr v memory read
 NB.*memw v memory write
 NB.*mema v memory allocate
 NB.*memf v memory free
+NB.*memu v forcecopy
 memr=: 15!:1
 memw=: 15!:2
 mema=: 15!:3
 memf=: 15!:4
+memu=: '' 1 : 'try. 15!:15 m catch. a: { ] return. end. 15!:15'
 
 NB. =========================================================
 NB.*cdf v free DLLs

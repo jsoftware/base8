@@ -171,10 +171,6 @@ NB.*each a each (&.>)
 each=: &.>
 
 NB. =========================================================
-NB.*echo v write argument to session
-echo=: 0 0&$ @ (1!:2&2)
-
-NB. =========================================================
 NB.*empty v return empty result (i.0 0)
 empty=: EMPTY"_
 
@@ -438,8 +434,10 @@ elseif. do. smoutput >{:boxopen y end.
 )
 
 NB. =========================================================
+NB.*echo v output to session
 NB.*smoutput v output to session
 NB.*tmoutput v output to stdout
+echo=: 0 0 $ 1!:2&2
 smoutput=: 0 0 $ 1!:2&2
 tmoutput=: 0 0 $ 1!:2&4
 
