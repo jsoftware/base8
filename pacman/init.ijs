@@ -74,7 +74,7 @@ NB. =========================================================
 nc=. '--no-cache'
 if. IFUNIX do.
   if. UNAME-:'Darwin' do.
-    HTTPCMD=: 'curl -o %O --stderr %L -f -s -S %U'
+    HTTPCMD=: 'curl -L -o %O --stderr %L -f -s -S %U'
   elseif. do.
     if. 'Android'-:UNAME do. nc=. ''
     else. try. nc=. nc #~ 1 e. nc E. shell 'wget --help' catch. nc=. '' end. end.

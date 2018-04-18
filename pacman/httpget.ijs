@@ -2,14 +2,14 @@ NB. httpget
 
 NB. =========================================================
 NB. httpget, storing file in temp
-NB. y is file[;retries]
+NB. y is file[;retries;outfile]
 NB. retries are set for initial read of revision.txt
 NB. result is returncode (0=OK);filename or message
 NB. any error message is displayed
 httpget=: 3 : 0
-'f t'=. 2 {. (boxxopen y),a:
+'f t p'=. 3 {. (boxxopen y),a:
 n=. f #~ -. +./\. f e. '=/'
-p=. jpath '~temp/',n
+if. 0=#p do. p=. jpath '~temp/',n end.
 q=. jpath '~temp/httpget.log'
 t=. ":{.t,3
 ferase p;q

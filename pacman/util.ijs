@@ -18,21 +18,34 @@ Files outside the system subdirectory, such as profile.ijs, are not changed.
 )
 
 NB. =========================================================
+addsep=: , '/' -. {:
+remsep=: }.~ [: - '/' = {:
 cutjal=: ([: (* 4 > +/\) ' ' = ]) <;._1 ]
 cutjsp=: ([: (* 5 > +/\) ' ' = ]) <;._1 ]
 fname=: #~ ([: *./\. ~:&'/')
 hostcmd=: [: 2!:0 '(' , ] , ' || true)'"_
+intersect=: e. # [
 ischar=: 2 = 3!:0
+noundef=: (1 e. (,each '0:0')&E.) &>
 rnd=: [ * [: <. 0.5 + %~
 sep2under=: '/' & (I.@('_' = ])})
 termLF=: , (0 < #) # LF -. {:
-NB. tolist=: }. @ ; @: (LF&,@,@":each)
 isjpkgout=: ((4 = {:) *. 2 = #)@$ *. 1 = L.
 
 NB. getintro v Returns maximum of first x characters of literal list y
 NB. eg: 19 getintro 'This is too long to fit.'
 getintro=: ('...' ,~ -&3@[ {. ])^:(<#)
 info=: smoutput
+
+NB. =========================================================
+dircopy=: 3 : 0
+'fm to'=. y
+p=. (#fm) }. each dirpath fm
+mkdir_j_ each to&, each p
+f=. dtree fm
+t=. to&, each (#fm) }. each f
+t fcopynew &> f
+)
 
 NB. =========================================================
 NB. getnames v Parses lists into package names
@@ -76,6 +89,24 @@ try.
   res=. 0< ferase {."1 dirtree y
   *./ res,0<ferase |.dirpath y
 catch. 0 end.
+)
+
+NB. =========================================================
+NB.*dtree v get filenames in directory tree
+NB. return list of filenames in directory tree
+NB. y is a folder name (with or without trailing separator)
+NB. hidden files and directories are ignored
+NB. result has full pathnames
+dtree=: 3 : 0
+p=. y #~ (+./\ *. +./\.) y~:' '
+p=. jpath p,'/' -. {:p
+d=. 1!:0 p,'*'
+if. 0 = #d do. '' return. end.
+d=. d #~ 'h' ~: 1 {"1 > 4 {"1 d
+if. 0 = #d do. '' return. end.
+m=. 'd' = 4 {"1 > 4 {"1 d
+d=. (<p) ,each {."1 d
+((-.m) # d), ;dtree each m # d
 )
 
 NB. =========================================================
@@ -339,6 +370,12 @@ if. IFUNIX do.
 else.
   spawn_jtask_ y
 end.
+)
+
+NB. =========================================================
+splitrep=: 3 : 0
+rep=. <;.1 '/',y
+(}. ; 2 {. rep);;2 }. rep
 )
 
 NB. =========================================================

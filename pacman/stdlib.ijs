@@ -9,8 +9,10 @@ NB.- 'full'      - install the full Qt IDE
 NB.- 'slim'      - install the slim Qt IDE
 NB.- 'all'       - install all addon packages
 NB.-  other      - install those packages, i.e. 'install' jpkg other
+NB.- gitrepo:name/repo
 do_install=: 3 : 0
 if. -. checkaccess_jpacman_ '' do. return. end.
+if. ':' e. y do. install_gitrepo y return. end.
 'update' jpkg ''
 if. y -: 'addons' do. y=. 'all' end.
 if. -. (<y) e. 'full';'qtide';'slim' do.
