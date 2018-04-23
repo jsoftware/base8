@@ -122,7 +122,7 @@ ReadAll=: 3 : 0
 ret=. ''
 str=. 4096#'z'
 while. 1 do.
-  'r len'=. 0 4{ ReadFile y;str;(#str);(,_1);0
+  'r str len'=. 0 2 4{ ReadFile y;str;(#str);(,_1);0
   len=. {.len
   if. (0=r)+.0=len do.
     'ec es'=: cderx''
@@ -143,7 +143,7 @@ NB. CloseHandle hr,ph
 WriteAll=: 3 : 0
 :
 while. #x do.
-  'r len'=. 0 4{ WriteFile y;x;(#x);(,_1);0
+  'r x len'=. 0 2 4{ WriteFile y;x;(#x);(,_1);0
   len=. {.len
   if. (0=r)+.0=len do.
     'ec es'=: cderx''
