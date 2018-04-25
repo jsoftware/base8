@@ -49,6 +49,8 @@ coerase <'jpacmandef'
 
 FILES=: ~. cutLF ;LF ,each ". each files
 if. 0=#FILES do. 0[echo 'Files not given' return. end.
+FILES=: ~. FILES, <'manifest.ijs'
+
 if. 0=#FOLDER do. 0[echo 'Folder not given' return. end.
 if. #PLATFORMS do.
   if. 0=#pfm intersect ;: PLATFORMS do.
