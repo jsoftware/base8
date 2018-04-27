@@ -4,13 +4,13 @@ NB. for reading manifest from git repo
 
 NB. =========================================================
 getmanifesturl=: 3 : 0
-'tag rep'=. y
+'tag rep cmt'=. y
 select. tag
 case. 'github' do.
   p=. <;.2 rep,'/'
   rpo=. ;2 {. p
   sub=. ;2 }. p
-  'https://raw.githubusercontent.com/',rpo,'master/',sub,'manifest.ijs'
+  'https://raw.githubusercontent.com/',rpo,cmt,'/',sub,'manifest.ijs'
 case. do.
   ''
 end.
