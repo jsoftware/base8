@@ -1,6 +1,6 @@
 
 cocurrent 'base'
-load '~.Main/release/install/system/util/pm.ijs'
+load '~Main/release/install/system/util/pm.ijs'
 
 NB. =========================================================
 coreset''

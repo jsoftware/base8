@@ -3,7 +3,7 @@ NB. test with jd
 cocurrent 'base'
 
 load 'jd'
-load '~.Main/release/install/system/util/pm.ijs'
+load '~Main/release/install/system/util/pm.ijs'
 
 jdadminx 'test'
 

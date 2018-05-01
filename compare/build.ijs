@@ -1,3 +1,3 @@
 NB. build
 
-writesourcex_jp_ '~Main/compare';'~.Main/release/compare.ijs'
+writesourcex_jp_ '~Main/compare';'~Main/release/compare.ijs'
