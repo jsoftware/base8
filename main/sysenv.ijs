@@ -96,7 +96,7 @@ end.
 
 NB. ---------------------------------------------------------
 NB. Linux sporadic problem in non-English locale
-'libc.so.6 setlocale > x i *c'&(15!:0)^:(UNAME-:'Linux') 1;,'C'
+'libc.so.6 setlocale > x i *c'&(15!:0) ::0:^:(UNAME-:'Linux') 1;,'C'
 
 NB. ---------------------------------------------------------
 if. notdef 'IFRASPI' do.
