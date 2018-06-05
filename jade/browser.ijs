@@ -73,6 +73,9 @@ case. do.
     2!:0'which chromium 2>/dev/null'
     'chromium' return. catch. end.
   try.
+    2!:0'which chromium-browser 2>/dev/null'
+    'chromium-browser' return. catch. end.
+  try.
     2!:0'which firefox 2>/dev/null'
     'firefox' return. catch. end.
   try.
