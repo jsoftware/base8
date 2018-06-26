@@ -27,6 +27,7 @@ dat=. freads man
 if. dat -: _1 do.
   0[log 'could not read manifest for ',y return.
 end.
+ferase man
 if. 0=valmanifest dat do. 0 return. end.
 defmanifest dat
 )
