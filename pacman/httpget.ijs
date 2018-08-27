@@ -25,7 +25,7 @@ if. IFIOS +. UNAME-:'Android' do.
     ip=. >2{sdgethostbyname_jsocket_ 'www.jsoftware.com'
     rc=. sdconnect_jsocket_ sk;PF_INET_jsocket_;ip;80
     if. 0~:rc do. break. end.
-    'rc sent'=. ('GET ',f,' HTTP/1.0',LF2) sdsend_jsocket_ sk;0
+    'rc sent'=. ('GET ',f,' HTTP/1.0',CRLF,CRLF) sdsend_jsocket_ sk;0
     if. 0~:rc do. break. end.
     while. ((0=rc)*.(*#m)) [[ 'rc m'=. sdrecv_jsocket_ sk,4096 do.
       pp=. pp,m
