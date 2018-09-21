@@ -179,7 +179,7 @@ gzip=: 3 : 0
 r=. ''
 d=. (128*1024)$' '
 h=. gzopen y;'rb'
-while. c=. (libz,' gzread >',cv,' i x *c i') cd h;d;#d do.
+while. 0{:: 'c h d nd'=. (libz,' gzread cv,' i x *c i') cd h;d;#d do.
   assert. _1~:c
   r=. r,c{.d
 end.
