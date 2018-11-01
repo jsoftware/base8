@@ -15,7 +15,7 @@ t=. ":{.t,3
 ferase p;q
 fail=. 0
 cmd=. HTTPCMD rplc '%O';(dquote p);'%L';(dquote q);'%t';t;'%T';(":TIMEOUT);'%U';f
-if. IFIOS +. UNAME-:'Android' do.
+if. ''-:HTTPCMD do.
   require 'socket'
   1!:55 ::0: <p
   rc=. 0 [ e=. pp=. ''

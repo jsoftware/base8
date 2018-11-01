@@ -71,11 +71,21 @@ end.
 
 NB. =========================================================
 3 : 0''
+HTTPCMD=: ''
 nc=. '--no-cache'
 if. IFUNIX do.
-  if. UNAME-:'Darwin' do.
+  IFWGET=. IFCURL=. 0
+  if. -. IFIOS +. UNAME-:'Android' do.
+    try.
+      2!:0'which wget 2>/dev/null'
+      IFWGET=. 1 catch. end.
+    try.
+      2!:0'which curl 2>/dev/null'
+      IFCURL=. 1 catch. end.
+  end.
+  if. IFCURL>IFWGET do.
     HTTPCMD=: 'curl -L -o %O --stderr %L -f -s -S %U'
-  elseif. do.
+  elseif. IFWGET do.
     if. 'Android'-:UNAME do. nc=. ''
     else. try. nc=. nc #~ 1 e. nc E. shell 'wget --help' catch. nc=. '' end. end.
     HTTPCMD=: 'wget ',nc,' -O %O -o %L -t %t %U'
