@@ -11,6 +11,7 @@ readlocal''
 
 NB. =========================================================
 refreshaddins=: 3 : 0
+setfiles''
 ADDLABS=: ''
 f=. ADDCFG,'addins.txt'
 p=. jpath '~addons/'
