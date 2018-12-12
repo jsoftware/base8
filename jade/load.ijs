@@ -95,7 +95,9 @@ if. #ind do.
   ind=. (-.msk)#ind
   if. #ind do.
     bal=. (-.msk)#bal
-    msk=. -. '.' e. &> bal
+    msk=. -. '.'&e.@(}.~i:&'/') &> bal      NB. filter path looks like addons by the last folder
+    msk=. msk *. *./@:((a.{~, 65 97 +/i.26)e.~])@:({.~i.&'/') &> bal  NB. and by the first folder
+    msk=. msk > isroot &> bal                                         NB. and not root folder
     cnt=. ('/' +/ .= ]) &> bal
     ndx=. I. msk *. cnt=1
     bal=. (addfname each ndx { bal) ndx } bal
