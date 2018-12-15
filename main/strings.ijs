@@ -344,3 +344,11 @@ ind=. ; bgn + each hnx { cnt # i.each newlen
 rep=. ; hnx { cnt # new
 rep ind} exp # txt
 )
+
+NB. =========================================================
+NB.*undquote v undo double quote text
+NB.-example:
+NB.+   undquote '"Pete""s Place"'
+NB.+Pete"s Place
+undquote=: (#~ -.@('""'&E.))@}:@}.^:(('"' = {.) *. '"' = {:)
+
