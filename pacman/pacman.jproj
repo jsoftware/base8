@@ -19,5 +19,6 @@ read.ijs
 refresh.ijs
 select.ijs
 runs.ijs
+je_update.ijs
 stdlib.ijs
 zfns.ijs
