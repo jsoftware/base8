@@ -2,8 +2,6 @@ NB. main save
 
 cocurrent 'jpsave'
 hostcmd_j_ 'rm -rf ',jpath '~Main/release'
-mkdir_j_ jpath '~Main/release/'
-('*.*',LF) fwrite jpath '~Main/release/svnignore.txt'
 mkdir_j_ jpath '~Main/release/install/system/main'
 
 f=. 3 : 0

@@ -355,7 +355,7 @@ NB.-Ignores hidden directories
 NB.-
 NB.-Global `DirTreeX_j_` (set in session configuration)
 NB.-is a list of directories to exclude from the search.
-NB.-e.g. DirTreeX_j_=: <'cvs' to exclude cvs directories.
+NB.-e.g. DirTreeX_j_=: 'cvs' to exclude cvs directories.
 NB.-
 NB.-example:
 NB.+dirtree ''
@@ -366,7 +366,7 @@ dirtree=: 3 : 0
 0 dirtree y
 :
 if. 0=4!:0 <'DirTreeX_j_' do.
-  ex=. boxxopen DirTreeX_j_
+  ex=. cutopen DirTreeX_j_
 else.
   ex=. ''
 end.

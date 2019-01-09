@@ -14,8 +14,10 @@ ferase jef,sh
 'plat name bname'=. je_sub''
 old=. fread bname
 old fwrite jef,name,'.old'
-je_get''
-'already updated'assert ('force'-:y)+.-.old-:fread jef,name,'.new'
+if. #msg=. je_get'' do. echo msg return. end.
+if. (-.'force'-:y) *. old-:fread jef,name,'.new' do.
+  echo 'the current JE is already up to date' return.
+end.
 OLD=. hostpathsep jpath bname
 NEW=. hostpathsep jpath jef,name,'.new'
 if. UNAME-:'Win' do.
@@ -40,9 +42,9 @@ t=. <;._1 '/',9!:14''
 version=. ;{.t
 br=. ;3{t NB. betaxxx or releasexxx
 i=. ('beta';'rele')i. <4{.br
-'current JE is not beta or release'assert i<2
+if. i=2 do. 'current JE is not beta or release' return. end.
 type=. ;i{'beta';'release'
-'update not supported for this type of install'assert 1=ftype bname
+if. 1~:ftype bname do. 'update not supported for this type of install' return. end.
 erase'JENEW'
 jeold=. fread bname
 path=. 'http://www.jsoftware.com/download/jengine/',version,'-',type,'/'
@@ -59,6 +61,7 @@ httpget_jpacman_ arg
 (fread tname)fwrite jef,name,'.new'
 echo 'saved as:    ',jef,name,'.new'
 echo 'new version: ',jengine_version tname
+''
 )
 
 je_sub=: 3 : 0
