@@ -230,6 +230,7 @@ end.
 NB. =========================================================
 NB.*dbview v view stack
 dbview=: 3 : 0
+if. -.IFQT do. return. end.
 if. _1 = 4!:0 <'jdbview_jdbview_' do.
   'require'~'~addons/ide/qt/dbview.ijs'
 end.
