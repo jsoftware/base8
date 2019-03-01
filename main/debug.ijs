@@ -27,6 +27,7 @@ NB.*dbss v stop set
 NB.*dbrun v run again (from current stop)
 NB.*dbnxt v run next (skip line and run)
 NB.*dbret v exit and return argument
+NB.*dbcut v cut back
 NB.*dbjmp v jump to line number
 NB.*dbsig v signal error
 NB.*dbrr v re-run with specified arguments
@@ -59,6 +60,7 @@ dblxs=: 13!:15
 dbtrace=: 13!:16
 dbq=: 13!:17
 dbst=: 13!:18
+dbcut=: 13!:19
 
 NB. =========================================================
 NB. utilities:
@@ -263,6 +265,7 @@ dbss    stop set
 dbrun   run again (from current stop)
 dbnxt   run next (skip line and run)
 dbret   exit and return argument
+dbcut   cut back
 dbjmp   jump to line number
 dbsig   signal error
 dbrr    re-run with specified arguments
