@@ -65,10 +65,14 @@ if. IFWIN do.
 else.
   if. 'Linux'-:UNAME do.
     if. fhs do.
-      if. IFRASPI do.
-        d1=. IF64{::'/usr/lib/arm-linux-gnueabihf/.';'/usr/lib/aarch64-linux-gnu/.'
-      elseif. do.
-        d1=. IF64{::'/usr/lib/i386-linux-gnu/.';'/usr/lib/x86_64-linux-gnu/.'
+      if. fexist '/etc/redhat-release' do.
+        d1=. IF64{::'/usr/lib/.';'/usr/lib64/.'
+      else.
+        if. IFRASPI do.
+          d1=. IF64{::'/usr/lib/arm-linux-gnueabihf/.';'/usr/lib/aarch64-linux-gnu/.'
+        elseif. do.
+          d1=. IF64{::'/usr/lib/i386-linux-gnu/.';'/usr/lib/x86_64-linux-gnu/.'
+        end.
       end.
       echo 'install libjqt.so to ',d1
       hostcmd_jpacman_ 'rm -f /usr/bin/jqt'

@@ -72,10 +72,14 @@ bname=. '~bin/',name
 if. FHS*.UNAME-:'Linux' do.
   v=. ({.~i.&'/')}.9!:14''
   sub=. '.',({.v),'.',}.v    NB. x j805 -> libj.so.8.05
-  if. IFRASPI do.
-    d1=. IF64{::'/usr/lib/arm-linux-gnueabihf/';'/usr/lib/aarch64-linux-gnu/'
-  elseif. do.
-    d1=. IF64{::'/usr/lib/i386-linux-gnu/';'/usr/lib/x86_64-linux-gnu/'
+  if. fexist '/etc/redhat-release' do.
+    d1=. IF64{::'/usr/lib/';'/usr/lib64/'
+  else.
+    if. IFRASPI do.
+      d1=. IF64{::'/usr/lib/arm-linux-gnueabihf/';'/usr/lib/aarch64-linux-gnu/'
+    elseif. do.
+      d1=. IF64{::'/usr/lib/i386-linux-gnu/';'/usr/lib/x86_64-linux-gnu/'
+    end.
   end.
   bname=. d1,name,sub
 end.
