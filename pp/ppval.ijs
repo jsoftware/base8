@@ -4,7 +4,7 @@ NB. =========================================================
 ppval=: 3 : 0
 dat=. words each y
 pos=. <: +/\ # &> dat
-dat=. ; dat
+dat=. ; boxxopen&.> dat
 bgn=. (dat e. CONTROLB) +. findfor &> dat
 end=. dat = <'end.'
 lvl=. +/\bgn-end

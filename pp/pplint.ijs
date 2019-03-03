@@ -6,7 +6,7 @@ NB.
 NB. pretty print + lint text argument
 NB.
 NB. Format_j_ is a numeric list:
-NB.   0   0=no format, 1=do format
+NB.   0   0=no format, 1=do format, 2=do format and allow errors
 NB.   1   soft tab width (0=hard tab)
 NB.   2   if remove multiple spaces in code
 NB.   3   if indent explicit definition
@@ -70,8 +70,13 @@ if. (<0) e. indat do.
   else.
     msg=. 'Could not parse line'
   end.
-  lin;msg
-  return.
+  if. 2>fmt do.
+    lin;msg return.
+  else.
+    txt=. dat{~ g=. I.indat=<0
+    indat=. ((0;0)&,@<@<@]&.> txt) g} indat
+    echo lin;msg
+  end.
 end.
 
 'in begin dat'=. |: > indat
@@ -93,16 +98,20 @@ if. 0 ~: +/ in do.
       msg=. 'Mismatched control words'
     end.
   end.
-  lin;msg return.
+  if. 2>fmt do.
+    lin;msg return.
+  else.
+    echo lin;msg
+  end.
 end.
 
 NB. ---------------------------------------------------------
 NB. validate control structures
 res=. ppval dat
-if. -. res -: 0 do. return. end.
+if. -. res -: 0 do. if. 2>fmt do. return. else. echo res end. end.
 
 NB. ---------------------------------------------------------
-if. -. fmt do. '' return. end.
+if. 0=fmt do. '' return. end.
 
 NB. ---------------------------------------------------------
 NB. format result:

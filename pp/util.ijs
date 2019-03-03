@@ -122,6 +122,7 @@ deltb=: #~ +./\.@: -. @ e.&(' ',TAB)
 NB. =========================================================
 NB. indent1
 indent1=: 3 : 0
+if. 0=L.y do. 0 return. end.
 tok=. y
 x=. I. findfor &> tok
 tok=. (<'for.') x} tok
@@ -209,7 +210,7 @@ txt=. msk#y
 com=. (-.msk)#y
 
 if. #txt do.
-  tok=. words txt
+  tok=. words1 txt
   if. tok -: 0 do. return. end.
   if. #tok do.
     in=. indent1 tok
@@ -230,9 +231,9 @@ in;bgn;<<txt,com
 )
 
 NB. =========================================================
-NB. is the first def needed anywhere?
-NB. words=: 7&u:&.>@:;:@(8&u:) :: ]
-words=: 7&u:&.>@:;:@(8&u:) :: 0:
+NB. is the first or second def needed anywhere?
+words=: 7&u:&.>@:;:@(8&u:) :: ]
+words1=: 7&u:&.>@:;:@(8&u:) :: 0:
 
 NB. =========================================================
 f=. #~ (=&' ') *: 1: |. notquotes *. '=:'&E. +. '=.'&E.
