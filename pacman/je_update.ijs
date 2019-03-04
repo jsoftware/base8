@@ -7,7 +7,7 @@ NB. je_update_jpacman_'force' - updates even if already there - for testing
 jef=: '~temp/je_update/'
 
 je_update=: 3 : 0
-if. IFIOS+.UNAME-:'Android' do. '' return. end.
+if. IFIOS+.UNAME-:'Android' do. 'update not supported for this platform' return. end.
 mkdir_j_ jef
 sh=. 'update.',;(UNAME-:'Win'){'sh';'bat'
 ferase jef,sh

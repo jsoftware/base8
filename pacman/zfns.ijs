@@ -27,3 +27,6 @@ res
 NB.*jpkgv v Same as jpkg but with more compact output
 NB. Use to view on screen or include in emails
 jpkgv_z_=: (<@:>"1@|:^:(0 ~: #))@jpkg
+
+NB.*je_update v update JE in place
+je_update_z_=: je_update_jpacman_
