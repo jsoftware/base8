@@ -52,7 +52,7 @@ cp profilex_template.ijs /etc/j/8.07/.
 find /etc/j/8.07 -type d -exec chmod a+rx {} \+
 find /etc/j/8.07 -type f -exec chmod a+r {} \+
 echo "#!/bin/bash" > ijconsole.sh
-echo "cd ~ && /usr/bin/ijconsole \"@$\"" >> ijconsole.sh
+echo "cd ~ && /usr/bin/ijconsole \"$@\"" >> ijconsole.sh
 mv ijconsole.sh /usr/bin/.
 chmod 755 /usr/bin/ijconsole.sh
 cp jconsole /usr/bin/ijconsole-8.07
