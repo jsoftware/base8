@@ -7,8 +7,6 @@ NB.         [-S|--server-response] [-U|--user-agent AGENT] URL...
 NB. =========================================================
 NB. busyboxget used for github downloads
 NB. y is url;outfile
-NB.
-NB. no longer used in pacman march 2019
 busyboxget=: 3 : 0
 'f p'=. 2 {. (boxxopen y),a:
 if. 0=#p do.
