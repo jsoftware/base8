@@ -187,9 +187,9 @@ NB. ---------------------------------------------------------
 sum=. str , edr , spc , spcr
 her=. (nub i. {."1 sum) +/ /. {:"1 sum
 
-if. x=0 do.
-  assert *./ all >: her
-end.
+NB. if. x=0 do.
+NB.   assert *./ all >: her
+NB. end.
 
 |: req # all ,. her ,. rep
 )
